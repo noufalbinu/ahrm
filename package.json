@@ -1,0 +1,24 @@
+{
+  "dependencies": {
+    "air-datepicker": "^3.4.0"
+  },
+	"name": "vbook",
+	"version": "0.1.0",
+	"description": "vBook ultimate Hotel Booking .",
+	"author": "wpadroit",
+	"homepage": "wpadroit.com/vbook",
+	"main": "build/index.js",
+	"scripts": {
+    "env": "wp-env",
+		"build": "wp-scripts build",
+		"format": "wp-scripts format",
+		"lint:css": "wp-scripts lint-style",
+		"lint:js": "wp-scripts lint-js",
+		"packages-update": "wp-scripts packages-update",
+		"plugin-zip": "wp-scripts plugin-zip",
+		"start": "wp-scripts start"
+	},
+	"devDependencies": {
+		"@wordpress/scripts": "^26.19.0"
+	}
+}

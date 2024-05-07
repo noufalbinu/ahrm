@@ -1,0 +1,333 @@
+*{
+    box-sizing:border-box;
+}
+.fixedbox {
+    width: 80%;
+    float: left;
+    border: 1px solid #bbb;
+    margin: 10px 10% 10px 10%;
+    border-radius: 10px;
+    position: relative;
+    padding: 10px;
+}
+.fixed-departure {
+    float: left;
+    width: 25%;
+}
+.fixed-container {
+    float: left;
+    width: 70%;
+}
+.fixedbox img {
+    width: 220px;
+    border-radius: 10px;
+}
+.post-img {
+    width: 80%;
+    overflow: auto;
+    margin: 0 auto;
+    margin-top: 30px;
+    position: relative;
+    border-radius: 10px;
+    background: #eaeaea;
+}
+.post-img img {
+    float: left;
+    width: 60%;
+}
+.post-img h1 {
+    font-size: 35px;
+    color: #fff;
+    z-index: 1;
+    bottom: 50px;
+    margin: 10px 0 15px;
+}
+.package-image-title p {
+    margin: 0;
+    font-size: 15px;
+}
+p.image-price {
+    font-size: 34px;
+    font-weight: 600;
+    color: #ffc800;
+    text-shadow: 1px 1px 1px #000;
+}
+.package-image-title {
+    position: absolute;
+    padding: 10px 0px 10px 50px;
+    font-size: 45px;
+    color: #fff;
+    z-index: 1;
+    bottom: 50px;
+    background: linear-gradient(to right, #e32929 0%,#c72828 15%,#e3292985 100%);
+    border-radius: 0 0 10px 0;
+}
+.package-image-title:after {
+    content: " ";
+    position: absolute;
+    display: block;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    right: 0;
+    z-index: -1;
+    background: linear-gradient(to right, #e32929 0%,#de292952 15%,#e32929 100%);
+    transform-origin: bottom left;
+    -ms-transform: skew(-30deg, 0deg);
+    -webkit-transform: skew(-30deg, 0deg);
+    transform: skew(-30deg, 0deg);
+    border-radius: 0 10px 10px 0;
+}
+.package-menu {
+    width: 40%;
+    float: left;
+    padding: 20px;
+}
+p.package-menu-title {
+    font-size: 22px;
+    font-weight: 600;
+    text-align: center;
+    margin: 10px 0 30px;
+}
+.package-menu-p p {
+    margin-left: 40px;
+    border-bottom: 1px dashed #bbbbbb75;
+    margin-right: 40px;
+    color: #757575;
+    font-weight: 400;
+    font-size: 16px;
+    padding-bottom: 10px;
+}
+i.fas.fa-dot-circle {
+    padding-right: 15px;
+    color: #e32929;
+}
+.packdiscription {
+    color: #000;
+    margin: 20px 10%;
+    border-radius: 10px;
+    position: relative;
+    border: 1px solid #bbbbbb94;
+}
+.packdiscription h2 {
+    margin: 0px;
+    background: #e0e0e0;
+    padding: 10px 50px;
+    border-radius: 10px 10px 0 0;
+}
+.packdiscription p {
+    padding: 10px 50px;
+    white-space: pre-wrap;
+}
+.zon-container {
+    position: relative;
+}
+
+.zon-form {
+
+}
+
+
+h4.hotel-title {
+    position: absolute;
+    background: #ffffffb3;
+    padding: 10px 15px;
+    left: 0;
+    border-radius: 0 5px 5px 0;
+    text-shadow: 1px 1px #fff;
+    color: #ff0000;
+    bottom: 0;
+}
+label.fixed-container p {
+    display: inline;
+}
+p.pricey, p.ticketcount {
+    border: 1px solid #bbb;
+    border-radius: 5px;
+    padding: 5px 10px;
+    color: #484848;
+    background: #fff;
+}
+#clmn3 {
+    position: relative;
+    padding: 20px 10% 30px 10%;
+    overflow: auto;
+}
+
+#clmn3 .cnt {
+    width: 33.3%;
+    float: left;
+}
+.row {
+    background: #fff;
+    background-size: 100% 200px !important;
+    background-repeat: no-repeat !important;
+    padding-top: 210px;
+    position: relative;
+    border-radius: 10px;
+    margin: 10px;
+    padding: 210px 20px 20px 20px;
+    overflow: auto;
+    border: 1px solid #e0e0e0;
+}
+
+
+
+
+
+
+
+
+
+.zon-input-fields {
+    position: relative;
+    padding: 20px 10% 30px 10%;
+    overflow: auto;
+}
+.field-container {
+    width: 33.3%;
+    box-sizing: border-box;
+    padding: 0px;
+    float: left;
+}
+input#adult {
+    border-radius: 0px 10px 10px 0;
+    border-left: none;
+}
+input#infant {
+    border-radius: 10px 0px 0px 10px;
+    border-right: none;
+}
+input#date {
+    border-right: none;
+}
+input#datepicker {
+    padding: 18px !important;
+}
+.field-container input {
+    border: 1px solid #bbb;
+    margin: 0px;
+    padding: 20px 10%;
+    float: left !important;
+    box-sizing: border-box;
+    width: 100%;
+}
+.zon-container p {
+    padding: 0 50px;
+    font-size: 13px;
+    line-height: 10px;
+    font-weight: 600;
+}
+input#name {
+    border-radius: 10px 0 0 10px;
+    border-right: none;
+}
+.btn {
+    width: 100%;
+    background: #f31818de;
+    color: #fff;
+    padding: 15px !important;
+    border: 0px;
+    border-radius: 0 10px 10px 0;
+    font-size: 20px;
+    font-weight: 700;
+    border: 1px solid #f6423e !important;
+}
+
+/* Hide the browser's default checkbox */
+.zon-container input {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+}
+
+/* Create a custom checkbox */
+.checkmark {
+    position: absolute;
+    top: 17px;
+    left: 17px;
+    height: 25px;
+    width: 25px;
+    border-radius: 100%;
+    box-sizing: border-box;
+    background: #f1f1f1;
+    border: 1px solid #bbbbbb40;
+}
+
+/* When the checkbox is checked, add a blue background */
+.zon-container input:checked ~ .checkmark {
+}
+/* Create the checkmark/indicator (hidden when not checked) */
+.checkmark:after {
+    content: "";
+    position: absolute;
+    display: none;
+}
+
+/* Show the checkmark when checked */
+.zon-container input:checked ~ .checkmark:after {
+    display: block;
+}
+
+/* Style the checkmark/indicator */
+.zon-container .checkmark:after {
+    right: 9px;
+    top: 5px;
+    width: 5px;
+    height: 10px;
+    border: solid white;
+    border-width: 0 4px 4px 0;
+    -webkit-transform: rotate(45deg);
+    -ms-transform: rotate(45deg);
+    transform: rotate(45deg);
+}
+
+
+
+.zon-container {
+    display: inline;
+    cursor: pointer;
+    font-size: 11px;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    float: left;
+    width: 100%;
+    height: 60px;
+    padding: 10px;
+    box-sizing: border-box;
+    color: #000;
+    border: 1px solid;
+    position: relative;
+    border: 1px solid #d6d6d6;
+    margin-bottom: 10px;
+    border-radius: 6px;
+}
+
+/* Hide the browser's default checkbox */
+.zon-container input {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+}
+
+
+/* When the checkbox is checked, add a blue background */
+.zon-container input:checked ~ .checkmark {
+    background: #f43535;
+    border: none !important;
+}
+
+/* Create the checkmark/indicator (hidden when not checked) */
+.checkmark:after {
+    content: "";
+    position: absolute;
+    display: none;
+}
+
+/* Show the checkmark when checked */
+.zon-container input:checked ~ .checkmark:after {
+    display: block;
+}
+

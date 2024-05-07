@@ -1,0 +1,17 @@
+{
+    "name": "destino/zon-packages",
+    "description": "zon package plugin",
+    "type": "project",
+    "license": "GPL",
+    "authors": [
+        {
+            "name": "Noufal Binu",
+            "email": "contact@noufalbinu.com"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {},
+    "autoload": {
+        "psr-4": {"Inc\\": "./inc"}
+    }
+}

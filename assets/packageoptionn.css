@@ -1,0 +1,137 @@
+*{
+    box-sizing:border-box;
+}
+span#footer-thankyou {
+    display: none !important;
+}
+.pack-option-container input {
+    border-radius: 5px !important;
+}
+.package-discription input, .package-discription textarea {
+    width: 100%;
+    border: 1px solid #bbb;
+    background: none !important;
+}
+
+textarea.pack-discription {
+    height: 320px;
+    border-radius: 5px;
+    text-align: unset;
+}
+
+.packageoption {
+    overflow: auto;
+    border: 1px solid #fff;
+    width: 100%;
+}
+.package {
+    width: 33.3%;
+    float: left;
+    background: #dcdcdcbb;
+    border: 1px solid #fff;
+    box-sizing: border-box;
+}
+
+.package-edit {
+    width: 33.3%;
+    position: relative;
+    float: left;
+    padding: 20px;
+    border-radius: 5px;
+    border: 1px solid #bbb;
+    height: auto !important;
+}
+.package-fixed {
+    border: 1px solid #bbb;
+    overflow: auto;
+    width: 100%;
+}
+.package-fixed h3, .packageoption h3 {
+    background: #bbb;
+    padding: 10px;
+    margin: 0px;
+    text-align: center;
+}
+.package-edit-input {
+    width: 70%;
+    float: right;
+    padding: 0 50px;
+}
+.profile-picture {
+    height: 100%;
+    position: relative;
+    background-size: 300px auto !important;
+    width: 100%;
+}
+
+.profile-picture-preview1, .profile-picture-preview2, .profile-picture-preview3 {
+    height: 200px;
+    background-size: 500px auto;
+    padding: 10px;
+    box-sizing: border-box;
+    width: 30%;
+    float: left;
+    position: relative;
+    border-radius: 10px;
+    border: 1px solid #fff;
+}
+.upload-button {
+    position: absolute;
+    z-index: 25;
+    top: 40%;
+    width: 90%;
+    border: none !important;
+    background: #00000078;
+    border-radius: 20px;
+    color: #fff;
+    padding: 10px;
+}
+
+input.pack-title {
+}
+input.pack-price {
+    width: 100%;
+    text-align: center;
+}
+.pack-option-container {
+    overflow: hidden;
+}
+.select-option select {
+    float: right;
+    border-radius: 5px;
+    padding: 0px 30px 0 30px !important;
+    border: 2px solid #bbb;
+}
+.select-option {
+    width: 100%;
+    background: #e2e2e2;
+    float: left;
+    margin: 20px 0;
+    padding: 10px;
+    border: 1px solid #bbb;
+}
+.package-main {
+    width: 30%;
+    float: right;
+}
+.package-discription {
+    width: 70%;
+    padding: 10px 20px 0 0px;
+    float: left;
+}
+.package-main input {
+    width: 99%;
+    padding: 10px;
+    margin: 5px 0;
+}
+input.pack-title {
+    width: 100%;
+    font-size: 16px;
+    border: 1px solid #bbb !important;
+    text-align: left;
+    padding-left: 20px;
+}
+.pack-discription {
+    width: 100%;
+    text-align: center;
+}
