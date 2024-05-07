@@ -41,11 +41,66 @@ class TestimonialController extends BaseController
 
 		add_action( 'wp_ajax_update_testimonial', array( $this, 'update_testimonial' ) );
 		add_action( 'wp_ajax_nopriv_update_testimonial', array( $this, 'update_testimonial' ) );
+
+		// filter option for job application from candidates
+		add_filter('parse_query', array( $this, 'tsm_convert_id_to_term_in_query') );
+		add_action( 'init', array( $this,  'themes_taxonomy') );
+		add_action('restrict_manage_posts', array( $this,  'tsm_filter_post_type_by_taxonomy') );
 	}
 
 		public function wp_first_shortcode() {
 
 	}
+
+
+
+	// filter option for job application from candidates
+        
+		public function tsm_filter_post_type_by_taxonomy() {
+        	global $typenow;
+        	$post_type = 'testimonial'; // change to your post type
+        	$taxonomy  = 'themes_categories'; // change to your taxonomy
+        	if ($typenow == $post_type) {
+        		$selected      = isset($_GET[$taxonomy]) ? $_GET[$taxonomy] : '';
+        		$info_taxonomy = get_taxonomy($taxonomy);
+        		wp_dropdown_categories(array(
+        			'show_option_all' => sprintf( __( 'Show all %s', 'textdomain' ), $info_taxonomy->label ),
+        			'taxonomy'        => $taxonomy,
+        			'name'            => $taxonomy,
+        			'orderby'         => 'name',
+        			'selected'        => $selected,
+        			'show_count'      => true,
+        			'hide_empty'      => true,
+        		));
+        	};
+        }
+        
+        public function tsm_convert_id_to_term_in_query($query) {
+        	global $pagenow;
+        	$post_type = 'testimonial'; // change to your post type
+        	$taxonomy  = 'themes_categories'; // change to your taxonomy
+        	$q_vars    = &$query->query_vars;
+        	if ( $pagenow == 'edit.php' && isset($q_vars['post_type']) && $q_vars['post_type'] == $post_type && isset($q_vars[$taxonomy]) && is_numeric($q_vars[$taxonomy]) && $q_vars[$taxonomy] != 0 ) {
+        		$term = get_term_by('id', $q_vars[$taxonomy], $taxonomy);
+        		$q_vars[$taxonomy] = $term->slug;
+        	}
+        }
+        public function themes_taxonomy() {
+            register_taxonomy(
+                'themes_categories',  // The name of the taxonomy. Name should be in slug form (must not contain capital letters or spaces).
+                'testimonial',             // post type name
+                array(
+                    'hierarchical' => true,
+                    'label' => 'Themes store', // display name
+                    'query_var' => true,
+                    'rewrite' => array(
+                        'slug' => 'themes',    // This controls the base slug that will display before each term
+                        'with_front' => false  // Don't display the category base before
+                    )
+                )
+            );
+        }
+        // filter option for job application from candidates
 
 	public function submit_testimonial()
 	{
@@ -302,39 +357,6 @@ class TestimonialController extends BaseController
 		$columns['approved'] = 'Approved';
 		$columns['featured'] = 'Short listed';
 		$columns['date'] = $date;
-
-
-		add_action('restrict_manage_posts', 'tsm_filter_post_type_by_taxonomy');
-	    function tsm_filter_post_type_by_taxonomy() {
-	    	global $typenow;
-	    	$post_type = 'team'; // change to your post type
-	    	$taxonomy  = 'group'; // change to your taxonomy
-	    	if ($typenow == $post_type) {
-	    		$selected      = isset($_GET[$taxonomy]) ? $_GET[$taxonomy] : '';
-	    		$info_taxonomy = get_taxonomy($taxonomy);
-	    		wp_dropdown_categories(array(
-	    			'show_option_all' => sprintf( __( 'Show all %s', 'textdomain' ), $info_taxonomy->label ),
-	    			'taxonomy'        => $taxonomy,
-	    			'name'            => $taxonomy,
-	    			'orderby'         => 'name',
-	    			'selected'        => $selected,
-	    			'show_count'      => true,
-	    			'hide_empty'      => true,
-	    		));
-	    	};
-	    }
-    
-	    add_filter('parse_query', 'tsm_convert_id_to_term_in_query');
-	    function tsm_convert_id_to_term_in_query($query) {
-	    	global $pagenow;
-	    	$post_type = 'testimonial'; // change to your post type
-	    	$taxonomy  = 'group'; // change to your taxonomy
-	    	$q_vars    = &$query->query_vars;
-	    	if ( $pagenow == 'edit.php' && isset($q_vars['post_type']) && $q_vars['post_type'] == $post_type && isset($q_vars[$taxonomy]) && is_numeric($q_vars[$taxonomy]) && $q_vars[$taxonomy] != 0 ) {
-	    		$term = get_term_by('id', $q_vars[$taxonomy], $taxonomy);
-	    		$q_vars[$taxonomy] = $term->slug;
-	    	}
-	    }
     
 	    return $columns;
 	}
@@ -379,3 +401,4 @@ class TestimonialController extends BaseController
 		return $columns;
 	}
 }
+
