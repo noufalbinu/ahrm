@@ -52,8 +52,7 @@ class TestimonialController extends BaseController
 
 	}
 
-
-
+	//https://stackoverflow.com/questions/72428718/wordpress-upload-post-and-attach-file-wp-insert-post-and-wp-insert-attachment
 	// filter option for job application from candidates
         
 		public function tsm_filter_post_type_by_taxonomy() {
