@@ -47,12 +47,10 @@ class TestimonialController extends BaseController
 		add_action( 'init', array( $this,  'themes_taxonomy') );
 		add_action('restrict_manage_posts', array( $this,  'tsm_filter_post_type_by_taxonomy') );
 	}
-
 		public function wp_first_shortcode() {
-
 	}
 
-	//https://stackoverflow.com/questions/72428718/wordpress-upload-post-and-attach-file-wp-insert-post-and-wp-insert-attachment
+	// https://stackoverflow.com/questions/72428718/wordpress-upload-post-and-attach-file-wp-insert-post-and-wp-insert-attachment
 	// filter option for job application from candidates
         
 		public function tsm_filter_post_type_by_taxonomy() {
@@ -90,7 +88,7 @@ class TestimonialController extends BaseController
                 'testimonial',             // post type name
                 array(
                     'hierarchical' => true,
-                    'label' => 'Themes store', // display name
+                    'label' => 'Job category', // display name
                     'query_var' => true,
                     'rewrite' => array(
                         'slug' => 'themes',    // This controls the base slug that will display before each term
@@ -245,7 +243,7 @@ class TestimonialController extends BaseController
 	{
 		add_meta_box(
 			'testimonial_author',
-			'Zon Bookings',
+			'Candidate Application Details',
 			array( $this, 'render_features_box' ),
 			'testimonial',
 			'normal',
@@ -268,6 +266,11 @@ class TestimonialController extends BaseController
 		$approved = isset($data['approved']) ? $data['approved'] : false;
 		$featured = isset($data['featured']) ? $data['featured'] : false;
 		?>
+		<p>
+			<label class="meta-label" for="zon_name">Attached File(CV)</label>
+			<input type="text" id="zon_name" name="zon_name" class="widefat" value="<?php echo esc_attr( $name ); ?>" disabled>
+			<button>Download</button>
+		</p>
 		<p>
 			<label class="meta-label" for="zon_name">name</label>
 			<input type="text" id="zon_name" name="zon_name" class="widefat" value="<?php echo esc_attr( $name ); ?>">

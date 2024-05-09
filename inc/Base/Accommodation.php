@@ -14,21 +14,15 @@ class Accommodation extends BaseController {
 	public function register()
 	{
 		if ( ! $this->activated( 'Accommodation' ) ) return;
-		
 		add_action( 'init', array( $this, 'custom_post_type' ) );
 		add_action( 'admin_enqueue_scripts', array( $this, 'zon_styles' ) );
 		add_filter( 'single_template', array( $this, 'load_pack_template' ) );
-
-		//metabox
 		add_action( 'add_meta_boxes', array( $this, 'zon_fixed_boxess' ) );
 		add_action( 'save_post', array( $this,'zon_save_meta_boxx' ) );
 
 	}
-
-
 	public function zon_styles( $page ) {
 		echo "<link rel=\"stylesheet\" href=\"$this->plugin_url/assets/packageoptionn.css\" type=\"text/css\" media=\"all\" />";
-		
 	}
 
     public function load_pack_template($template) {
@@ -44,9 +38,9 @@ class Accommodation extends BaseController {
 	public function custom_post_type() 
 	{
 		$labels = array(
-			'name' => ( 'Accommodation' ),
-			'singular_name'         => _x( 'Accommodation', 'Post Type Singular Name', 'text_domain' ),
-			'menu_name'             => __( 'Accommodation', 'text_domain' ),
+			'name' => ( 'Add/Edit Jobs' ),
+			'singular_name'         => _x( 'Add/Edit Jobs', 'Post Type Singular Name', 'text_domain' ),
+			'menu_name'             => __( 'Add/Edit Jobs', 'text_domain' ),
 			'name_admin_bar'        => __( 'Post Type', 'text_domain' ),
 			'archives'              => __( 'Item Archives', 'text_domain' ),
 			'attributes'            => __( 'Item Attributes', 'text_domain' ),
@@ -83,7 +77,7 @@ class Accommodation extends BaseController {
 			'show_ui'               => true,
 			'show_in_menu'          => true,
 			'menu_position'         => 0,
-			'menu_icon'             => 'dashicons-admin-home',
+			'menu_icon'             => 'dashicons-id-alt',
 			'show_in_admin_bar'     => true,
 			'show_in_nav_menus'     => true,
 			'can_export'            => true,
@@ -93,7 +87,7 @@ class Accommodation extends BaseController {
 			'capability_type'       => 'page',
 			'show_in_rest'          => true,
 		);
-		register_post_type( 'accommodations', $args );
+		register_post_type( 'jobs', $args );
 	}
 
 public function zon_fixed_boxess() {
@@ -104,9 +98,9 @@ public function zon_fixed_boxess() {
     }
 	add_meta_box(
 		'fixed_box',                       // Unique ID
-		'Room Bookings',                             // Box title
+		'Job Detials',                             // Box title
 		 array( $this, 'zon_featuress_boxx' ),      // Content callback, must be of type callable
-		'accommodations',                              // 
+		'jobs',                              // 
 		'normal',
 		'high'
 	);

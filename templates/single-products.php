@@ -11,7 +11,7 @@ add_action('wp_head', 'mypage_head');
 <?php
 /*
 Template Name: aaaaaaa
-Template Post Type: page, packages
+Template Post Type: page, packages,
 */
 get_header(); ?>
 
@@ -124,31 +124,7 @@ var input = document.getElementById("datepicker");
       input.disabled = false; 
 input.setAttribute('min', date);
 
-  </script>
-
-
-
-<script>
-jQuery(".chb").change(function() {
-    jQuery(".chb").prop('checked', false);
-    jQuery(this).prop('checked', true);
-});
 </script>
-
-<script>
-  jQuery(document).ready(function() {
-    $menuLeft = jQuery('.pushmenu-left');
-    $nav_list = jQuery('#nav_list');
-
-    $nav_list.click(function() {
-      jQuery(this).toggleClass('active');
-      jQuery('.pushmenu-push').toggleClass('pushmenu-push-toright');
-      $menuLeft.toggleClass('pushmenu-open');
-    });
-  });
-</script>
-
-
 
 
 <!-- Footer -->
