@@ -17,9 +17,8 @@ class SettingsLinks extends BaseController
 
 	public function settings_link( $links ) 
 	{
-		$settings_link = '<a href="admin.php?page=ahrm_packages"> Settings</a>';
+		$settings_link = '<a href="admin.php?page=zon_packages">Settings</a>';
 		array_push( $links, $settings_link );
-		print_r($links);
 		return $links;
 	}
 }

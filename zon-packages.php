@@ -4,13 +4,13 @@
  * @version 1.0
  */
 /*
-Plugin Name: Adroit HRMS
-Plugin URI: https://www.wpadroit.com/plugins/adroit-hrms
+Plugin Name: AdroitHRM
+Plugin URI: https://www.wpadroit.com/plugins/ahrm
 Description: .
-Author: wpAdroit
+Author: Noufal Binu
 Version: 1.0.0
 Author URI: https://www.wpadroit.com/
-Text Domain: Adroit HRMS
+Text Domain: vBook
 */
 
 
@@ -53,6 +53,8 @@ function vbook_vbook_block_init() {
 	register_block_type( __DIR__ . '/build' );
 }
 add_action( 'init', 'vbook_vbook_block_init' );
+
+
 /**
  * Custom Block Category
  */
@@ -61,8 +63,8 @@ function wpdocs_filter_block_categories_when_post_provided( $block_categories, $
         array_push(
             $block_categories,
             array(
-                'slug'  => 'ahrm',
-                'title' => __( 'ahrm', 'ahrm' ),
+                'slug'  => 'vbook',
+                'title' => __( 'vbook', 'vbook' ),
                 'icon'  => null,
             )
         );

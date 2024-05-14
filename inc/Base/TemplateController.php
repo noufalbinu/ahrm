@@ -14,15 +14,22 @@ use Inc\Api\Callbacks\AdminCallbacks;
 class TemplateController extends BaseController
 {
 	public $callbacks;
+
 	public $subpages = array();
+
 	public function register()
 	{
 		if ( ! $this->activated( 'templates_manager' ) ) return;
-		   $this->settings = new SettingsApi();
-		   $this->callbacks = new AdminCallbacks();
-		   $this->setSubpages();
-		   $this->settings->addSubPages( $this->subpages )->register();
+
+		$this->settings = new SettingsApi();
+
+		$this->callbacks = new AdminCallbacks();
+
+		$this->setSubpages();
+
+		$this->settings->addSubPages( $this->subpages )->register();
 	}
+
 	public function setSubpages()
 	{
 		$this->subpages = array(

@@ -12,17 +12,23 @@ use Inc\Api\Callbacks\ManagerCallbacks;
 class Dashboard extends BaseController
 {
 	public $settings;
+
 	public $callbacks;
+
 	public $callbacks_mngr;
+
 	public $pages = array();
 
 	public function register()
 	{
 		$this->settings = new SettingsApi();
+
 		$this->callbacks = new AdminCallbacks();
+
 		$this->callbacks_mngr = new ManagerCallbacks();
 
 		$this->setPages();
+
 		$this->setSettings();
 		$this->setSections();
 		$this->setFields();
@@ -34,8 +40,8 @@ class Dashboard extends BaseController
 	{
 		$this->pages = array(
 			array(
-				'page_title' => 'AHRM Settings', 
-				'menu_title' => 'AHRM Settings', 
+				'page_title' => 'Zon Packages Settings', 
+				'menu_title' => 'vBook Settings', 
 				'capability' => 'manage_options', 
 				'menu_slug' => 'zon_packages', 
 				'callback' => array( $this->callbacks, 'adminDashboard' ), 
@@ -63,7 +69,7 @@ class Dashboard extends BaseController
 		$args = array(
 			array(
 				'id' => 'zon_admin_index',
-				'title' => 'Activate/Deactivate AHRM Modules',
+				'title' => 'Activate/Deactivate vBook Modules',
 				'callback' => array( $this->callbacks_mngr, 'adminSectionManager' ),
 				'page' => 'zon_packages'
 			)
