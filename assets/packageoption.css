@@ -1,0 +1,69 @@
+
+.packageoption {
+    overflow: auto;
+    border: 1px solid #fff;
+    width: 100% !important;
+}
+.package {
+    width: 33.3%;
+    float: left;
+    background: #dcdcdcbb;
+    border: 1px solid #fff;
+    box-sizing: border-box;
+}
+.package-main {
+    width: 30%;
+    float: right;
+}
+.package-edit {
+    width: 33.3% !important;
+    height: 330px;
+    position: relative;
+    float: left;
+}
+.profile-picture {
+    height: 100%;
+    position: relative;
+    background-size: 300px auto !important;
+    width: 100%;
+}
+.profile-picture-preview1, .profile-picture-preview2, .profile-picture-preview3 {
+    height: 200px;
+    background-size: 500px auto;
+    padding: 10px;
+    box-sizing: border-box;
+}
+.upload-button {
+    position: absolute;
+    z-index: 25;
+    top: 0;
+    width: 100%;
+    border: 1px solid #bbb;
+    background: #fff;
+}
+
+input.pack-title {
+    width: 100%;
+    text-align: center;
+    background-color: #47494a !important;
+    color: #fff !important;
+}
+input.pack-price {
+    width: 100%;
+    text-align: center;
+}
+
+input.pack-title {
+    width: 100%;
+    text-align: center;
+    color: #000 !important;
+    font-size: 20px;
+    border: 2px solid #bb96ef !important;
+}
+.pack-option-container {
+    overflow: hidden;
+}
+.pack-discription {
+    width: 100%;
+    text-align: center;
+}
