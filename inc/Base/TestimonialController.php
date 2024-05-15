@@ -167,9 +167,6 @@ class TestimonialController extends BaseController
 			//...
 			//...
 		
-		
-			
-		
 			//save the edited post and return its ID
 			$pid = wp_update_post($post_to_edit); 
 		
@@ -179,23 +176,13 @@ class TestimonialController extends BaseController
 		
 		}
 	}
-	
-
-	    
-	    
-
-	
-
 
 	public function testimonial_form()
 	{
 		ob_start();
 		echo "<link rel=\"stylesheet\" href=\"$this->plugin_url/assets/form.css\" type=\"text/css\" media=\"all\" />";
-
 		require_once( "$this->plugin_path/templates/single-products.php" );
-
 		echo "<script src=\"$this->plugin_url/assets/form.js\"></script>";
-
 		return ob_get_clean();
 	}
 
@@ -203,15 +190,10 @@ class TestimonialController extends BaseController
 	{
 		ob_start();
 		echo "<link rel=\"stylesheet\" href=\"$this->plugin_url/assets/user-booking.css\" type=\"text/css\" media=\"all\" />";
-
 		require_once( "$this->plugin_path/templates/user-booking.php" );
-
 		echo "<script src=\"$this->plugin_url/assets/user-booking.js\"></script>";
-
 		return ob_get_clean();
 	}
-	
-
 	public function testimonial_cpt ()
 	{
 		$labels = array(
@@ -233,9 +215,6 @@ class TestimonialController extends BaseController
 
 		register_post_type ( 'applications', $args );
 	}
-
-
-    
 	public function add_meta_boxes()
 	{
 		add_meta_box(
@@ -246,9 +225,7 @@ class TestimonialController extends BaseController
 			'normal',
 			'high'
 		);
-
 	}
-
 	public function render_features_box($post)
 	{
 		wp_nonce_field( 'zon_testimonial', 'zon_testimonial_nonce' );
@@ -257,6 +234,7 @@ class TestimonialController extends BaseController
 		$package = isset($data['package']) ? $data['package'] : '';
 		$phone = isset($data['phone']) ? $data['phone'] : '';
 		$name = isset($data['name']) ? $data['name'] : '';
+		$cv = isset($data['cv']) ? $data['cv'] : '';
 		$date = isset($data['date']) ? $data['date'] : '';
 		$email = isset($data['email']) ? $data['email'] : '';
 		$approved = isset($data['approved']) ? $data['approved'] : false;
@@ -264,8 +242,7 @@ class TestimonialController extends BaseController
 		?>
 		<p>
 			<label class="meta-label" for="zon_name">Attached File(CV)</label>
-			<input type="text" id="zon_name" name="zon_name" class="widefat" value="<?php echo esc_attr( $name ); ?>" disabled>
-			<button>Download</button>
+			<input type="text" id="zon_cv" name="zon_cv" class="widefat" value="<?php echo esc_attr( $cv ); ?>" disabled>
 		</p>
 		<p>
 			<label class="meta-label" for="zon_name">name</label>
@@ -332,6 +309,7 @@ class TestimonialController extends BaseController
 		$data = array(
 			'package' => sanitize_text_field( $_POST['zon_package'] ),
 			'phone' => sanitize_text_field( $_POST['zon_phone'] ),
+			'cv' => sanitize_text_field( $_POST['zon_cv'] ),
 			'name' => sanitize_text_field( $_POST['zon_testimonial_author'] ),
 			'date' => sanitize_text_field( $_POST['zon_testimonial_date'] ),
 			'email' => sanitize_email( $_POST['zon_testimonial_email'] ),
