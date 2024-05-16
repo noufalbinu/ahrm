@@ -46,10 +46,8 @@ class TestimonialController extends BaseController
 	}
 		public function wp_first_shortcode() {
 	    }
-
 	    // https://stackoverflow.com/questions/72428718/wordpress-upload-post-and-attach-file-wp-insert-post-and-wp-insert-attachment
 	    // filter option for job application from candidates
-        
 		public function tsm_filter_post_type_by_taxonomy() {
         	global $typenow;
         	$post_type = 'applications'; // change to your post type
@@ -68,7 +66,6 @@ class TestimonialController extends BaseController
         		));
         	};
         }
-        
         public function tsm_convert_id_to_term_in_query($query) {
         	global $pagenow;
         	$post_type = 'applications'; // change to your post type
@@ -166,14 +163,11 @@ class TestimonialController extends BaseController
 			//do you validation
 			//...
 			//...
-		
+			
 			//save the edited post and return its ID
 			$pid = wp_update_post($post_to_edit); 
-		
-		
 			//set new category
 			wp_set_post_terms($pid,(array)($_POST['cat']),'category',true);
-		
 		}
 	}
 
