@@ -36,11 +36,6 @@
                     name: a.querySelector('[name="name"]').value,
                     email: a.querySelector('[name="email"]').value,
                     message: a.querySelector('[name="message"]').value,
-                    package: a.querySelector('[name="package"]').value,
-
-
-
-
                     nonce: a.querySelector('[name="nonce"]').value
                 };
                 if (r.name)

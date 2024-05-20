@@ -30,8 +30,7 @@ class TestimonialController extends BaseController
 		add_action( 'manage_testimonial_posts_custom_column', array( $this, 'set_custom_columns_data' ), 10, 2 );
 		add_filter( 'manage_edit-testimonial_sortable_columns', array( $this, 'set_custom_columns_sortable' ) );
 
-		add_shortcode( 'testimonial-form', array( $this, 'testimonial_form' ) );
-		add_shortcode( 'user-booking', array( $this, 'user_booking' ) );
+		add_shortcode( 'application-form', array( $this, 'application_form' ) );
 
 		add_action( 'wp_ajax_submit_testimonial', array( $this, 'submit_testimonial' ) );
 		add_action( 'wp_ajax_nopriv_submit_testimonial', array( $this, 'submit_testimonial' ) );
@@ -44,8 +43,7 @@ class TestimonialController extends BaseController
 		add_action( 'init', array( $this,  'themes_taxonomy') );
 		add_action('restrict_manage_posts', array( $this,  'tsm_filter_post_type_by_taxonomy') );
 	}
-		public function wp_first_shortcode() {
-	    }
+		
 	    // https://stackoverflow.com/questions/72428718/wordpress-upload-post-and-attach-file-wp-insert-post-and-wp-insert-attachment
 	    // filter option for job application from candidates
 		public function tsm_filter_post_type_by_taxonomy() {
@@ -101,7 +99,6 @@ class TestimonialController extends BaseController
 		}
 
 		$name = sanitize_text_field($_POST['name']);
-		$package = sanitize_text_field($_POST['package']);
 		$phone = sanitize_text_field($_POST['phone']);
 		$date = sanitize_text_field($_POST['date']);
 		$email = sanitize_email($_POST['email']);
@@ -109,7 +106,6 @@ class TestimonialController extends BaseController
 
 		$data = array(
 			'name' => $name,
-			'package' => $package,
 			'phone' => $phone,
 			'email' => $email,
 			'date' => $date,
@@ -171,23 +167,15 @@ class TestimonialController extends BaseController
 		}
 	}
 
-	public function testimonial_form()
+	public function application_form()
 	{
 		ob_start();
 		echo "<link rel=\"stylesheet\" href=\"$this->plugin_url/assets/form.css\" type=\"text/css\" media=\"all\" />";
-		require_once( "$this->plugin_path/templates/single-products.php" );
+		require_once( "$this->plugin_path/templates/application-form.php" );
 		echo "<script src=\"$this->plugin_url/assets/form.js\"></script>";
 		return ob_get_clean();
 	}
 
-	public function user_booking()
-	{
-		ob_start();
-		echo "<link rel=\"stylesheet\" href=\"$this->plugin_url/assets/user-booking.css\" type=\"text/css\" media=\"all\" />";
-		require_once( "$this->plugin_path/templates/user-booking.php" );
-		echo "<script src=\"$this->plugin_url/assets/user-booking.js\"></script>";
-		return ob_get_clean();
-	}
 	public function testimonial_cpt ()
 	{
 		$labels = array(
@@ -225,10 +213,8 @@ class TestimonialController extends BaseController
 		wp_nonce_field( 'zon_testimonial', 'zon_testimonial_nonce' );
 		$data = get_post_meta( $post->ID, '_zon_testimonial_key', true );
 
-		$package = isset($data['package']) ? $data['package'] : '';
 		$phone = isset($data['phone']) ? $data['phone'] : '';
 		$name = isset($data['name']) ? $data['name'] : '';
-		$cv = isset($data['cv']) ? $data['cv'] : '';
 		$date = isset($data['date']) ? $data['date'] : '';
 		$email = isset($data['email']) ? $data['email'] : '';
 		$approved = isset($data['approved']) ? $data['approved'] : false;
