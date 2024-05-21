@@ -1,4 +1,8 @@
-<h1><?php the_title(); ?></h1>
+
+
+<h1><?php the_title(); 
+
+?></h1>
 
 <form id="zon-testimonial-form"  class="zon-form" action="#" method="post" data-url="<?php echo admin_url('admin-ajax.php'); ?>" enctype="multipart/form-data">
   
@@ -50,17 +54,14 @@
 
 <!---- Calendar Popup Container ----->
 <!---- Calendar Popup Container End ----->   
-<script>
-  async function saveFile() {
-    let formData = new FormData();
-    formData.append("file", fileupload.files[0]);
-    await fetch('<?php echo plugin_dir_url( __FILE__ ); ?>/upload.php', {method: "POST", body: formData});
-    alert("done");
-  }
-</script>
+
 
 <script>
-
+async function saveFile() {
+  let formData = new FormData();
+  formData.append("file", fileupload.files[0]);
+  await fetch('<?php echo plugin_dir_url( __FILE__ ); ?>/upload.php', {method: "POST", body: formData});
+}
 ! function o(n, i, u) {
     function c(r, e) {
         if (!i[r]) {
@@ -109,12 +110,13 @@
 
                             s = new URLSearchParams(new FormData(a));
                             s.append("file", cv.files[0]);
-      
+                            saveFile()
                             a.querySelector(".js-form-submission").classList.add("show"), fetch(t, {
                                 method: "POST",
 
                                 body: s   
                             }).then(function(e) {
+                                
                                 return e.json()
                             }).catch(function(e) {
                                 o(), a.querySelector(".js-form-error").classList.add("show")
