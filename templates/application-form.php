@@ -1,11 +1,7 @@
 
 
-<h1><?php the_title(); 
-
-?></h1>
-
+<h1><?php the_title(); ?></h1>
 <form id="zon-testimonial-form"  class="zon-form" action="#" method="post" data-url="<?php echo admin_url('admin-ajax.php'); ?>" enctype="multipart/form-data">
-  
   <?php $current_user = wp_get_current_user(); echo $current_user->user_login; ?>
 
   <div class="zon-input-fields">
@@ -13,31 +9,28 @@
       <input value="<?php echo $current_user->user_login; ?>" type="text" class="field-input" placeholder="Name" id="name" name="name" required>
       <small class="field-msg error" data-error="invalidName">Your Name is Required</small>
     </div>
-  
     <div class="field-container">
       <input type="number" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" class="field-input" placeholder="Mobile"  maxlength="10" id="phone" name="phone" required>
       <small class="field-msg error" data-error="invalidMobile">The Mobile number is not valid</small>
     </div>  
-  
     <div class="field-container">
       <input value="<?php echo $current_user->user_email; ?>" type="text" class="field-input" placeholder="Email" id="adult" name="email" required>
       <small class="field-msg error" data-error="invalidEmail">Your Email is Required</small>
     </div>
-  
     <div class="field-container">
       <input type="text" class="field-input" placeholder="Person/s" id="infant" name="message" >
       <small class="field-msg error" data-error="invalidName">Child is Required</small>
     </div>
-  
     <div class="field-container">
       <input type="text" class="field-input" id="my-element" placeholder="Date" id="" name="date" required>
       <small class="field-msg error" data-error="invalidDate">The Date is not valid</small>
     </div>
 
     <!-------file-upload------->
-    <input type="file" name="fileupload" id="fileupload">
+    <input type="file"  name="fileupload" id="fileupload">
     <button id="upload-button" onclick="saveFile()">Upload</button>
   
+    
     <div class="field-container">
       <input type="submit"  id="btn-razorpay" class="btn"  name="submit" value='BOOK NOW PAY LATER' placeholder="submit">
     </div>
@@ -54,13 +47,27 @@
 
 <!---- Calendar Popup Container ----->
 <!---- Calendar Popup Container End ----->   
-
+<button class="uplo">fghdfghdfgh</button>
 
 <script>
+
+const btn = document.querySelector('.uplo');
+const clickHandler = async () => {
+  const res = await fetch('<?php echo plugin_dir_url( __FILE__ ); ?>/upload.php', {
+    method: "get", 
+    body: formData
+  });
+}
+btn.addEventListener('click', clickHandler);
+
+
 async function saveFile() {
   let formData = new FormData();
   formData.append("file", fileupload.files[0]);
-  await fetch('<?php echo plugin_dir_url( __FILE__ ); ?>/upload.php', {method: "POST", body: formData});
+  await fetch('<?php echo plugin_dir_url( __FILE__ ); ?>/upload.php', {
+    method: "POST", 
+    body: formData
+  });
 }
 ! function o(n, i, u) {
     function c(r, e) {
@@ -107,16 +114,13 @@ async function saveFile() {
                     if (/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(String(r.email).toLowerCase()))
                         if (r.message) {
                             var t = a.dataset.url,
-
                             s = new URLSearchParams(new FormData(a));
                             s.append("file", cv.files[0]);
                             saveFile()
                             a.querySelector(".js-form-submission").classList.add("show"), fetch(t, {
                                 method: "POST",
-
                                 body: s   
                             }).then(function(e) {
-                                
                                 return e.json()
                             }).catch(function(e) {
                                 o(), a.querySelector(".js-form-error").classList.add("show")
