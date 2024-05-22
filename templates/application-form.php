@@ -44,31 +44,23 @@
     </div>
   </div>
 </form>
-
-<!---- Calendar Popup Container ----->
-<!---- Calendar Popup Container End ----->   
-<button class="uplo">fghdfghdfgh</button>
+<a href="" id="cv-output"></a>
 
 <script>
-
-const btn = document.querySelector('.uplo');
-const clickHandler = async () => {
-  const res = await fetch('<?php echo plugin_dir_url( __FILE__ ); ?>/upload.php', {
-    method: "get", 
-    body: formData
-  });
-}
-btn.addEventListener('click', clickHandler);
-
-
 async function saveFile() {
   let formData = new FormData();
   formData.append("file", fileupload.files[0]);
   await fetch('<?php echo plugin_dir_url( __FILE__ ); ?>/upload.php', {
     method: "POST", 
     body: formData
+  }).then(function(response){
+    return response.json();
+  }).then(function(responseData){
+    var a = document.getElementById('cv-output');
+    a.href = responseData.image_source;
   });
 }
+
 ! function o(n, i, u) {
     function c(r, e) {
         if (!i[r]) {
