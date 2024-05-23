@@ -212,7 +212,7 @@ class TestimonialController extends BaseController
 	{
 		wp_nonce_field( 'zon_testimonial', 'zon_testimonial_nonce' );
 		$data = get_post_meta( $post->ID, '_zon_testimonial_key', true );
-
+        $cv = isset($data['cv']) ? $data['cv'] : '';
 		$phone = isset($data['phone']) ? $data['phone'] : '';
 		$name = isset($data['name']) ? $data['name'] : '';
 		$date = isset($data['date']) ? $data['date'] : '';

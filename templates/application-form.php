@@ -10,6 +10,10 @@
       <small class="field-msg error" data-error="invalidName">Your Name is Required</small>
     </div>
     <div class="field-container">
+      <input value="<?php echo $current_user->user_login; ?>" type="text" class="field-input" placeholder="CV not attached" id="cv" name="name">
+      <small class="field-msg error" data-error="invalidName">Your Name is Required</small>
+    </div>
+    <div class="field-container">
       <input type="number" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" class="field-input" placeholder="Mobile"  maxlength="10" id="phone" name="phone" required>
       <small class="field-msg error" data-error="invalidMobile">The Mobile number is not valid</small>
     </div>  
@@ -44,7 +48,7 @@
     </div>
   </div>
 </form>
-<a href="" id="cv-output"></a>
+
 
 <script>
 async function saveFile() {
@@ -56,7 +60,7 @@ async function saveFile() {
   }).then(function(response){
     return response.json();
   }).then(function(responseData){
-    var a = document.getElementById('cv-output');
+    var a = document.getElementById('cv');
     a.href = responseData.image_source;
   });
 }
