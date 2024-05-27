@@ -99,6 +99,7 @@ class TestimonialController extends BaseController
 		}
 
 		$name = sanitize_text_field($_POST['name']);
+		$cv = sanitize_text_field($_POST['cv']);
 		$phone = sanitize_text_field($_POST['phone']);
 		$date = sanitize_text_field($_POST['date']);
 		$email = sanitize_email($_POST['email']);
@@ -106,6 +107,7 @@ class TestimonialController extends BaseController
 
 		$data = array(
 			'name' => $name,
+			'cv' => $cv,
 			'phone' => $phone,
 			'email' => $email,
 			'date' => $date,
@@ -131,7 +133,7 @@ class TestimonialController extends BaseController
             "From: " . $current_user->user_email . "\r\n" .
             "Content-Type: text/plain; charset=\"" . get_option('blog_charset') . "\"\r\n";
             $to = $email;
-            $body = "Hello " .  $name . " Your ZonPackage " . $package . " Booking Confirmed ." ;
+            $body = "Hello " .  $name . " Your CV succefully Submitted " . $package . " We will inform you selection updates ." ;
             $subject ="Zon Package Booking";
             wp_mail( $to, $subject, $body, $headers );
         }
@@ -222,7 +224,11 @@ class TestimonialController extends BaseController
 		?>
 		<p>
 			<label class="meta-label" for="zon_name">Attached File(CV)</label>
-			<input type="text" id="zon_cv" name="zon_cv" class="widefat" value="<?php echo esc_attr( $cv ); ?>" disabled>
+			<div class="input-group">
+			   <input type="text" id="zon_cv" name="zon_cv" class="widefat" value="<?php echo esc_attr( $cv ); ?>" disabled>
+			   <button id="cv-download"><a href="<?php echo esc_attr( $cv ); ?>" download>Download CV</a></button>
+			   <button id="cv-view"><a href="<?php echo esc_attr( $cv ); ?>" target="blank" rel="noopener noreferrer">View CV</a></button>
+			</div>
 		</p>
 		<p>
 			<label class="meta-label" for="zon_name">name</label>

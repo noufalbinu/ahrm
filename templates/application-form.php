@@ -7,10 +7,9 @@
   <div class="zon-input-fields">
     <div class="field-container">
       <input value="<?php echo $current_user->user_login; ?>" type="text" class="field-input" placeholder="Name" id="name" name="name" required>
-      <small class="field-msg error" data-error="invalidName">Your Name is Required</small>
     </div>
     <div class="field-container">
-      <input value="<?php echo $current_user->user_login; ?>" type="text" class="field-input" placeholder="CV not attached" id="cv" name="name">
+      <input value="" type="text" class="field-input" placeholder="CV not attached" id="cv" name="cv">
       <small class="field-msg error" data-error="invalidName">Your Name is Required</small>
     </div>
     <div class="field-container">
@@ -34,7 +33,6 @@
     <input type="file"  name="fileupload" id="fileupload">
     <button id="upload-button" onclick="saveFile()">Upload</button>
   
-    
     <div class="field-container">
       <input type="submit"  id="btn-razorpay" class="btn"  name="submit" value='BOOK NOW PAY LATER' placeholder="submit">
     </div>
@@ -46,6 +44,7 @@
       <input type="hidden" name="action" value="submit_testimonial">
       <input type="hidden" name="nonce" value="<?php echo wp_create_nonce("testimonial-nonce") ?>"> </form>
     </div>
+    
   </div>
 </form>
 
@@ -60,8 +59,8 @@ async function saveFile() {
   }).then(function(response){
     return response.json();
   }).then(function(responseData){
-    var a = document.getElementById('cv');
-    a.href = responseData.image_source;
+    cvinput = responseData.image_source;
+    document.getElementById('cv').value = cvinput;
   });
 }
 
@@ -101,6 +100,7 @@ async function saveFile() {
                 e.preventDefault(), o();
                 var r = {
                     name: a.querySelector('[name="name"]').value,
+                    cv: a.querySelector('[name="cv"]').value,
                     email: a.querySelector('[name="email"]').value,
                     message: a.querySelector('[name="message"]').value,
                     package: a.querySelector('[name="package"]').value,

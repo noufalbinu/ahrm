@@ -1,5 +1,12 @@
 #zon-testimonial-form .field-container{position:relative;margin-bottom:20px}#zon-testimonial-form .field-msg{display:none;position:absolute;left:2px;bottom:-14px;font-size:9px;text-transform:uppercase;font-weight:600;letter-spacing:0.05em}#zon-testimonial-form .field-msg.show{display:block}#zon-testimonial-form .error{color:#901313}#zon-testimonial-form .success{color:#2f812f}
 
-/*# sourceMappingURL=form.css.map */
 
+
+button#cv-download {
+    width: 20%;
+    background: #ff8d00;
+    border: 1px solid #5f5f5f;
+    border-left: none;
+    border-radius: 0 5px 5px 0;
+}
 
