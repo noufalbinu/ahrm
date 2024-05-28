@@ -1,6 +1,3 @@
-#zon-testimonial-form .field-container{position:relative;margin-bottom:20px}#zon-testimonial-form .field-msg{display:none;position:absolute;left:2px;bottom:-14px;font-size:9px;text-transform:uppercase;font-weight:600;letter-spacing:0.05em}#zon-testimonial-form .field-msg.show{display:block}#zon-testimonial-form .error{color:#901313}#zon-testimonial-form .success{color:#2f812f}
-
-
 
 button#cv-download {
     width: 20%;
@@ -9,4 +6,103 @@ button#cv-download {
     border-left: none;
     border-radius: 0 5px 5px 0;
 }
+.progress-wrapper {
+    width:100%;
+}
+.progress-wrapper .progress {
+    background-color:green;
+    width:0%;
+    padding:5px 0px 5px 0px;
+}
+
+.btn {
+    text-align: center;
+    padding: 16px;
+    display: flex;
+  }
+  
+  button {
+    border-radius: 10px;
+    background-color: grey;
+    outline: none;
+  }
+  
+  button:hover {
+    background-color: orange;
+  }
+  
+  .modal {
+    display: none;
+    position: absolute;
+    z-index: 16;
+    width: 800px;
+    height: auto;
+    left: 50%;
+    transform: translate(-50%, 0);
+  }
+  
+  .modal_content {
+    background-color: white;
+    padding: 20px;
+    border-radius: 5px;
+    border: 2px solid #c5c1c1;
+  }
+  
+  .close {
+    color: Black;
+    float: right;
+  }
+  
+  .close:hover {
+    color: red;
+    cursor: pointer;
+  }
+.zon-input-fields {
+    text-align: center;
+}
+.cv-section-container {
+    display: flex;
+    width: 100%;
+}
+.cv-section-one {
+    width: 50%;
+}
+.cv-section-two {
+    width: 50%;
+}
+.field-input {
+    padding: 14px 20px;
+    width: 100%;
+    border-radius: 5px;
+    border: 1px solid #bbb;
+}
+  .cv-preview-container {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.cv-preview-default-image {
+    position: absolute;
+    z-index: 2;
+    width: 94px;
+}
+#cv-preview {
+    border-radius: 10px;
+    border: 3px solid #cecece;
+    position: relative;
+    z-index: 5;
+}
+.btn-application-submit {
+    text-align: center;
+    padding: 16px 30px;
+    display: flex;
+    background: #000;
+    border-radius: 5px;
+    border: 0;
+    color: #fff;
+}
+#zon-testimonial-form .field-container{margin-bottom:20px;display: flex;justify-content: center;}#zon-testimonial-form .field-msg{display:none;position:absolute;left:2px;bottom:-14px;font-size:9px;text-transform:uppercase;font-weight:600;letter-spacing:0.05em}#zon-testimonial-form .field-msg.show{display:block}#zon-testimonial-form .error{color:#901313}#zon-testimonial-form .success{color:#2f812f}
+
+
 
