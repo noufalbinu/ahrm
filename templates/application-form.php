@@ -1,10 +1,11 @@
 
 
-<h1><?php the_title(); ?></h1>
+
 
 <div class="btn">
-  <button class="js-btn">APPLY NOW!</button>
+  <button class="js-btn btn-apply">APPLY NOW!</button>
 </div>
+
 
 <div class="modal">
   <div class="modal_content">
@@ -13,7 +14,7 @@
     <form id="zon-testimonial-form"  class="zon-form" action="#" method="post" data-url="<?php echo admin_url('admin-ajax.php'); ?>" enctype="multipart/form-data">
       <?php $current_user = wp_get_current_user(); echo $current_user->user_login; ?>
       <div class="zon-input-fields">
-        <h3>Job Application Form</h3>
+        <h3>Apply for this position</h3>
         <div class="cv-section-container">
           <div class="cv-section-one">
             <div class="field-container">
@@ -57,26 +58,34 @@
               	<path style="fill:#00384D;" d="M136,368v32h96c0-11.008,1.36-21.696,3.712-32H136z"/>
               </g>
               </svg>
-    
-              <embed id="cv-preview"  src='' width="250" height="300">
+              <div class="file-upload-preview-container">
+                <label for="">Upload CV/Resume *</label>
+                <embed id="cv-preview"  src='' width="100%" height="300">
+                <label for="fileupload" class="custom-file-upload">Upload</label>
+                <label for="">Allowed File Type: .pdf,</label>
+              </div>
             </div>
+           
             <input type="file" onchange="saveFile()" name="fileupload" id="fileupload">
             <div id="progress-bar-file1" class="progress"></div>
           </div>
         </div>
       
-        <div class="field-container">
-          <input type="submit"  id="btn-razorpay" class="btn-application-submit"  name="submit" value='SUBMIT YOUR APPLICATION' placeholder="submit">
-        </div>
+        
+          
+       
     
-        <div class="field-container">
+       
+        
+      </div>
+      <input type="submit"  id="btn-razorpay" class="btn-application-submit"  name="submit" value='SUBMIT YOUR APPLICATION' placeholder="submit">
+      <div class="field-container">
           <small class="field-msg js-form-submission">Submission in process, please wait&hellip;</small>
           <small class="field-msg success js-form-success">Application Successfully submitted, thank you!</small>
           <small class="field-msg error js-form-error">There was a problem with the Application Form, please try again!</small>
           <input type="hidden" name="action" value="submit_testimonial">
           <input type="hidden" name="nonce" value="<?php echo wp_create_nonce("testimonial-nonce") ?>"> </form>
         </div>
-      </div>
     </form>
   </div>
 </div>
