@@ -26,9 +26,9 @@ class TestimonialController extends BaseController
 		add_action( 'add_meta_boxes', array( $this, 'add_meta_boxes' ) );
 		add_action( 'save_post', array( $this, 'save_meta_box' ) );
 
-		add_action( 'manage_testimonial_posts_columns', array( $this, 'set_custom_columns' ) );
-		add_action( 'manage_testimonial_posts_custom_column', array( $this, 'set_custom_columns_data' ), 10, 2 );
-		add_filter( 'manage_edit-testimonial_sortable_columns', array( $this, 'set_custom_columns_sortable' ) );
+		add_action( 'manage_applications_posts_columns', array( $this, 'set_custom_columns' ) );
+		add_action( 'manage_applications_posts_custom_column', array( $this, 'set_custom_columns_data' ), 10, 2 );
+		add_filter( 'manage_edit-applications_sortable_columns', array( $this, 'set_custom_columns_sortable' ) );
 
 		add_shortcode( 'application-form', array( $this, 'application_form' ) );
 
@@ -308,8 +308,18 @@ class TestimonialController extends BaseController
 	public function set_custom_columns($columns)
 	{
 		$title = $columns['title'];
+		$approved = $columns['approved'];
 		$date = $columns['date'];
-		unset( $columns['title'], $columns['date'] );
+		
+
+
+        //column Header
+		unset( 
+			$columns['title'], 
+			$columns['approved'], 
+		    $columns['date'] 
+		);
+
 		$columns['name'] = 'Author Name';
 		$columns['title'] = $title;
 		$columns['approved'] = 'Approved';
