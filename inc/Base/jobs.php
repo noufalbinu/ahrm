@@ -19,7 +19,6 @@ class Jobs extends BaseController {
 		add_filter( 'single_template', array( $this, 'load_pack_template' ) );
 		add_action( 'add_meta_boxes', array( $this, 'zon_fixed_boxess' ) );
 		add_action( 'save_post', array( $this,'zon_save_meta_boxx' ) );
-
 	}
 	public function zon_styles( $page ) {
 		echo "<link rel=\"stylesheet\" href=\"$this->plugin_url/assets/packageoptionn.css\" type=\"text/css\" media=\"all\" />";
@@ -84,7 +83,8 @@ class Jobs extends BaseController {
 			'has_archive'           => true,
 			'exclude_from_search'   => false,
 			'publicly_queryable'    => true,
-			'capability_type'       => 'page',
+			'capability_type'     => array('job','jobs'),
+			'map_meta_cap'        => true,
 			'show_in_rest'          => true,
 		);
 		register_post_type( 'jobs', $args );
@@ -98,7 +98,7 @@ public function zon_fixed_boxess() {
     }
 	add_meta_box(
 		'fixed_box',                       // Unique ID
-		'Job Detials',                             // Box title
+		'Job Details',                             // Box title
 		 array( $this, 'zon_featuress_boxx' ),      // Content callback, must be of type callable
 		'jobs',                              // 
 		'normal',
