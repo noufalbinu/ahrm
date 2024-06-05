@@ -83,7 +83,7 @@ class Jobs extends BaseController {
 			'has_archive'           => true,
 			'exclude_from_search'   => false,
 			'publicly_queryable'    => true,
-			'capability_type'     => array('job','jobs'),
+			'capability_type'     => array('job','jobs', 'post'),
 			'map_meta_cap'        => true,
 			'show_in_rest'          => true,
 		);

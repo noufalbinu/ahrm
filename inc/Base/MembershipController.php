@@ -46,11 +46,11 @@ class MembershipController extends BaseController
         add_role('ahrm_manager_role','AHRM Manager',
             [
                 // list of capabilities for this role
-				'read' => false,
+				'read' => true,
                 'edit_posts' => false,
                 'delete_posts' => true,
                 'publish_posts' => true,
-                'upload_files' => false,
+                'upload_files' => true,
             ]
         );
     }
@@ -58,29 +58,28 @@ class MembershipController extends BaseController
 	public function ahrm_manager_role_caps()
     {
 
+		/* Get the roles you want to add capabilities for, e.g. */
+		$roles = array( get_role('ahrm_manager_role'), get_role('administrator') );
 		// Add the roles you'd like to administer the custom post types
-		$roles = array('ahrm_manager_role');
 
 		// Loop through each role and assign capabilities
-		foreach($roles as $the_role) { 
-            // gets the example_role role object
-            $role = get_role('ahrm_manager_role');
-
+		foreach($roles as $role) { 
 			//remove_role('ahrm_manager_role');
-
-            $role->add_cap( 'read' );
-		    $role->add_cap( 'read_jobs' );
-		    $role->add_cap( 'read_private_jobs' );
-            $role->add_cap( 'edit_jobs' );
-			$role->add_cap( 'publish_jobs', true );
-			$role->add_cap( 'delete_jobs', true );
-		    $role->add_cap( 'edit_jobs' );
-		    $role->add_cap( 'edit_others_jobs' );
-		    $role->add_cap( 'edit_published_jobs' );
-		    $role->add_cap( 'publish_jobs' );
-		    $role->add_cap( 'delete_others_jobs' );
-		    $role->add_cap( 'delete_private_jobs' );
-		    $role->add_cap( 'delete_published_jobs' );
+			if($role) {
+                $role->add_cap( 'read' );
+		        $role->add_cap( 'read_jobs' );
+		        $role->add_cap( 'read_private_jobs' );
+                $role->add_cap( 'edit_jobs' );
+			    $role->add_cap( 'publish_jobs', true );
+			    $role->add_cap( 'delete_jobs', true );
+		        $role->add_cap( 'edit_jobs' );
+		        $role->add_cap( 'edit_others_jobs' );
+		        $role->add_cap( 'edit_published_jobs' );
+		        $role->add_cap( 'publish_jobs' );
+		        $role->add_cap( 'delete_others_jobs' );
+		        $role->add_cap( 'delete_private_jobs' );
+		        $role->add_cap( 'delete_published_jobs' );
+			}
 		}
     }
 
