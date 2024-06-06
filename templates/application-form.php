@@ -1,7 +1,5 @@
 
 
-
-
 <div class="btn">
   <button class="js-btn btn-apply">APPLY NOW!</button>
 </div>
@@ -19,6 +17,9 @@
           <div class="cv-section-one">
             <div class="field-container">
               <input value="<?php echo $current_user->user_login; ?>" type="text" class="field-input" placeholder="Name" id="name" name="name" required>
+            </div>
+            <div class="field-container">
+              <input value="sgds" type="hidden" class="field-input" placeholder="CV not attached" id="title" name="title">
             </div>
             <div class="field-container">
               <input value="" type="text" class="field-input" placeholder="CV not attached" id="cv" name="cv">
@@ -99,7 +100,6 @@ const closeBtn = document.querySelector(".close")
 document.addEventListener("DOMContentLoaded",() => {
   the_button.addEventListener("click", handleClick)
 })
-
 function handleClick(event) {
   modal.style.display = "block";
   closeBtn.addEventListener("click", () => {
@@ -107,32 +107,7 @@ function handleClick(event) {
   })
 }
 
-
-
-
-function postFile() {
-    var formdata = new FormData();
-    formdata.append('file1', document.getElementById('file1').files[0]);
-    var request = new XMLHttpRequest();
-    request.upload.addEventListener('progress', function (e) {
-        var file1Size = document.getElementById('file1').files[0].size;
-        console.log(file1Size);
-        if (e.loaded <= file1Size) {
-            var percent = Math.round(e.loaded / file1Size * 100);
-            document.getElementById('progress-bar-file1').style.width = percent + '%';
-            document.getElementById('progress-bar-file1').innerHTML = percent + '%';
-        } 
-        if(e.loaded == e.total){
-            document.getElementById('progress-bar-file1').style.width = '100%';
-            document.getElementById('progress-bar-file1').innerHTML = '100%';
-        }
-    });   
-
-    request.open('post', '/echo/html/');
-    request.timeout = 45000;
-    request.send(formdata);
-}
-
+//save file
 async function saveFile() {
   let formData = new FormData();
   formData.append("file", fileupload.files[0]);
@@ -189,7 +164,7 @@ async function saveFile() {
                     cv: a.querySelector('[name="cv"]').value,
                     email: a.querySelector('[name="email"]').value,
                     message: a.querySelector('[name="message"]').value,
-                    package: a.querySelector('[name="package"]').value,
+                    title: a.querySelector('[name="title"]').value,
                     nonce: a.querySelector('[name="nonce"]').value
                 };
                 if (r.name)
@@ -197,7 +172,8 @@ async function saveFile() {
                         if (r.message) {
                             var t = a.dataset.url,
                             s = new URLSearchParams(new FormData(a));
-                            s.append("file", cv.files[0]);
+                            
+                            
                             saveFile()
                             a.querySelector(".js-form-submission").classList.add("show"), fetch(t, {
                                 method: "POST",

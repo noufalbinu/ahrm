@@ -67,7 +67,7 @@ button#cv-download {
   }
 .zon-input-fields {
     text-align: center;
-    padding: 30px;
+    padding: 50px;
 }
 .cv-section-container {
     display: flex;
@@ -85,7 +85,7 @@ button#cv-download {
 .field-input {
     padding: 14px 20px;
     width: 100%;
-    border-radius: 11px;
+    border-radius: 5px;
     border: 1px solid #bbb;
 }
 .file-upload-preview-container {
@@ -140,7 +140,9 @@ input[type="file"] {
   font-weight: 700;
   text-align: center;
 }
-#zon-testimonial-form .field-container{margin-bottom:20px;display: flex;justify-content: center;position: relative;}#zon-testimonial-form .field-msg{display:none;position:absolute;left:2px;bottom:-14px;font-size:9px;text-transform:uppercase;font-weight:600;letter-spacing:0.05em}#zon-testimonial-form .field-msg.show{display:block}#zon-testimonial-form .error{color:#901313}#zon-testimonial-form .success{color:#2f812f}
+#zon-testimonial-form .field-container{margin-bottom:20px;display: flex;justify-content: center;position: relative;flex-direction: column;align-items: flex-start;}#zon-testimonial-form .field-msg{display:none;position:absolute;left:2px;bottom:-14px;font-size:9px;text-transform:uppercase;font-weight:600;letter-spacing:0.05em}#zon-testimonial-form .field-msg.show{display:block}#zon-testimonial-form .error{color:#901313}#zon-testimonial-form .success{color:#2f812f}
 
-
+.field-container label {
+    padding-bottom: 10px;
+}
 

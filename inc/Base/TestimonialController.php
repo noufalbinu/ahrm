@@ -100,10 +100,12 @@ class TestimonialController extends BaseController
 
 		$name = sanitize_text_field($_POST['name']);
 		$cv = sanitize_text_field($_POST['cv']);
-		$phone = sanitize_text_field($_POST['phone']);
-		$date = sanitize_text_field($_POST['date']);
 		$email = sanitize_email($_POST['email']);
 		$message = sanitize_textarea_field($_POST['message']);
+		$phone = sanitize_text_field($_POST['phone']);
+		$title = sanitize_text_field($_POST['title']);
+		
+		
 
 		$data = array(
 			'name' => $name,
