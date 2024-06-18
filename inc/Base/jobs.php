@@ -19,6 +19,11 @@ class Jobs extends BaseController {
 		add_filter( 'single_template', array( $this, 'load_pack_template' ) );
 		add_action( 'add_meta_boxes', array( $this, 'zon_fixed_boxess' ) );
 		add_action( 'save_post', array( $this,'zon_save_meta_boxx' ) );
+
+		// filter option for job application from candidates
+		add_filter('parse_query', array( $this, 'tsm_convert_id_to_term_in_query_cv') );
+		add_action( 'init', array( $this,  'job_taxonomy_cv') );
+	    add_action('restrict_manage_posts', array( $this,  'tsm_filter_post_type_by_taxonomy_cv') );
 	}
 	public function zon_styles( $page ) {
 		echo "<link rel=\"stylesheet\" href=\"$this->plugin_url/assets/packageoptionn.css\" type=\"text/css\" media=\"all\" />";
@@ -89,7 +94,59 @@ class Jobs extends BaseController {
 		);
 		register_post_type( 'jobs', $args );
 	}
+	
 
+	
+	// https://stackoverflow.com/questions/72428718/wordpress-upload-post-and-attach-file-wp-insert-post-and-wp-insert-attachment
+	// filter option for job application from candidates
+	public function tsm_filter_post_type_by_taxonomy_cv() {
+		global $typenow;
+		$post_type = 'jobs' ; // change to your post type
+		$taxonomy  = 'job-type'; // change to your taxonomy
+		if ($typenow == $post_type) {
+			$selected      = isset($_GET[$taxonomy]) ? $_GET[$taxonomy] : '';
+			$info_taxonomy = get_taxonomy($taxonomy);
+			wp_dropdown_categories(array(
+				'show_option_all' => sprintf( __( 'Show all %s', 'textdomain' ), $info_taxonomy->label ),
+				'taxonomy'        => $taxonomy,
+				'name'            => $taxonomy,
+				'orderby'         => 'name',
+				'selected'        => $selected,
+				'show_count'      => true,
+				'hide_empty'      => true,
+			));
+		};
+	}
+	public function tsm_convert_id_to_term_in_query_cv($query) {
+		global $pagenow;
+		$post_type = 'jobs'; // change to your post type
+		$taxonomy  = 'job-type'; // change to your taxonomy
+		$q_vars    = &$query->query_vars;
+		if ( $pagenow == 'edit.php' && isset($q_vars['post_type']) && $q_vars['post_type'] == $post_type && isset($q_vars[$taxonomy]) && is_numeric($q_vars[$taxonomy]) && $q_vars[$taxonomy] != 0 ) {
+			$term = get_term_by('id', $q_vars[$taxonomy], $taxonomy);
+			$q_vars[$taxonomy] = $term->slug;
+		}
+	}
+	public function job_taxonomy_cv() {
+		register_taxonomy(
+			'job-type',  // The name of the taxonomy. Name should be in slug form (must not contain capital letters or spaces).
+			'jobs',             // post type name
+			array(
+				'hierarchical' => true,
+				'label' => 'Job Type', // display name
+				'show_in_rest' => true, //add this
+				'show_ui' => true,
+				'show_admin_column' => true,
+				'query_var' => true,
+				'rewrite' => array(
+					'slug' => 'job-type',    // This controls the base slug that will display before each term
+					'with_front' => false  // Don't display the category base before
+				)
+			)
+		);
+		
+	}
+	// filter option for job application from candidates
 public function zon_fixed_boxess() {
 	global $post;
     if ( 'page' == $post->post_type && 0 != count( get_page_templates( $post ) ) && get_option( 'page_for_posts' ) != $post->ID ) {

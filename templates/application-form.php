@@ -19,7 +19,7 @@
               <input value="<?php echo $current_user->user_login; ?>" type="text" class="field-input" placeholder="Name" id="name" name="name" required>
             </div>
             <div class="field-container">
-              <input value="sgds" type="hidden" class="field-input" placeholder="CV not attached" id="title" name="title">
+              <input value="<?php the_title(); ?>" type="hidden" class="field-input" placeholder="CV not attached" id="jobtitle" name="jobtitle">
             </div>
             <div class="field-container">
               <input value="" type="text" class="field-input" placeholder="CV not attached" id="cv" name="cv">
@@ -163,8 +163,10 @@ async function saveFile() {
                     name: a.querySelector('[name="name"]').value,
                     cv: a.querySelector('[name="cv"]').value,
                     email: a.querySelector('[name="email"]').value,
+                    phone: a.querySelector('[name="email"]').phone,
                     message: a.querySelector('[name="message"]').value,
-                    title: a.querySelector('[name="title"]').value,
+                    date: a.querySelector('[name="date"]').value,
+                    jobtitle: a.querySelector('[name="jobtitle"]').value,
                     nonce: a.querySelector('[name="nonce"]').value
                 };
                 if (r.name)

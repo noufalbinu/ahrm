@@ -40,7 +40,7 @@ class TestimonialController extends BaseController
 
 		// filter option for job application from candidates
 		add_filter('parse_query', array( $this, 'tsm_convert_id_to_term_in_query') );
-		add_action( 'init', array( $this,  'themes_taxonomy') );
+		add_action( 'init', array( $this,  'job_taxonomy') );
 		add_action('restrict_manage_posts', array( $this,  'tsm_filter_post_type_by_taxonomy') );
 	}
 		
@@ -48,8 +48,8 @@ class TestimonialController extends BaseController
 	    // filter option for job application from candidates
 		public function tsm_filter_post_type_by_taxonomy() {
         	global $typenow;
-        	$post_type = 'applications'; // change to your post type
-        	$taxonomy  = 'themes_categories'; // change to your taxonomy
+        	$post_type = 'applications' ; // change to your post type
+        	$taxonomy  = 'job-type'; // change to your taxonomy
         	if ($typenow == $post_type) {
         		$selected      = isset($_GET[$taxonomy]) ? $_GET[$taxonomy] : '';
         		$info_taxonomy = get_taxonomy($taxonomy);
@@ -74,16 +74,35 @@ class TestimonialController extends BaseController
         		$q_vars[$taxonomy] = $term->slug;
         	}
         }
-        public function themes_taxonomy() {
+        public function job_taxonomy() {
             register_taxonomy(
-                'themes_categories',  // The name of the taxonomy. Name should be in slug form (must not contain capital letters or spaces).
+                'job-type',  // The name of the taxonomy. Name should be in slug form (must not contain capital letters or spaces).
                 'applications',             // post type name
                 array(
                     'hierarchical' => true,
-                    'label' => 'Job category', // display name
+                    'label' => 'Job Type', // display name
+					'show_in_rest' => true, //add this
+                    'show_ui' => true,
+                    'show_admin_column' => true,
                     'query_var' => true,
                     'rewrite' => array(
-                        'slug' => 'themes',    // This controls the base slug that will display before each term
+                        'slug' => 'job-type',    // This controls the base slug that will display before each term
+                        'with_front' => false  // Don't display the category base before
+                    )
+                )
+            );
+			register_taxonomy(
+                'job-location',  // The name of the taxonomy. Name should be in slug form (must not contain capital letters or spaces).
+                'applications',             // post type name
+                array(
+                    'hierarchical' => true,
+                    'label' => 'Job Location', // display name
+					'show_in_rest' => true, //add this
+                    'show_ui' => true,
+                    'show_admin_column' => true,
+                    'query_var' => true,
+                    'rewrite' => array(
+                        'slug' => 'job-location',    // This controls the base slug that will display before each term
                         'with_front' => false  // Don't display the category base before
                     )
                 )
@@ -99,21 +118,25 @@ class TestimonialController extends BaseController
 		}
 
 		$name = sanitize_text_field($_POST['name']);
+		$jobtitle = sanitize_text_field($_POST['jobtitle']);
 		$cv = sanitize_text_field($_POST['cv']);
 		$email = sanitize_email($_POST['email']);
 		$message = sanitize_textarea_field($_POST['message']);
 		$phone = sanitize_text_field($_POST['phone']);
-		$title = sanitize_text_field($_POST['title']);
+		
+		$date = sanitize_text_field($_POST['date']);
 		
 		
 
 		$data = array(
 			'name' => $name,
+			'jobtitle' => $jobtitle,
 			'cv' => $cv,
 			'phone' => $phone,
 			'email' => $email,
+			
 			'date' => $date,
-			'date' => $message,
+			'message' => $message,
 			'approved' => 0,
 			'featured' => 0,
 		);
@@ -136,7 +159,7 @@ class TestimonialController extends BaseController
             "Content-Type: text/plain; charset=\"" . get_option('blog_charset') . "\"\r\n";
             $to = $email;
             $body = "Hello " .  $name . " Your CV succefully Submitted " . $package . " We will inform you selection updates ." ;
-            $subject ="Zon Package Booking";
+            $subject ="Vistas Careers: Job Application Confirmation";
             wp_mail( $to, $subject, $body, $headers );
         }
 		
@@ -219,6 +242,7 @@ class TestimonialController extends BaseController
         $cv = isset($data['cv']) ? $data['cv'] : '';
 		$phone = isset($data['phone']) ? $data['phone'] : '';
 		$name = isset($data['name']) ? $data['name'] : '';
+		$jobtitle = isset($data['jobtitle']) ? $data['jobtitle'] : '';
 		$date = isset($data['date']) ? $data['date'] : '';
 		$email = isset($data['email']) ? $data['email'] : '';
 		$approved = isset($data['approved']) ? $data['approved'] : false;
@@ -245,8 +269,8 @@ class TestimonialController extends BaseController
 			<input type="text" id="zon_testimonial_date" name="zon_testimonial_date" class="widefat" value="<?php echo esc_attr( $date ); ?>">
 		</p>
 		<p>
-			<label class="meta-label" for="zon_package">package</label>
-			<input type="text" id="zon_package" name="zon_package" class="widefat" value="<?php echo esc_attr( $package ); ?>">
+			<label class="meta-label" for="zon_package">Applyed for</label>
+			<input type="text" id="zon_package" name="zon_package" class="widefat" value="<?php echo esc_attr( $jobtitle ); ?>">
 		</p>
 		<p>
 			<label class="meta-label" for="zon_phone">phone</label>
@@ -295,9 +319,9 @@ class TestimonialController extends BaseController
 		}
 
 		$data = array(
-			'package' => sanitize_text_field( $_POST['zon_package'] ),
 			'phone' => sanitize_text_field( $_POST['zon_phone'] ),
 			'cv' => sanitize_text_field( $_POST['zon_cv'] ),
+			'jobtitle' => sanitize_text_field( $_POST['jobtitle'] ),
 			'name' => sanitize_text_field( $_POST['zon_testimonial_author'] ),
 			'date' => sanitize_text_field( $_POST['zon_testimonial_date'] ),
 			'email' => sanitize_email( $_POST['zon_testimonial_email'] ),
@@ -309,24 +333,20 @@ class TestimonialController extends BaseController
 
 	public function set_custom_columns($columns)
 	{
-		$title = $columns['title'];
-		$approved = $columns['approved'];
-		$date = $columns['date'];
-		
 
 
-        //column Header
+        //Uset defualt wordpress column titles
 		unset( 
 			$columns['title'], 
-			$columns['approved'], 
 		    $columns['date'] 
 		);
-
+        //Assign new header titles
 		$columns['name'] = 'Author Name';
-		$columns['title'] = $title;
+		$columns['jobtitle'] = 'Job applied for';
 		$columns['approved'] = 'Approved';
 		$columns['featured'] = 'Short listed';
-		$columns['date'] = $date;
+		$columns['date'] = 'Date';
+		
     
 	    return $columns;
 	}
@@ -334,20 +354,31 @@ class TestimonialController extends BaseController
 	
 	public function set_custom_columns_data($column, $post_id)
 	{
+		
 		$data = get_post_meta( $post_id, '_zon_testimonial_key', true );
+		
 		$name = isset($data['name']) ? $data['name'] : '';
+		$jobtitle = isset($data['jobtitle']) ? $data['jobtitle'] : '';
+		
 		$date = isset($data['date']) ? $data['date'] : '';
-		$package = isset($data['package']) ? $data['package'] : '';
+		
+		
 		$phone = isset($data['phone']) ? $data['phone'] : '';
 		$email = isset($data['email']) ? $data['email'] : '';
 		$approved = isset($data['approved']) && $data['approved'] === 1 ? '<strong>YES</strong>' : 'NO';
 		$featured = isset($data['featured']) && $data['featured'] === 1 ? '<strong>YES</strong>' : 'NO';
 
+
+		
 		switch($column) {
 			case 'name':
 				echo '<strong>' . $name . '</strong><br/><a href="mailto:' . $email . '">' . $email . '</a>';
 				break;
 
+			case 'jobtitle':
+				echo '<strong>' . $jobtitle . '<strong>';
+				break;
+	
 			case 'approved':
 				echo $approved;
 				break;
@@ -360,9 +391,9 @@ class TestimonialController extends BaseController
 
 	public function set_custom_columns_sortable($columns)
 	{
-
+		
 		$columns['name'] = 'name';
-		$columns['package'] = 'package';
+		$columns['title'] = 'title';
 		$columns['phone'] = 'phone';
 		$columns['date'] = 'date';
 		$columns['approved'] = 'approved';
