@@ -75,7 +75,7 @@ class Jobs extends BaseController {
 			'description'           => __( 'Post Type Description', 'text_domain' ),
 			'labels'                => $labels,
 			'supports'              => array('title','editor', 'author', 'thumbnail'),
-			'taxonomies'            => array( 'category', 'fixedpackages' ),
+			'taxonomies'            => [ 'job-type','jobtype','category', 'fixedpackages' ],
 			'hierarchical'          => false,
 			'public'                => true,
 			'show_ui'               => true,

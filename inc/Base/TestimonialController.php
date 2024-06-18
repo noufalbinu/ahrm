@@ -23,7 +23,8 @@ class TestimonialController extends BaseController
 		$this->callbacks = new TestimonialCallbacks();
 
 		add_action( 'init', array( $this, 'testimonial_cpt' ) );
-		add_action( 'add_meta_boxes', array( $this, 'add_meta_boxes' ) );
+		add_action( 'add_meta_boxes', array( $this, 'add_meta_boxes' ), 25, 3 );
+		add_action( 'add_meta_boxes', array( $this, 'add_status_box'), 25, 3 );
 		add_action( 'save_post', array( $this, 'save_meta_box' ) );
 
 		add_action( 'manage_applications_posts_columns', array( $this, 'set_custom_columns' ) );
@@ -40,7 +41,7 @@ class TestimonialController extends BaseController
 
 		// filter option for job application from candidates
 		add_filter('parse_query', array( $this, 'tsm_convert_id_to_term_in_query') );
-		add_action( 'init', array( $this,  'job_taxonomy') );
+	
 		add_action('restrict_manage_posts', array( $this,  'tsm_filter_post_type_by_taxonomy') );
 	}
 		
@@ -67,48 +68,14 @@ class TestimonialController extends BaseController
         public function tsm_convert_id_to_term_in_query($query) {
         	global $pagenow;
         	$post_type = 'applications'; // change to your post type
-        	$taxonomy  = 'themes_categories'; // change to your taxonomy
+        	$taxonomy  = 'job-type'; // change to your taxonomy
         	$q_vars    = &$query->query_vars;
         	if ( $pagenow == 'edit.php' && isset($q_vars['post_type']) && $q_vars['post_type'] == $post_type && isset($q_vars[$taxonomy]) && is_numeric($q_vars[$taxonomy]) && $q_vars[$taxonomy] != 0 ) {
         		$term = get_term_by('id', $q_vars[$taxonomy], $taxonomy);
         		$q_vars[$taxonomy] = $term->slug;
         	}
         }
-        public function job_taxonomy() {
-            register_taxonomy(
-                'job-type',  // The name of the taxonomy. Name should be in slug form (must not contain capital letters or spaces).
-                'applications',             // post type name
-                array(
-                    'hierarchical' => true,
-                    'label' => 'Job Type', // display name
-					'show_in_rest' => true, //add this
-                    'show_ui' => true,
-                    'show_admin_column' => true,
-                    'query_var' => true,
-                    'rewrite' => array(
-                        'slug' => 'job-type',    // This controls the base slug that will display before each term
-                        'with_front' => false  // Don't display the category base before
-                    )
-                )
-            );
-			register_taxonomy(
-                'job-location',  // The name of the taxonomy. Name should be in slug form (must not contain capital letters or spaces).
-                'applications',             // post type name
-                array(
-                    'hierarchical' => true,
-                    'label' => 'Job Location', // display name
-					'show_in_rest' => true, //add this
-                    'show_ui' => true,
-                    'show_admin_column' => true,
-                    'query_var' => true,
-                    'rewrite' => array(
-                        'slug' => 'job-location',    // This controls the base slug that will display before each term
-                        'with_front' => false  // Don't display the category base before
-                    )
-                )
-            );
-        }
-        // filter option for job application from candidates
+        
 
 	public function submit_testimonial()
 	{
@@ -224,6 +191,27 @@ class TestimonialController extends BaseController
 
 		register_post_type ( 'applications', $args );
 	}
+	public function add_status_box()
+	{
+		add_meta_box(
+			'application_satuts',
+			'Application status',
+			array( $this, 'render_status_box' ),
+			'applications',
+			'side',
+			'high'
+		);
+	}
+	public function render_status_box($post)
+	{
+		$termID = [];
+        $terms = get_the_terms( 553, 'job-type');
+        foreach ($terms as $term) {
+            $termID = $term->name;
+              
+            echo '<p>'.$termID.'</p>';
+        }
+	}
 	public function add_meta_boxes()
 	{
 		add_meta_box(
@@ -231,12 +219,14 @@ class TestimonialController extends BaseController
 			'Candidate Application Details',
 			array( $this, 'render_features_box' ),
 			'applications',
-			'normal',
+			'side',
 			'high'
 		);
 	}
 	public function render_features_box($post)
 	{
+	    
+
 		wp_nonce_field( 'zon_testimonial', 'zon_testimonial_nonce' );
 		$data = get_post_meta( $post->ID, '_zon_testimonial_key', true );
         $cv = isset($data['cv']) ? $data['cv'] : '';
@@ -247,7 +237,10 @@ class TestimonialController extends BaseController
 		$email = isset($data['email']) ? $data['email'] : '';
 		$approved = isset($data['approved']) ? $data['approved'] : false;
 		$featured = isset($data['featured']) ? $data['featured'] : false;
+
 		?>
+
+
 		<p>
 			<label class="meta-label" for="zon_name">Attached File(CV)</label>
 			<div class="input-group">
@@ -281,7 +274,7 @@ class TestimonialController extends BaseController
 			<input type="email" id="zon_testimonial_email" name="zon_testimonial_email" class="widefat" value="<?php echo esc_attr( $email ); ?>">
 		</p>
 		<div class="meta-container">
-			<label class="meta-label w-50 text-left" for="zon_testimonial_approved">Candidates Shortlisted</label>
+			<label class="meta-label w-50 text-left" for="zon_testimonial_approved">Candidate Shortlisted</label>
 			<div class="text-right w-50 inline">
 				<div class="ui-toggle inline"><input type="checkbox" id="zon_testimonial_approved" name="zon_testimonial_approved" value="1" <?php echo $approved ? 'checked' : ''; ?>>
 					<label for="zon_testimonial_approved"><div></div></label>
