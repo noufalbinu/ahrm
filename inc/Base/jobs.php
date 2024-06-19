@@ -144,6 +144,22 @@ class Jobs extends BaseController {
 				)
 			)
 		);
+		register_taxonomy(
+			'job-location',  // The name of the taxonomy. Name should be in slug form (must not contain capital letters or spaces).
+			'jobs',             // post type name
+			array(
+				'hierarchical' => true,
+				'label' => 'Job Location', // display name
+				'show_in_rest' => true, //add this
+				'show_ui' => true,
+				'show_admin_column' => true,
+				'query_var' => true,
+				'rewrite' => array(
+					'slug' => 'job-location',    // This controls the base slug that will display before each term
+					'with_front' => false  // Don't display the category base before
+				)
+			)
+		);
 		
 	}
 	// filter option for job application from candidates
