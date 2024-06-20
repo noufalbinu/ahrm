@@ -14,7 +14,7 @@ class Jobs extends BaseController {
 	public function register()
 	{
 		if ( ! $this->activated( 'Jobs' ) ) return;
-		add_action( 'init', array( $this, 'custom_post_type' ) );
+		add_action( 'init', array( $this, 'custom_post_job' ) );
 		add_action( 'admin_enqueue_scripts', array( $this, 'zon_styles' ) );
 		add_filter( 'single_template', array( $this, 'load_pack_template' ) );
 		add_action( 'add_meta_boxes', array( $this, 'zon_fixed_boxess' ) );
@@ -39,7 +39,7 @@ class Jobs extends BaseController {
     }
 
 	
-	public function custom_post_type() 
+	public function custom_post_job() 
 	{
 		$labels = array(
 			'name' => ( 'Add/Edit Jobs' ),
