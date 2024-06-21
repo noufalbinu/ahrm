@@ -85,10 +85,10 @@ class Jobs extends BaseController {
 			'show_in_admin_bar'     => true,
 			'show_in_nav_menus'     => true,
 			'can_export'            => true,
-			'has_archive'           => true,
+			'has_archive'           => 'jobs',
 			'exclude_from_search'   => false,
 			'publicly_queryable'    => true,
-			'capability_type'     => array('job','jobs', 'post'),
+			'capability_type'     => array('job','jobs', 'page'),
 			'map_meta_cap'        => true,
 			'show_in_rest'          => true,
 		);
