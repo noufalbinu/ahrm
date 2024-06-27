@@ -10,35 +10,30 @@
     <span class="close">&times;</span>
 
     <form id="zon-testimonial-form"  class="zon-form" action="#" method="post" data-url="<?php echo admin_url('admin-ajax.php'); ?>" enctype="multipart/form-data">
-      <?php $current_user = wp_get_current_user(); echo $current_user->user_login; ?>
+      <?php $current_user = wp_get_current_user(); ?>
       <div class="zon-input-fields">
         <h3>Apply for this position</h3>
         <div class="cv-section-container">
           <div class="cv-section-one">
             <div class="field-container">
+              <label for="">Name *</label>
               <input value="<?php echo $current_user->user_login; ?>" type="text" class="field-input" placeholder="Name" id="name" name="name" required>
             </div>
+           
+           
             <div class="field-container">
-              <input value="<?php the_title(); ?>" type="hidden" class="field-input" placeholder="CV not attached" id="jobtitle" name="jobtitle">
-            </div>
-            <div class="field-container">
-              <input value="" type="text" class="field-input" placeholder="CV not attached" id="cv" name="cv">
-              <small class="field-msg error" data-error="invalidName">Your Name is Required</small>
-            </div>
-            <div class="field-container">
+              <label for="">Mobile *</label>
               <input type="number" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" class="field-input" placeholder="Mobile"  maxlength="10" id="phone" name="phone" required>
               <small class="field-msg error" data-error="invalidMobile">The Mobile number is not valid</small>
             </div>  
             <div class="field-container">
+              <label for="">Email *</label>
               <input value="<?php echo $current_user->user_email; ?>" type="text" class="field-input" placeholder="Email" id="adult" name="email" required>
               <small class="field-msg error" data-error="invalidEmail">Your Email is Required</small>
             </div>
             <div class="field-container">
-              <input type="text" class="field-input" placeholder="Person/s" id="infant" name="message" >
-              <small class="field-msg error" data-error="invalidName">Child is Required</small>
-            </div>
-            <div class="field-container">
-              <input type="text" class="field-input" id="my-element" placeholder="Date" id="" name="date" required>
+              <label for="">Cover Letter *</label>
+              <textarea class="field-input" id="my-element" placeholder="Date" id="" name="message" required></textarea>
               <small class="field-msg error" data-error="invalidDate">The Date is not valid</small>
             </div>
           </div>
@@ -59,16 +54,25 @@
               	<path style="fill:#00384D;" d="M136,368v32h96c0-11.008,1.36-21.696,3.712-32H136z"/>
               </g>
               </svg>
-              <div class="file-upload-preview-container">
+              <div class="file-upload-section">
                 <label for="">Upload CV/Resume *</label>
-                <embed id="cv-preview"  src='' width="100%" height="300">
-                <label for="fileupload" class="custom-file-upload">Upload</label>
+                <div class="file-upload-preview-container">
+                  <embed id="cv-preview"  src='' width="100%" height="300">
+                  <label for="fileupload" class="custom-file-upload">Upload</label>
+                </div>
                 <label for="">Allowed File Type: .pdf,</label>
               </div>
             </div>
            
             <input type="file" onchange="saveFile()" name="fileupload" id="fileupload">
             <div id="progress-bar-file1" class="progress"></div>
+            <div class="field-container">
+              <input value="<?php the_title(); ?>" type="hidden" class="field-input" placeholder="CV not attached" id="jobtitle" name="jobtitle">
+            </div>
+            <div class="field-container">
+              <input value="" type="hidden" class="field-input" placeholder="CV not attached" id="cv" name="cv">
+              <small class="field-msg error" data-error="invalidName">Your Name is Required</small>
+            </div>
           </div>
         </div>
       
@@ -79,7 +83,10 @@
        
         
       </div>
-      <input type="submit"  id="btn-razorpay" class="btn-application-submit"  name="submit" value='SUBMIT YOUR APPLICATION' placeholder="submit">
+      <div class="button-wrap">
+        <input type="submit"  id="btn-razorpay" class="btn-application-submit"  name="submit" value='SUBMIT YOUR APPLICATION' placeholder="submit">
+      </div>
+      
       <div class="field-container">
           <small class="field-msg js-form-submission">Submission in process, please wait&hellip;</small>
           <small class="field-msg success js-form-success">Application Successfully submitted, thank you!</small>
@@ -160,13 +167,13 @@ async function saveFile() {
             a.addEventListener("submit", function(e) {
                 e.preventDefault(), o();
                 var r = {
+                    
                     name: a.querySelector('[name="name"]').value,
-                    cv: a.querySelector('[name="cv"]').value,
                     email: a.querySelector('[name="email"]').value,
-                    phone: a.querySelector('[name="email"]').phone,
-                    message: a.querySelector('[name="message"]').value,
-                    date: a.querySelector('[name="date"]').value,
+                    phone: a.querySelector('[name="phone"]').phone,
+                    cv: a.querySelector('[name="cv"]').value,
                     jobtitle: a.querySelector('[name="jobtitle"]').value,
+                    message: a.querySelector('[name="message"]').value,
                     nonce: a.querySelector('[name="nonce"]').value
                 };
                 if (r.name)

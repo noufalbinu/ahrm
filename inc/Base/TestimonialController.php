@@ -225,22 +225,17 @@ class TestimonialController extends BaseController
 	}
 	public function render_features_box($post)
 	{
-	    
-
 		wp_nonce_field( 'zon_testimonial', 'zon_testimonial_nonce' );
 		$data = get_post_meta( $post->ID, '_zon_testimonial_key', true );
         $cv = isset($data['cv']) ? $data['cv'] : '';
 		$phone = isset($data['phone']) ? $data['phone'] : '';
 		$name = isset($data['name']) ? $data['name'] : '';
 		$jobtitle = isset($data['jobtitle']) ? $data['jobtitle'] : '';
-		$date = isset($data['date']) ? $data['date'] : '';
+		$message = isset($data['message']) ? $data['message'] : '';
 		$email = isset($data['email']) ? $data['email'] : '';
 		$approved = isset($data['approved']) ? $data['approved'] : false;
 		$featured = isset($data['featured']) ? $data['featured'] : false;
-
 		?>
-
-
 		<p>
 			<label class="meta-label" for="zon_name">Attached File(CV)</label>
 			<div class="input-group">
@@ -254,14 +249,6 @@ class TestimonialController extends BaseController
 			<input type="text" id="zon_name" name="zon_name" class="widefat" value="<?php echo esc_attr( $name ); ?>">
 		</p>
 		<p>
-			<label class="meta-label" for="zon_testimonial_author">Adult</label>
-			<input type="text" id="zon_testimonial_author" name="zon_testimonial_author" class="widefat" value="<?php echo esc_attr( $name ); ?>">
-		</p>
-		<p>
-			<label class="meta-label" for="zon_testimonial_date">Date</label>
-			<input type="text" id="zon_testimonial_date" name="zon_testimonial_date" class="widefat" value="<?php echo esc_attr( $date ); ?>">
-		</p>
-		<p>
 			<label class="meta-label" for="zon_package">Applyed for</label>
 			<input type="text" id="zon_package" name="zon_package" class="widefat" value="<?php echo esc_attr( $jobtitle ); ?>">
 		</p>
@@ -272,6 +259,10 @@ class TestimonialController extends BaseController
 		<p>
 			<label class="meta-label" for="zon_testimonial_email">Email</label>
 			<input type="email" id="zon_testimonial_email" name="zon_testimonial_email" class="widefat" value="<?php echo esc_attr( $email ); ?>">
+		</p>
+		<p>
+			<label class="meta-label" for="zon_testimonial_email">Cover Letter</label>
+			<textarea  id="cover_message" name="cover_message" class="widefat" value="<?php echo esc_attr( $message ); ?>"></textarea>
 		</p>
 		<div class="meta-container">
 			<label class="meta-label w-50 text-left" for="zon_testimonial_approved">Candidate Shortlisted</label>
@@ -316,7 +307,7 @@ class TestimonialController extends BaseController
 			'cv' => sanitize_text_field( $_POST['zon_cv'] ),
 			'jobtitle' => sanitize_text_field( $_POST['jobtitle'] ),
 			'name' => sanitize_text_field( $_POST['zon_testimonial_author'] ),
-			'date' => sanitize_text_field( $_POST['zon_testimonial_date'] ),
+			'message' => sanitize_text_field( $_POST['message'] ),
 			'email' => sanitize_email( $_POST['zon_testimonial_email'] ),
 			'approved' => isset($_POST['zon_testimonial_approved']) ? 1 : 0,
 			'featured' => isset($_POST['zon_testimonial_featured']) ? 1 : 0,
