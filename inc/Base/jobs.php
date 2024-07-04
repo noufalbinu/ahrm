@@ -75,7 +75,7 @@ class Jobs extends BaseController {
 			'description'           => __( 'Post Type Description', 'text_domain' ),
 			'labels'                => $labels,
 			'supports'              => array('title','editor', 'author', 'thumbnail'),
-			'taxonomies'            => [ 'job-type','jobtype','category', 'fixedpackages' ],
+			'taxonomies'            => [ 'job-category','job-type','job-location' ],
 			'hierarchical'          => false,
 			'public'                => true,
 			'show_ui'               => true,
@@ -129,6 +129,28 @@ class Jobs extends BaseController {
 	}
 	public function job_taxonomy_cv() {
 		register_taxonomy(
+			'job-category',  // The name of the taxonomy. Name should be in slug form (must not contain capital letters or spaces).
+			'jobs',             // post type name
+			array(
+				'hierarchical' => true,
+				'label' => 'Job Category', // display name
+				'show_in_rest' => true, //add this
+				'show_ui' => true,
+				'show_admin_column' => true,
+				'query_var' => true,
+				'capabilities' => array(
+                    'manage_terms' => 'manage_job-category',
+                    'edit_terms'   => 'edit_job-category',
+                    'delete_terms' => 'delete_job-category',
+                    'assign_terms' => 'assign_job-category',
+                ),
+				'rewrite' => array(
+					'slug' => 'job-category',    // This controls the base slug that will display before each term
+					'with_front' => false  // Don't display the category base before
+				)
+			)
+		);
+		register_taxonomy(
 			'job-type',  // The name of the taxonomy. Name should be in slug form (must not contain capital letters or spaces).
 			'jobs',             // post type name
 			array(
@@ -138,6 +160,12 @@ class Jobs extends BaseController {
 				'show_ui' => true,
 				'show_admin_column' => true,
 				'query_var' => true,
+				'capabilities' => array(
+                    'manage_terms' => 'manage_job-location',
+                    'edit_terms'   => 'edit_job-location',
+                    'delete_terms' => 'delete_job-location',
+                    'assign_terms' => 'assign_job-location',
+                ),
 				'rewrite' => array(
 					'slug' => 'job-type',    // This controls the base slug that will display before each term
 					'with_front' => false  // Don't display the category base before
@@ -154,12 +182,19 @@ class Jobs extends BaseController {
 				'show_ui' => true,
 				'show_admin_column' => true,
 				'query_var' => true,
+				'capabilities' => array(
+                    'manage_terms' => 'manage_job-location',
+                    'edit_terms'   => 'edit_job-location',
+                    'delete_terms' => 'delete_job-location',
+                    'assign_terms' => 'assign_job-location',
+                ),
 				'rewrite' => array(
 					'slug' => 'job-location',    // This controls the base slug that will display before each term
 					'with_front' => false  // Don't display the category base before
 				)
 			)
 		);
+		
 		
 	}
 	// filter option for job application from candidates
@@ -182,220 +217,8 @@ public function zon_fixed_boxess() {
 
 
 public function zon_featuress_boxx( $post ) {
-	wp_nonce_field( 'zonpackk_testimonial', 'zonpackk_testimonial_nonce' );
-
-		$data = get_post_meta( $post->ID, '_zonpackk_testimonial_key', true );
-
-		$p1 = isset($data['p1']) ? $data['p1'] : '';
-		$p2 = isset($data['p2']) ? $data['p2'] : '';
-		$p3 = isset($data['p3']) ? $data['p3'] : '';
-		$p4 = isset($data['p4']) ? $data['p4'] : '';
-		$p5 = isset($data['p5']) ? $data['p5'] : '';
-		$p6 = isset($data['p6']) ? $data['p6'] : '';
-		$p7 = isset($data['p7']) ? $data['p7'] : '';
-		$p8 = isset($data['p8']) ? $data['p8'] : '';
-		$p9 = isset($data['p9']) ? $data['p9'] : ''; 
-
-		$ticketcount = isset($data['ticketcount']) ? $data['ticketcount'] : '';
-		$fixeddeparture = isset($data['fixeddeparture']) ? $data['fixeddeparture'] : '';
-		$picture1 = isset($data['picture1']) ? $data['picture1'] : '';
-		$picture2 = isset($data['picture2']) ? $data['picture2'] : '';
-		$picture3  = isset($data['picture3']) ? $data['picture3'] : '';
-
-		$packagecode = isset($data['packagecode']) ? $data['packagecode'] : '';
-
-
-		//package Header
-		$budget = isset($data['budget']) ? $data['budget'] : '';
-		$economy = isset($data['economy']) ? $data['economy'] : '';
-		$premium = isset($data['premium']) ? $data['premium'] : ''; 
-
-		$pm1 = isset($data['pm1']) ? $data['pm1'] : '';
-		$pm2 = isset($data['pm2']) ? $data['pm2'] : ''; 
-		$pm3 = isset($data['pm3']) ? $data['pm3'] : ''; 
-		$pm4 = isset($data['pm4']) ? $data['pm4'] : ''; 
-		$pm5 = isset($data['pm5']) ? $data['pm5'] : '';
-		$pm6 = isset($data['pm6']) ? $data['pm6'] : '';
-		$pm7 = isset($data['pm7']) ? $data['pm7'] : '';
-		$pm8 = isset($data['pm8']) ? $data['pm8'] : '';
-
-
-		$packtitle = isset($data['packtitle']) ? $data['packtitle'] : '';
-		$packdiscription = isset($data['packdiscription']) ? $data['packdiscription'] : '';
-		$dataoption = isset($data['dataoption']) ? $data['dataoption'] : '';
-		$zonoption = isset($data['zonoption']) ? $data['zonoption'] : '';
-
-
-		?>	
-
-
-<div class="pack-option-container">
-	<div class="firstone">
-		<div class="package-discription">
-			<p>Package Subtitle</p>
-
-
-			<input type="text" class="pack-title" name="pack-title" placeholder="<?php echo esc_attr($packtitle); ?>" value="<?php echo esc_attr($packtitle); ?>">
-			<p>Package Description</p>
-<textarea name="pack-discription" class="pack-discription" value="<?php echo esc_attr($packdiscription); ?>">
-<?php echo esc_attr($packdiscription); ?>
-</textarea>
-
-</div>
-		</div>
-
-		<div class="package-main">
-			<p>Package Included</p>
-			<input type="text" class="pack-menu" name="packmain1" placeholder="<?php echo esc_attr($pm1); ?>" value="<?php echo esc_attr($pm1); ?>">
-			<input type="text" class="pack-menu" name="packmain2" placeholder="<?php echo esc_attr($pm2); ?>" value="<?php echo esc_attr($pm2); ?>">
-			<input type="text" class="pack-menu" name="packmain3" placeholder="<?php echo esc_attr($pm3); ?>" value="<?php echo esc_attr($pm3); ?>">
-			<input type="text" class="pack-menu" name="packmain4" placeholder="<?php echo esc_attr($pm4); ?>" value="<?php echo esc_attr($pm4); ?>">
-			<input type="text" class="pack-menu" name="packmain5" placeholder="<?php echo esc_attr($pm5); ?>" value="<?php echo esc_attr($pm5); ?>">
-			<input type="text" class="pack-menu" name="packmain6" placeholder="<?php echo esc_attr($pm6); ?>" value="<?php echo esc_attr($pm6); ?>">
-			<input type="text" class="pack-menu" name="packmain7" placeholder="<?php echo esc_attr($pm7); ?>" value="<?php echo esc_attr($pm7); ?>">	
-			<input type="text" class="pack-menu" name="packmain8" placeholder="<?php echo esc_attr($pm8); ?>" value="<?php echo esc_attr($pm8); ?>">
-		</div>
-        	<div class="select-option">
-<select name="dataoption" onchange="this.form.submit()">
-     <option value="page1"<?php if ($dataoption == "page1") { echo " selected"; } ?>>Custom Departure</option>
-     <option value="page2"<?php if ($dataoption  == "page2") { echo " selected"; } ?>>Fixed Departure</option>
-</select>
- </div>
-<?php
-
-switch ($dataoption) {
-    case 'page2': ?>
-        
-        <div class="package-fixed">
-
-        	<div class="profile-picture-preview1" style="background-image: url(<?php echo esc_attr($picture1); ?>);">
-        		<input type="button" class="upload-button" value="Upload Hotel Picture" data-group="1">
-        		<input type="hidden" name="profile_picture1" class="profile-picture1" value="<?php echo esc_attr($picture1); ?>">
-        	</div>
-        	<div class="package-edit-input">
-        		<table class="form-table">
-        			<tr>
-        				<th scope="row">Title</th>
-        				<td><input type="text" class="fixed-departure" name="fixed-departure" placeholder="<?php echo esc_attr($fixeddeparture); ?>" value="<?php echo esc_attr($fixeddeparture); ?>"></td>
-        			</tr>
-        			<tr>
-        				<th scope="row">Hotel Name</th>
-        				<td><input type="text"  name="budget_title" placeholder="<?php echo esc_attr($budget); ?>" value="<?php echo esc_attr($budget); ?>"></td>
-        			</tr>
-        			<tr>
-        				<th scope="row">Amount</th>
-        				<td><input type="text"  name="pack1" placeholder="<?php echo esc_attr($p1); ?>" value="<?php echo esc_attr($p1); ?>"></td>
-        			</tr>
-        			<tr>
-        				<th scope="row">Package Code</th>
-        				<td><input type="text"  name="package" placeholder="<?php echo esc_attr($packagecode); ?>" value="<?php echo esc_attr($packagecode); ?>"></td>
-        			</tr>
-        			<tr>
-        				<th scope="row">Balance tickets</th>
-        				<td><input type="text" class="pack-menu" name="ticketcounter" placeholder="<?php echo esc_attr($ticketcount); ?>" value="<?php echo esc_attr($ticketcount); ?>"></td>
-        			</tr>
-        		</table>
-        	</div>
-        </div>
-
-        <?php
-        break;
-        case 'page1':
-        ?>
-        <div class="packageoption">
-
-
-
-
-<div class="package-edit">
-
-	<div class="profile-picture-preview1" style="background-image: url(<?php echo esc_attr($picture1); ?>);"></div>
-<input type="button" class="upload-button" value="Upload Profile Picture" data-group="1">
-<input type="hidden" name="profile_picture1" class="profile-picture1" value="<?php echo esc_attr($picture1); ?>">
-<input type="text" class="pack-title" name="budget_title" placeholder="<?php echo esc_attr($budget); ?>" value="<?php echo esc_attr($budget); ?>">
-
-<input type="text" class="pack-price" name="pack1" placeholder="<?php echo esc_attr($p1); ?>" value="<?php echo esc_attr($p1); ?>">
-<input type="text" class="pack-price" name="pack2" placeholder="<?php echo esc_attr($p2); ?>" value="<?php echo esc_attr($p2); ?>">
-<input type="text" class="pack-price" name="pack3" placeholder="<?php echo esc_attr($p3); ?>" value="<?php echo esc_attr($p3); ?>">
-</div>
-
-
-<div class="package-edit">
-	<div class="profile-picture-preview2" style="background-image: url(<?php echo esc_attr($picture2); ?>);"></div>
-<input type="button" class="upload-button" value="Upload Profile Picture" data-group="2">
-<input type="hidden" name="profile_picture2" class="profile-picture2" value="<?php echo esc_attr($picture2); ?>">
-<input type="text" class="pack-title" name="economy_title" placeholder="<?php echo esc_attr($economy); ?>" value="<?php echo esc_attr($economy); ?>">
-
-<input type="text" class="pack-price" name="pack4" placeholder="<?php echo esc_attr($p4); ?>" value="<?php echo esc_attr($p4); ?>">
-<input type="text" class="pack-price" name="pack5" placeholder="<?php echo esc_attr($p5); ?>" value="<?php echo esc_attr($p5); ?>">
-<input type="text" class="pack-price" name="pack6" placeholder="<?php echo esc_attr($p6); ?>" value="<?php echo esc_attr($p6); ?>">
-
-</div>
-
-
-<div class="package-edit">
-	<div class="profile-picture-preview3" style="background-image: url(<?php echo esc_attr($picture3); ?>);"></div>
-<input type="button" class="upload-button" value="Upload Profile Picture" data-group="3">
-<input type="hidden" name="profile_picture3" class="profile-picture3" value="<?php echo esc_attr($picture3); ?>">
-<input type="text" class="pack-title" name="premium_title" placeholder="<?php echo esc_attr($premium); ?>" value="<?php echo esc_attr($premium); ?>">
-
-<input type="text" class="pack-price" name="pack7" placeholder="<?php echo esc_attr($p7); ?>" value="<?php echo esc_attr($p7); ?>">
-<input type="text" class="pack-price" name="pack8" placeholder="<?php echo esc_attr($p8); ?>" value="<?php echo esc_attr($p8); ?>">
-<input type="text" class="pack-price" name="pack9" placeholder="<?php echo esc_attr($p9); ?>" value="<?php echo esc_attr($p9); ?>">
-
-</div>
-
-
-</div>
-
-
-        <?php
-        break;
-    }
-    ?>
-
-	</div>
-
-</div>
-
-
-<script>
-jQuery(document).ready( function($){
-
-var mediaUploader;
-
-$('.upload-button').on('click',function(e) {
-    e.preventDefault();
-    var buttonID = $(this).data('group');
-
-    if( mediaUploader ){
-        mediaUploader.open();
-        return;
-    }
-
-  mediaUploader = wp.media.frames.file_frame =wp.media({
-    title: 'Choose a Hotel Picture',
-    button: {
-        text: 'Choose Picture'
-    },
-    multiple:false
-  });
-
-  mediaUploader.on('select', function(){
-    attachment = mediaUploader.state().get('selection').first().toJSON();
-    $('.profile-picture'+buttonID).val(attachment.url);
-    $('.profile-picture-preview'+buttonID).css('background-image','url(' + attachment.url + ')');
-
-  });
-  mediaUploader.open();
-}); });
-
-</script>
-
-
-<?php
 	
-	}
+}
 
 
 
@@ -429,44 +252,7 @@ public function zon_save_meta_boxx( $post_id ) {
 
 
 		$data = array(
-			'p1' => $_POST['pack1'],
-			'p2' => $_POST['pack2'],
-			'p3' => $_POST['pack3'],
-			'p4' => $_POST['pack4'],
-			'p5' => $_POST['pack5'],
-			'p6' => $_POST['pack6'],
-			'p7' => $_POST['pack7'],
-			'p8' => $_POST['pack8'],
-			'p9' => $_POST['pack9'],
-
-			'ticketcount' => $_POST['ticketcounter'],
-			'fixeddeparture' => $_POST['fixed-departure'],
-
-
-			'packdiscription' => $_POST['pack-discription'],
-			'packtitle' => $_POST['pack-title'],
-			'pm1' => $_POST['packmain1'],
-			'pm2' => $_POST['packmain2'],
-			'pm3' => $_POST['packmain3'],
-			'pm4' => $_POST['packmain4'],
-			'pm5' => $_POST['packmain5'],
-			'pm6' => $_POST['packmain6'],
-			'pm7' => $_POST['packmain7'],
-			'pm8' => $_POST['packmain8'],
-
-			'budget' => $_POST['budget_title'],
-
-			'picture1' => $_POST['profile_picture1'],
-			'picture2' => $_POST['profile_picture2'],
-			'picture3' => $_POST['profile_picture3'],
-
-			'packagecode' => $_POST['package'],
-
-			'dataoption' => $_POST['dataoption'],
-			'zonoption' => $_POST['zonoption'],
-
-
-
+			'p1' => $_POST['pack1']
 		);
 		update_post_meta( $post_id, '_zonpackk_testimonial_key', $data );
 		}

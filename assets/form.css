@@ -7,9 +7,14 @@ button.btn-apply {
   font-size: 14px;
   font-weight: 600;
 }
+ button:hover {
+    background-color: #bfbfbf;
+    color:#000;
+    cursor: pointer;
+  }
 button#cv-download {
     width: 20%;
-    background: #ff8d00;
+    background: #e5d5c2;
     border: 1px solid #5f5f5f;
     border-left: none;
     border-radius: 0 5px 5px 0;
@@ -37,34 +42,29 @@ button#cv-download {
     outline: none;
   }
   
-  button:hover {
-    background-color: orange;
-  }
+ 
   
   .modal {
     display: none;
     position: fixed;
-    z-index: 16;
-    width: 800px;
+    z-index: 5555555;
+    width: 400px;
     height: auto;
     left: 50%;
     transform: translate(-50%, 0);
-    top: 100px;
+    top: 80px;
   }
   
   .modal_content {
     background-color: white;
     border-radius: 10px;
     border: 1px solid #c5c1c1;
-    box-shadow: 1px 1px 10px 5px #0000001c;
+    box-shadow: 1px 1px 8px 100vh #00000047;
   }
   
   .close {
     color: Black;
-    right: 0;
     font-size: 50px;
-    padding-right: 22px;
-    position: absolute;
   }
   
   .close:hover {
@@ -73,14 +73,29 @@ button#cv-download {
   }
 .zon-input-fields {
     text-align: center;
-    padding: 0 50px;
+    padding: 0px 20px;
+}
+.job-form-header {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 1px solid #bbb;
+    padding: 0 20px;
+}
+.job-form-header h3 {
+    font-size: 14px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: #666;
 }
 .cv-section-container {
     display: flex;
     width: 100%;
+    padding-top: 18px;
 }
 .cv-section-one {
-    width: 50%;
+    width: 100%;
 }
 .cv-section-two {
     width: 50%;
@@ -94,41 +109,107 @@ button#cv-download {
     border-radius: 5px;
     border: 1px solid #bbb;
 }
-.file-upload-preview-container {
-  display: flex;
-  flex-direction: column;
-  padding: 15px 0;
-}
 
-  .cv-preview-container {
-    position: relative;
+.fileUploadInput {
+  display: grid;
+  grid-gap: 10px;
+  position: relative;
+  z-index: 1;
+  align-items: center;
+  align-content: center;
+}
+  
+.fileUploadInput label {
     display: flex;
     align-items: center;
-    justify-content: center;
-    text-align: left;
+    color: setColor(primary, 0.5);
+    background: setColor(white);
+    transition: .4s ease;
+    font-family: arial, sans-serif;
+    font-size: .75em;
+    font-weight: regular; 
 }
-.cv-preview-default-image {
+    
+.fileUploadInput input {
+    z-index: 1;
+    width: 100%;
+    height: 50px;
+    border: 1px solid #bbb;
+    border-radius: 5px;
+    font-family: arial, sans-serif;
+    font-size: 14px;
+    user-select: none;
+    cursor: pointer;
+    font-weight: regular;
+    line-height: 39px;
+    }
+.fileUploadInput input[type="file"] {
+    padding: 0 gap(m); 
+}
+.fileUploadInput input[type="file"]::-webkit-file-upload-button {
+        visibility: hidden;
+        margin-left: 10px;
+        padding: 0;
+        height: 50px;
+        width: 0; 
+}
+        
+  .upld-btn {
     position: absolute;
-    z-index: 2;
-    width: 94px;
+    right: 5px;
+    bottom: 4px;
+    padding: 12px 20px;
+    height: 40px;
+    line-height: 0;
+    user-select: none;
+    color: white;
+    background-color: #858585;
+    border: 1px solid #bbb;
+    border-radius: 5px;
+    font-family: ;
+    font-size: 1rem;
+    font-weight: 600;
+    }
+.fileUploadInput button i {
+    padding-right: 10px;
+    }
+.fileUploadInput button svg {
+  width: auto;
+  height: 50%; 
 }
-#cv-preview {
-    border-radius: 10px 10px 0 0;
-    border: 1px solid #9c9999;
-    border-bottom: 0;
-    position: relative;
-    z-index: 5;
+.container-file {
+  background: white;
+  z-index: 555;
+  bottom: 10px;
+  width: 100%;
+  }
+
+@-moz-document url-prefix() {
+  .fileUploadInput button{
+    display: none;
+  }
 }
 .button-wrap {
     width: 100%;
     display: flex;
     justify-content: flex-end;
-    padding: 19px 45px 0px;
+    padding: 19px 20px 0px;
     border-top: 1px solid #bbb;
-    margin-top: 28px;
+    gap: 10px;
+}
+.btn-application-cancel {
+    padding: 14px 29px;
+    display: flex;
+    border-radius: 5px;
+    border: none;
+    border-width: 1px 0 0;
+    color: #000;
+    align-items: flex-end;
+    background: #e8e6e6;
+    font-size: 12px;
 }
 .btn-application-submit {
-    padding: 16px 30px;
+    padding: 8px 30px;
     display: flex;
     border-radius: 5px;
     border: 1px solid #bbb;
@@ -137,24 +218,36 @@ button#cv-download {
     align-items: flex-end;
     background: #dd0000;
 }
-input[type="file"] {
-  display: none;
+
+
+
+#zon-testimonial-form .field-container{
+    margin-bottom: 10px;
+    display: flex;
+    justify-content: center;
+    position: relative;
+    flex-direction: column;
+    align-items: flex-start;
+}
+.file-upload-field {
+    margin: 0 !important;
+}
+.field-msg{position: absolute;display:none;left: 0px;bottom: 6px;font-size: 15px;font-weight:600;letter-spacing:0.05em;margin: 0;}
+.form-success-error-msg {
+    position: relative;
+    bottom: 10px;
 }
 
-.custom-file-upload {
-  border: 1px solid #a1a1a1;
-  display: inline-block;
-  padding: 14px 12px;
-  cursor: pointer;
-  width: 100%;
-  border-radius: 0 0 10px 10px;
-  color: #000;
-  font-weight: 700;
-  text-align: center;
+#zon-testimonial-form .field-msg.show{display:block}#zon-testimonial-form .error{color:#901313}#zon-testimonial-form .success{color:#2f812f}
+.field-container input::placeholder {
+    color:#adadad
 }
-#zon-testimonial-form .field-container{margin-bottom:20px;display: flex;justify-content: center;position: relative;flex-direction: column;align-items: flex-start;}#zon-testimonial-form .field-msg{display:none;position:absolute;left:2px;bottom:-14px;font-size:9px;text-transform:uppercase;font-weight:600;letter-spacing:0.05em}#zon-testimonial-form .field-msg.show{display:block}#zon-testimonial-form .error{color:#901313}#zon-testimonial-form .success{color:#2f812f}
-
 .field-container label {
     padding-bottom: 10px;
+    font-size: 13px;
 }
-
+@media screen and (max-width: 767px) {
+.modal {
+    width: 95%;
+}
+}

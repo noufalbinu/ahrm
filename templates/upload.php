@@ -10,7 +10,7 @@ require_once("../../../../wp-load.php");
 $ext = pathinfo($_FILES['file']['name'], PATHINFO_EXTENSION);
 
 
-$new_name = date("d-m-y");
+$new_name = date("d-m-y") . '-' . time();
 
 $filename = $_FILES['file']['name'];
 

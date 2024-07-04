@@ -23,12 +23,10 @@ final class Init
 			Base\CustomTaxonomyController::class,
 			Base\WidgetController::class,
 			Base\GalleryController::class,
-			Base\TestimonialController::class,
+			Base\JobController::class,
 			Base\TemplateController::class,
 			Base\AuthController::class,
 			Base\MembershipController::class,
-			Base\ChatController::class,
-			Base\ZonPackageFixed::class,
 		];
 	}
 

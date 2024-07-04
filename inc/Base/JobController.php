@@ -9,7 +9,7 @@ use Inc\Api\Callbacks\TestimonialCallbacks;
 /**
 * 
 */
-class TestimonialController extends BaseController
+class JobController extends BaseController
 {
 	public $settings;
 	public $callbacks;
@@ -145,21 +145,7 @@ class TestimonialController extends BaseController
 	    
 	}
 
-	public function update_testimonial() {
-		if( 'POST' == $_SERVER['REQUEST_METHOD'] && !empty( $_POST['action'] ) &&  $_POST['action'] == "f_edit_post" && isset($_POST['pid'])) {
-			//get the old post:
-			$post_to_edit = get_post((int)$_POST['pid']); 
-		
-			//do you validation
-			//...
-			//...
-			
-			//save the edited post and return its ID
-			$pid = wp_update_post($post_to_edit); 
-			//set new category
-			wp_set_post_terms($pid,(array)($_POST['cat']),'category',true);
-		}
-	}
+
 
 	public function application_form()
 	{
@@ -174,9 +160,8 @@ class TestimonialController extends BaseController
 	{
 		$labels = array(
 			'name' => 'Candidates Applications',
-			'singular_name' => 'Testimonial'
+			'singular_name' => 'Applications'
 		);
-
 		$supports = array('');
 		$args = array(
 			'labels' => $labels,
@@ -188,7 +173,6 @@ class TestimonialController extends BaseController
 			'publicly_queryable' => false,
 			'supports' => $supports
 		);
-
 		register_post_type ( 'applications', $args );
 	}
 	public function add_status_box()

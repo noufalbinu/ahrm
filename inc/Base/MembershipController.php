@@ -39,11 +39,9 @@ class MembershipController extends BaseController
 			)
 		);
 	}
-
-
 	public function ahrm_manager_role()
     {
-        add_role('ahrm_manager_role','AHRM Manager',
+        add_role('ahrm_manager_role','Job Manager',
             [
                 // list of capabilities for this role
 				'read' => true,
@@ -57,7 +55,6 @@ class MembershipController extends BaseController
 
 	public function ahrm_manager_role_caps()
     {
-
 		/* Get the roles you want to add capabilities for, e.g. */
 		$roles = array( get_role('ahrm_manager_role'), get_role('administrator') );
 		// Add the roles you'd like to administer the custom post types
@@ -66,7 +63,23 @@ class MembershipController extends BaseController
 		foreach($roles as $role) { 
 			//remove_role('ahrm_manager_role');
 			if($role) {
-                $role->add_cap( 'read' );
+
+				$role->add_cap( 'read' );
+
+				$role->add_cap( 'read_applications' );
+		        $role->add_cap( 'read_private_applications' );
+                $role->add_cap( 'edit_applications' );
+			    $role->add_cap( 'publish_applications', true );
+			    $role->add_cap( 'delete_applications', true );
+		        $role->add_cap( 'edit_applications' );
+		        $role->add_cap( 'edit_others_applications' );
+		        $role->add_cap( 'edit_published_applications' );
+		        $role->add_cap( 'publish_applications' );
+		        $role->add_cap( 'delete_others_applications' );
+		        $role->add_cap( 'delete_private_applications' );
+		        $role->add_cap( 'delete_published_applications' );
+
+                
 		        $role->add_cap( 'read_jobs' );
 		        $role->add_cap( 'read_private_jobs' );
                 $role->add_cap( 'edit_jobs' );
@@ -79,6 +92,27 @@ class MembershipController extends BaseController
 		        $role->add_cap( 'delete_others_jobs' );
 		        $role->add_cap( 'delete_private_jobs' );
 		        $role->add_cap( 'delete_published_jobs' );
+
+				$role->add_cap( 'manage_links');
+                
+				//Default Categories
+				$role->add_cap( 'manage_job-category' );
+				$role->add_cap( 'edit_job-category' );
+				$role->add_cap( 'delete_job-category' );
+				$role->add_cap( 'assign_job-category' );
+
+				//location
+				$role->add_cap( 'manage_job-location' );
+				$role->add_cap( 'edit_job-location' );
+				$role->add_cap( 'delete_job-location' );
+				$role->add_cap( 'assign_job-location' );
+
+				//job-Type location
+				$role->add_cap( 'manage_job-type' );
+				$role->add_cap( 'edit_job-type' );
+				$role->add_cap( 'delete_job-type' );
+				$role->add_cap( 'assign_job-type' );
+
 			}
 		}
     }
