@@ -87,6 +87,7 @@ class JobController extends BaseController
 		$name = sanitize_text_field($_POST['name']);
 		$jobtitle = sanitize_text_field($_POST['jobtitle']);
 		$cv = sanitize_text_field($_POST['cv']);
+		$cvpath = sanitize_text_field($_POST['cvpath']);
 		$email = sanitize_email($_POST['email']);
 		$message = sanitize_textarea_field($_POST['message']);
 		$phone = sanitize_text_field($_POST['phone']);
@@ -99,9 +100,9 @@ class JobController extends BaseController
 			'name' => $name,
 			'jobtitle' => $jobtitle,
 			'cv' => $cv,
+			'cvpath' => $cvpath,
 			'phone' => $phone,
-			'email' => $email,
-			
+			'email' => $email,			
 			'date' => $date,
 			'message' => $message,
 			'approved' => 0,
@@ -117,22 +118,33 @@ class JobController extends BaseController
 				'_zon_testimonial_key' => $data
 			)
 		);
-
 		$postID = wp_insert_post( $args );
-
 		if ($postID) {
-            $headers = "MIME-Version: 1.0\r\n" .
-            "From: " . $current_user->user_email . "\r\n" .
-            "Content-Type: text/plain; charset=\"" . get_option('blog_charset') . "\"\r\n";
+			ob_start();
+			include( "$this->plugin_path/templates/email_templates/employee_email_template.php" );
+			$employee_email_template = ob_get_contents();
+            ob_end_clean();
+            $headers = array('Content-Type: text/html; charset=UTF-8');
             $to = $email;
-            $body = "Hello " .  $name . " Your CV succefully Submitted " . $package . " We will inform you selection updates ." ;
-            $subject ="Vistas Careers: Job Application Confirmation";
+			$subject ="Vistas Careers: Job Application successfully Submitted";
+            $body = $employee_email_template;
             wp_mail( $to, $subject, $body, $headers );
         }
-		
+		if ($postID) {
+			ob_start();
+			include( "$this->plugin_path/templates/email_templates/employer_email_template.php" );
+			$employee_email_template = ob_get_contents();
+            ob_end_clean();
+            $headers = array('Content-Type: text/html; charset=UTF-8');
+            $to = "nbvk@live.com, careers@vistasglobal.com";
+			$subject ="$name Applied for $jobtitle";
+            $body = $employee_email_template;
+			$attachments = array( WP_CONTENT_DIR . '/' . $cvpath );
+            wp_mail( $to, $subject, $body, $headers , $attachments );
+			
+		}
 		if ($postID) {
 		    return $this->return_json('success');
-		    
 		}
 	    
 	}
@@ -188,13 +200,13 @@ class JobController extends BaseController
 	}
 	public function render_status_box($post)
 	{
-		$termID = [];
-        $terms = get_the_terms( 553, 'job-type');
-        foreach ($terms as $term) {
-            $termID = $term->name;
-              
-            echo '<p>'.$termID.'</p>';
-        }
+		//$termID = [];
+        //$terms = get_the_terms( $postID, 'job-type');
+        //foreach ($terms as $term) {
+        //    $termID = $term->name;
+        //      
+        //    echo '<p>'.$termID.'</p>';
+        //}
 	}
 	public function add_meta_boxes()
 	{
@@ -212,6 +224,7 @@ class JobController extends BaseController
 		wp_nonce_field( 'zon_testimonial', 'zon_testimonial_nonce' );
 		$data = get_post_meta( $post->ID, '_zon_testimonial_key', true );
         $cv = isset($data['cv']) ? $data['cv'] : '';
+		$cvpath = isset($data['cvpath']) ? $data['cvpath'] : '';
 		$phone = isset($data['phone']) ? $data['phone'] : '';
 		$name = isset($data['name']) ? $data['name'] : '';
 		$jobtitle = isset($data['jobtitle']) ? $data['jobtitle'] : '';
@@ -220,7 +233,9 @@ class JobController extends BaseController
 		$approved = isset($data['approved']) ? $data['approved'] : false;
 		$featured = isset($data['featured']) ? $data['featured'] : false;
 		?>
+		<?php echo esc_attr( $cvpath ); ?>
 		<p>
+			
 			<label class="meta-label" for="zon_name">Attached File(CV)</label>
 			<div class="input-group">
 			   <input type="text" id="zon_cv" name="zon_cv" class="widefat" value="<?php echo esc_attr( $cv ); ?>" disabled>
@@ -246,7 +261,7 @@ class JobController extends BaseController
 		</p>
 		<p>
 			<label class="meta-label" for="zon_testimonial_email">Cover Letter</label>
-			<textarea  id="cover_message" name="cover_message" class="widefat" value="<?php echo esc_attr( $message ); ?>"></textarea>
+			<p id="cover-message" name="message" class="widefat"><?php echo esc_attr( $message ); ?></p>
 		</p>
 		<div class="meta-container">
 			<label class="meta-label w-50 text-left" for="zon_testimonial_approved">Candidate Shortlisted</label>
