@@ -1,13 +1,5 @@
-
-
-<div class="btn">
-  <button class="js-btn btn-apply">APPLY NOW!</button>
-</div>
-
-
 <div class="modal">
   <div class="modal_content">
-
     <form id="zon-testimonial-form"  class="zon-form" action="#" method="post" data-url="<?php echo admin_url('admin-ajax.php'); ?>" enctype="multipart/form-data">
       <?php $current_user = wp_get_current_user(); ?>
       <div class="job-form-header">
@@ -50,7 +42,15 @@
               <textarea rows="3" class="field-input" id="my-element" id="" name="message" required></textarea>
               <small class="field-msg error" data-error="invalidDate">The Date is not valid</small>
             </div>
-            <div class="field-container">
+                        
+          </div>
+        </div>
+      </div>
+      <div class="job-form-footer">
+        <div class="button-wrap">
+          <input type="submit"  class="btn-application-submit"  name="submit" value='SUBMIT' placeholder="submit">
+        </div>
+        <div class="field-container">
               
               <input value="<?php the_title(); ?>" type="hidden" class="field-input" placeholder="CV not attached" id="jobtitle" name="jobtitle">
             </div>
@@ -60,18 +60,10 @@
             <div class="field-container">
               <input value="" type="hidden" class="field-input" placeholder="CV not attached" id="cvpath" name="cvpath"/>
             </div>
-            <div class="form-success-error-msg">
-            <p class="field-msg js-form-submission">Submission in process, please wait&hellip;</p>
+        <div class="form-success-error-msg">
+          <p class="field-msg js-form-submission">Submission in process, please wait&hellip;</p>
           <p class="field-msg success js-form-success">Application Successfully submitted, thank you!</p>
           <p class="field-msg error js-form-error">There was a problem with the Application Form, please try again!</p>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="job-form-footer">
-        <div class="button-wrap">
-          <input type="submit"  class="btn-application-cancel close"  name="submit" value='CLOSE'/>
-          <input type="submit"  class="btn-application-submit"  name="submit" value='SUBMIT' placeholder="submit">
         </div>
       </div>
       <div class="field-container">   
@@ -84,19 +76,7 @@
 
 
 <script>
-const the_button = document.querySelector(".js-btn")
-const modal = document.querySelector(".modal")
-const closeBtn = document.querySelector(".close")
 
-document.addEventListener("DOMContentLoaded",() => {
-  the_button.addEventListener("click", handleClick)
-})
-function handleClick(event) {
-  modal.style.display = "block";
-  closeBtn.addEventListener("click", () => {
-    modal.style.display = "none"
-  })
-}
 
 //save file
 async function saveFile() { 

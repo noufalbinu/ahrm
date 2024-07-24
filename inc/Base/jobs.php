@@ -19,12 +19,24 @@ class Jobs extends BaseController {
 		add_filter( 'single_template', array( $this, 'load_pack_template' ) );
 		add_action( 'add_meta_boxes', array( $this, 'zon_fixed_boxess' ) );
 		add_action( 'save_post', array( $this,'zon_save_meta_boxx' ) );
+        
+		add_action( 'init', array( $this,'add_something' ) );
 
 		// filter option for job application from candidates
 		add_filter('parse_query', array( $this, 'tsm_convert_id_to_term_in_query_cv') );
 		add_action( 'init', array( $this,  'job_taxonomy_cv') );
 	    add_action('restrict_manage_posts', array( $this,  'tsm_filter_post_type_by_taxonomy_cv') );
 	}
+	public function add_something() {
+	    global $wpdb;  
+        $table = $wpdb->prefix.'vaniom_hr_candidates';
+		$data = array(
+            'name' => 'noufal',
+            'email' => 'noufal@wpadroit.com',
+        );
+        $wpdb->insert($table, $data);
+    }
+
 	public function zon_styles( $page ) {
 		echo "<link rel=\"stylesheet\" href=\"$this->plugin_url/assets/packageoptionn.css\" type=\"text/css\" media=\"all\" />";
 	}
@@ -216,14 +228,13 @@ public function zon_fixed_boxess() {
 }
 
 
-public function zon_featuress_boxx( $post ) {
-	
-}
 
 
 
 
 public function zon_save_meta_boxx( $post_id ) {
+
+	
 	if (! isset($_POST['zonpackk_testimonial_nonce'])) {
 			return $post_id;
 		}
@@ -256,6 +267,7 @@ public function zon_save_meta_boxx( $post_id ) {
 		);
 		update_post_meta( $post_id, '_zonpackk_testimonial_key', $data );
 		}
+
 }
 
 

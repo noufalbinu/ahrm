@@ -43,6 +43,26 @@ class JobController extends BaseController
 		add_filter('parse_query', array( $this, 'tsm_convert_id_to_term_in_query') );
 	
 		add_action('restrict_manage_posts', array( $this,  'tsm_filter_post_type_by_taxonomy') );
+		add_action('restrict_manage_posts', array( $this,  'export_csv_button') );
+	}
+
+	public function export_csv_button() {
+		global $typenow;
+		$post_type = 'applications' ; // change to your post type
+		$taxonomy  = 'job-type'; // change to your taxonomy
+		if ($typenow == $post_type) {
+			$selected      = isset($_GET[$taxonomy]) ? $_GET[$taxonomy] : '';
+			$info_taxonomy = get_taxonomy($taxonomy);
+			wp_dropdown_categories(array(
+				'show_option_all' => sprintf( __( 'Show all %s', 'textdomain' ), $info_taxonomy->label ),
+				'taxonomy'        => $taxonomy,
+				'name'            => $taxonomy,
+				'orderby'         => 'name',
+				'selected'        => $selected,
+				'show_count'      => true,
+				'hide_empty'      => true,
+			));
+		};
 	}
 		
 	    // https://stackoverflow.com/questions/72428718/wordpress-upload-post-and-attach-file-wp-insert-post-and-wp-insert-attachment
@@ -156,9 +176,6 @@ class JobController extends BaseController
 	        wp_send_json($return);
 	    
 	}
-
-
-
 	public function application_form()
 	{
 		ob_start();

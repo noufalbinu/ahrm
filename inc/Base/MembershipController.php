@@ -23,6 +23,7 @@ class MembershipController extends BaseController
 
 		// add the employer_role
 		add_action( 'init', array( $this, 'ahrm_manager_role' ) );
+		add_action( 'init', array( $this, 'add_vaniomhr_candidates' ) );
 		add_action( 'admin_init', array( $this, 'ahrm_manager_role_caps'), 999 );
 	}
 
@@ -38,6 +39,20 @@ class MembershipController extends BaseController
 				'callback' => array( $this->callbacks, 'adminMembership' )
 			)
 		);
+	}
+	function add_vaniomhr_candidates () {
+		global $wpdb;
+        $charset_collate = $wpdb->get_charset_collate();
+        $table_name = $wpdb->prefix . 'vaniom_hr_candidates';
+        $sql = "CREATE TABLE " . $table_name . " (
+	      id int(11) NOT NULL AUTO_INCREMENT,
+	      name tinytext NOT NULL,
+	      email VARCHAR(100) NOT NULL,
+	      age int(2) NULL,
+	      PRIMARY KEY  (id),
+        ) $charset_collate;";
+        require_once(ABSPATH . 'wp-admin/includes/upgrade.php');
+        dbDelta($sql);
 	}
 	public function ahrm_manager_role()
     {
