@@ -36,7 +36,6 @@ class Jobs extends BaseController {
         );
         $wpdb->insert($table, $data);
     }
-
 	public function zon_styles( $page ) {
 		echo "<link rel=\"stylesheet\" href=\"$this->plugin_url/assets/packageoptionn.css\" type=\"text/css\" media=\"all\" />";
 	}
@@ -258,9 +257,6 @@ public function zon_save_meta_boxx( $post_id ) {
 		} else {
 			$zonoption  = $_SESSION['dataoption'];
 		}
-
-
-
 
 		$data = array(
 			'p1' => $_POST['pack1']

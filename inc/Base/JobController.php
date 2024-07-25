@@ -200,7 +200,10 @@ class JobController extends BaseController
 			'menu_position'         => 1,
 			'exclude_from_search' => true,
 			'publicly_queryable' => false,
-			'supports' => $supports
+			'supports' => $supports,
+			'map_meta_cap' => true,
+			'capability_type'     => array('application','applications'),
+			'show_in_rest'          => true,
 		);
 		register_post_type ( 'applications', $args );
 	}

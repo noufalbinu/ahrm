@@ -21,11 +21,20 @@ class MembershipController extends BaseController
 	{
 		if ( ! $this->activated( 'membership_manager' ) ) return;
 
+		
+		
+	
+
+		add_action( 'init', array( $this, 'add_vaniomhr_candidates' ) );
+
+		add_action( 'init', array( $this, 'ahrm_candidate_role' ) );
+		add_action( 'admin_init', array( $this, 'ahrm_candidate_role_caps'), 999 );
+		
 		// add the employer_role
 		add_action( 'init', array( $this, 'ahrm_manager_role' ) );
-		add_action( 'init', array( $this, 'add_vaniomhr_candidates' ) );
 		add_action( 'admin_init', array( $this, 'ahrm_manager_role_caps'), 999 );
 	}
+	
 
 	public function setSubpages()
 	{
@@ -54,6 +63,47 @@ class MembershipController extends BaseController
         require_once(ABSPATH . 'wp-admin/includes/upgrade.php');
         dbDelta($sql);
 	}
+	public function ahrm_candidate_role()
+    {
+        add_role('ahrm_candidate_role','Candidate',
+            [
+                // list of capabilities for this role
+				'read' => true,
+                'edit_posts' => false,
+                'delete_posts' => true,
+                'publish_posts' => true,
+                'upload_files' => true,
+            ]
+        );
+    }
+	public function ahrm_candidate_role_caps() 
+	{
+	    /* Get the roles you want to add capabilities for, e.g. */
+	    $roles = array( get_role('ahrm_candidate_role'), get_role('contributor') );
+	    // Add the roles you'd like to administer the custom post types
+    
+	    // Loop through each role and assign capabilities
+	    foreach($roles as $role) { 
+	    	//remove_role('ahrm_candidate_role');
+	    	if($role) {
+	    		$role->add_cap( 'read' );
+	    		$role->add_cap( 'read_applications' );
+	    		$role->add_cap( 'read_private_applications' );
+	    		$role->add_cap( 'edit_applications' );
+	    		$role->add_cap( 'publish_applications', true );
+	    		$role->add_cap( 'delete_applications', true );
+	    		$role->add_cap( 'edit_applications' );
+	    		$role->add_cap( 'edit_others_applications' );
+	    		$role->add_cap( 'edit_published_applications' );
+	    		$role->add_cap( 'publish_applications' );
+	    		$role->add_cap( 'delete_others_applications' );
+	    		$role->add_cap( 'delete_private_applications' );
+	    		$role->add_cap( 'delete_published_applications' );
+        
+	    	}
+	    }
+    }
+
 	public function ahrm_manager_role()
     {
         add_role('ahrm_manager_role','Job Manager',
