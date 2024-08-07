@@ -9,20 +9,18 @@ use Inc\Api\Callbacks\TestimonialCallbacks;
 /**
 * 
 */
-class JobController extends BaseController
+class formManager extends BaseController
 {
 	public $settings;
 	public $callbacks;
 
 	public function register()
 	{
-		if ( ! $this->activated( 'testimonial_manager' ) ) return;
-
+		if ( ! $this->activated( 'form_manager' ) ) return;
 		$this->settings = new SettingsApi();
-
 		$this->callbacks = new TestimonialCallbacks();
 
-		add_action( 'init', array( $this, 'testimonial_cpt' ) );
+		add_action( 'init', array( $this, 'ahrmforms_cpt' ) );
 		add_action( 'add_meta_boxes', array( $this, 'add_meta_boxes' ), 25, 3 );
 		add_action( 'add_meta_boxes', array( $this, 'add_status_box'), 25, 3 );
 		add_action( 'save_post', array( $this, 'save_meta_box' ) );
@@ -31,9 +29,7 @@ class JobController extends BaseController
 		add_action( 'manage_applications_posts_custom_column', array( $this, 'set_custom_columns_data' ), 10, 2 );
 		add_filter( 'manage_edit-applications_sortable_columns', array( $this, 'set_custom_columns_sortable' ) );
 
-		//form shortcodes
 		add_shortcode( 'application-form', array( $this, 'application_form' ) );
-		add_shortcode( 'contact-form', array( $this, 'contact_form' ) );
 
 		add_action( 'wp_ajax_submit_testimonial', array( $this, 'submit_testimonial' ) );
 		add_action( 'wp_ajax_nopriv_submit_testimonial', array( $this, 'submit_testimonial' ) );
@@ -198,20 +194,12 @@ class JobController extends BaseController
 		echo "<script src=\"$this->plugin_url/assets/form.js\"></script>";
 		return ob_get_clean();
 	}
-	public function contact_form()
-	{
-		ob_start();
-		echo "<link rel=\"stylesheet\" href=\"$this->plugin_url/assets/contact-form.css\" type=\"text/css\" media=\"all\" />";
-		require_once( "$this->plugin_path/templates/contact-form.php" );
-		echo "<script src=\"$this->plugin_url/assets/contact-form.js\"></script>";
-		return ob_get_clean();
-	}
 
-	public function testimonial_cpt ()
+	public function ahrmforms_cpt ()
 	{
 		$labels = array(
-			'name' => 'Candidates Applications',
-			'singular_name' => 'Applications'
+			'name' => 'AHRM forms',
+			'singular_name' => 'ahrmforms'
 		);
 		$supports = array('');
 		$args = array(
@@ -219,15 +207,15 @@ class JobController extends BaseController
 			'public' => true,
 			'has_archive' => false,
 			'menu_icon' => 'dashicons-calendar-alt',
-			'menu_position'         => 1,
+			'menu_position'         => 2,
 			'exclude_from_search' => true,
 			'publicly_queryable' => false,
 			'supports' => $supports,
 			'map_meta_cap' => true,
-			'capability_type'     => array('application','applications'),
+			'capability_type'     => array('ahrmform','ahrmforms'),
 			'show_in_rest'          => true,
 		);
-		register_post_type ( 'applications', $args );
+		register_post_type ( 'ahrmforms', $args );
 	}
 	public function add_status_box()
 	{
@@ -235,7 +223,7 @@ class JobController extends BaseController
 			'application_satuts',
 			'Application status',
 			array( $this, 'render_status_box' ),
-			'applications',
+			'ahrmforms',
 			'side',
 			'high'
 		);
@@ -256,7 +244,7 @@ class JobController extends BaseController
 			'testimonial_author',
 			'Candidate Application Details',
 			array( $this, 'render_features_box' ),
-			'applications',
+			'ahrmforms',
 			'side',
 			'high'
 		);

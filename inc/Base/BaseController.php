@@ -15,6 +15,7 @@ class BaseController
 		$this->plugin = plugin_basename( dirname( __FILE__, 3 ) ) . '/zon_packages.php';
 		$this->managers = array(
 			'testimonial_manager' => 'Activate Zon Package Manager',
+			'form_manager' => 'Activate form Manager',
 			'Jobs' => 'Activate Jobs Manager',			
 			'fixed_packages' => 'Activate Fixed Package Departure',
 			'taxonomy_manager' => 'Activate Taxonomy Manager',

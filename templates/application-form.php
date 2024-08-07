@@ -125,8 +125,7 @@ async function saveFile() {
             var a = document.getElementById("zon-testimonial-form");
             a.addEventListener("submit", function(e) {
                 e.preventDefault(), o();
-                var r = {
-                    
+                var r = {  
                     name: a.querySelector('[name="name"]').value,
                     email: a.querySelector('[name="email"]').value,
                     phone: a.querySelector('[name="phone"]').phone,
