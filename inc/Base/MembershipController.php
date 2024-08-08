@@ -27,6 +27,8 @@ class MembershipController extends BaseController
 
 		add_action( 'init', array( $this, 'add_vaniomhr_candidates' ) );
 
+		add_action( 'init', array( $this, 'vaniomhr_charset_collate' ) );
+
 		add_action( 'init', array( $this, 'ahrm_candidate_role' ) );
 		add_action( 'admin_init', array( $this, 'ahrm_candidate_role_caps'), 999 );
 		
@@ -49,17 +51,37 @@ class MembershipController extends BaseController
 			)
 		);
 	}
+
+    /**
+     * Get table charset and collation.
+     *
+     * @since  2012.10.22
+     * @return string
+     */
+    function vaniomhr_charset_collate() {
+        global $wpdb;
+        $charset_collate = '';
+        if ( ! empty ( $wpdb->charset ) )
+            $charset_collate = "DEFAULT CHARACTER SET $wpdb->charset";
+    
+        if ( ! empty ( $wpdb->collate ) )
+            $charset_collate .= " COLLATE $wpdb->collate";
+        return $charset_collate;
+    }
+	
 	function add_vaniomhr_candidates () {
 		global $wpdb;
         $charset_collate = $wpdb->get_charset_collate();
-        $table_name = $wpdb->prefix . 'vaniom_hr_candidates';
-        $sql = "CREATE TABLE " . $table_name . " (
-	      id int(11) NOT NULL AUTO_INCREMENT,
+        $table = $wpdb->prefix . 'vaniom_hr_candidates';
+        $sql = "CREATE TABLE IF NOT EXISTS $table (
+	      id int(11) NOT NULL auto_increment,
+		  application_date timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
 	      name tinytext NOT NULL,
 	      email VARCHAR(100) NOT NULL,
 	      age int(2) NULL,
-	      PRIMARY KEY  (id),
+	      PRIMARY KEY  (id)
         ) $charset_collate;";
+		// make dbDelta() available
         require_once(ABSPATH . 'wp-admin/includes/upgrade.php');
         dbDelta($sql);
 	}
