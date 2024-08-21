@@ -27,13 +27,12 @@ class JobController extends BaseController
 		add_action( 'add_meta_boxes', array( $this, 'add_status_box'), 25, 3 );
 		add_action( 'save_post', array( $this, 'save_meta_box' ) );
 
+		add_shortcode( 'application-form', array( $this, 'application_form' ) );
+		add_shortcode( 'contact-form', array( $this, 'contact_form' ) );
+
 		add_action( 'manage_applications_posts_columns', array( $this, 'set_custom_columns' ) );
 		add_action( 'manage_applications_posts_custom_column', array( $this, 'set_custom_columns_data' ), 10, 2 );
 		add_filter( 'manage_edit-applications_sortable_columns', array( $this, 'set_custom_columns_sortable' ) );
-
-		//form shortcodes
-		add_shortcode( 'application-form', array( $this, 'application_form' ) );
-		add_shortcode( 'contact-form', array( $this, 'contact_form' ) );
 
 		add_action( 'wp_ajax_submit_testimonial', array( $this, 'submit_testimonial' ) );
 		add_action( 'wp_ajax_nopriv_submit_testimonial', array( $this, 'submit_testimonial' ) );
@@ -105,7 +104,6 @@ class JobController extends BaseController
 		if (! DOING_AJAX || ! check_ajax_referer('testimonial-nonce', 'nonce') ) {
 			return $this->return_json('error');
 		}
-
 		$name = sanitize_text_field($_POST['name']);
 		$jobtitle = sanitize_text_field($_POST['jobtitle']);
 		$cv = sanitize_text_field($_POST['cv']);
@@ -114,6 +112,15 @@ class JobController extends BaseController
 		$message = sanitize_textarea_field($_POST['message']);
 		$phone = sanitize_text_field($_POST['phone']);	
 		$date = sanitize_text_field($_POST['date']);
+
+		$pno = sanitize_text_field($_POST['pno']);
+        $pissue = sanitize_text_field($_POST['pissue']);
+        $dissue = sanitize_text_field($_POST['dissue']);
+        $exdate = sanitize_text_field($_POST['exdate']);
+        $indian = sanitize_text_field($_POST['indian']);
+        $ldissue = sanitize_text_field($_POST['ldissue']);
+        $gulf = sanitize_text_field($_POST['gulf']);
+        $exdate = sanitize_text_field($_POST['exdate']);
 		
 
 		$data = array(
@@ -124,6 +131,16 @@ class JobController extends BaseController
 			'phone' => $phone,
 			'email' => $email,			
 			'date' => $date,
+
+			'pno'     => $pno,
+            'pissue'  => $pissue,
+            'dissue'  => $dissue,
+            'exdate'  => $exdate,
+            'indian'  => $indian,
+            'ldissue' => $ldissu,
+            'gulf'    => $gulf,
+            'exdate'  => $exdate,
+
 			'message' => $message,
 			'approved' => 0,
 			'featured' => 0,
@@ -270,6 +287,18 @@ class JobController extends BaseController
 		$phone = isset($data['phone']) ? $data['phone'] : '';
 		$name = isset($data['name']) ? $data['name'] : '';
 		$jobtitle = isset($data['jobtitle']) ? $data['jobtitle'] : '';
+
+		$pno =     isset($data['pno']) ? $data['pno']: '';
+        $pissue =  isset($data['pissue']) ? $data['pissue']: '';
+        $dissue =  isset($data['dissue']) ? $data['dissue']: '';
+        $exdate =  isset($data['exdate']) ? $data['exdate']: '';
+        $indian =  isset($data['indian']) ? $data['indian']: '';
+        $ldissue = isset($data['ldissue']) ? $data['ldissue']: '';
+        $gulf =    isset($data['gulf']) ? $data['gulf']: '';
+        $exdate =  isset($data['exdate']) ? $data['exdate']: '';
+
+		
+
 		$message = isset($data['message']) ? $data['message'] : '';
 		$email = isset($data['email']) ? $data['email'] : '';
 		$approved = isset($data['approved']) ? $data['approved'] : false;
@@ -300,6 +329,38 @@ class JobController extends BaseController
 		<p>
 			<label class="meta-label" for="zon_testimonial_email">Email</label>
 			<input type="email" id="zon_testimonial_email" name="zon_testimonial_email" class="widefat" value="<?php echo esc_attr( $email ); ?>">
+		</p>
+		<p>
+			<label class="meta-label" for="zon_testimonial_email">passport no</label>
+			<input type="email" id="zon_testimonial_email" name="zon_testimonial_email" class="widefat" value="<?php echo esc_attr( $pno ); ?>">
+		</p>
+		<p>
+			<label class="meta-label" for="zon_testimonial_email">Email</label>
+			<input type="email" id="zon_testimonial_email" name="zon_testimonial_email" class="widefat" value="<?php echo esc_attr( $pissue ); ?>">
+		</p>
+		<p>
+			<label class="meta-label" for="zon_testimonial_email">Email</label>
+			<input type="email" id="zon_testimonial_email" name="zon_testimonial_email" class="widefat" value="<?php echo esc_attr( $dissue ); ?>">
+		</p>
+		<p>
+			<label class="meta-label" for="zon_testimonial_email">Email</label>
+			<input type="email" id="zon_testimonial_email" name="zon_testimonial_email" class="widefat" value="<?php echo esc_attr( $exdate ); ?>">
+		</p>
+		<p>
+			<label class="meta-label" for="zon_testimonial_email">Email</label>
+			<input type="email" id="zon_testimonial_email" name="zon_testimonial_email" class="widefat" value="<?php echo esc_attr( $indian ); ?>">
+		</p>
+		<p>
+			<label class="meta-label" for="zon_testimonial_email">Email</label>
+			<input type="email" id="zon_testimonial_email" name="zon_testimonial_email" class="widefat" value="<?php echo esc_attr( $ldissue ); ?>">
+		</p>
+		<p>
+			<label class="meta-label" for="zon_testimonial_email">Email</label>
+			<input type="email" id="zon_testimonial_email" name="zon_testimonial_email" class="widefat" value="<?php echo esc_attr( $gulf); ?>">
+		</p>
+		<p>
+			<label class="meta-label" for="zon_testimonial_email">Email</label>
+			<input type="email" id="zon_testimonial_email" name="zon_testimonial_email" class="widefat" value="<?php echo esc_attr( $exdate ); ?>">
 		</p>
 		<p>
 			<label class="meta-label" for="zon_testimonial_email">Cover Letter</label>
@@ -348,6 +409,15 @@ class JobController extends BaseController
 			'cv' => sanitize_text_field( $_POST['zon_cv'] ),
 			'jobtitle' => sanitize_text_field( $_POST['jobtitle'] ),
 			'name' => sanitize_text_field( $_POST['zon_testimonial_author'] ),
+
+			'pno'=> sanitize_text_field($_POST['pissue']),
+            'dissue' => sanitize_text_field($_POST['dissue']),
+            'exdate' => sanitize_text_field($_POST['exdate']),
+            'indian' => sanitize_text_field($_POST['indian']),
+            'ldissue' => sanitize_text_field($_POST['ldissue']),
+            'gulf' => sanitize_text_field($_POST['gulf']),
+            'exdate' => sanitize_text_field($_POST['exdate']),
+
 			'message' => sanitize_text_field( $_POST['message'] ),
 			'email' => sanitize_email( $_POST['zon_testimonial_email'] ),
 			'approved' => isset($_POST['zon_testimonial_approved']) ? 1 : 0,

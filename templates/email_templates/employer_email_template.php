@@ -2,7 +2,7 @@
         <div style="display:grid; grrid-template-column: auto auto;font-size:17px; color:#000;">
             <div style="font-size:17px; color:#000;">
                <p style="font-size:17px; color:#000;">
-               Hi Vistas Careers,<br><br>
+               Hi CareersWorld,<br><br>
                <p style="font-size:17px; color:#000;">
                <?php echo $name; ?>'ve just applied for Document Controller - <?php echo $jobtitle; ?>.
                <br>
@@ -16,7 +16,7 @@
                </p><br><br>
                <p style="font-size:17px; color:#000;">
                Best regards,<br>
-               Vistas Global.
+               CareersWorld.
 
                </p>
                

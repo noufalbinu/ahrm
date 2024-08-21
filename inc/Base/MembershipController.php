@@ -75,9 +75,11 @@ class MembershipController extends BaseController
         $table = $wpdb->prefix . 'vaniom_hr_candidates';
         $sql = "CREATE TABLE IF NOT EXISTS $table (
 	      id int(11) NOT NULL auto_increment,
-		  application_date timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+		  employee_id timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
 	      name tinytext NOT NULL,
 	      email VARCHAR(100) NOT NULL,
+		  basic VARCHAR(100) NOT NULL,
+		  ip_address VARCHAR(100) NOT NULL,
 	      age int(2) NULL,
 	      PRIMARY KEY  (id)
         ) $charset_collate;";

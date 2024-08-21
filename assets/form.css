@@ -64,7 +64,6 @@ button#cv-download {
   }
 .zon-input-fields {
     text-align: center;
-    padding: 0px 20px;
 }
 .job-form-header {
     display: flex;
@@ -72,7 +71,7 @@ button#cv-download {
     align-items: center;
     justify-content: space-between;
     border-bottom: 1px solid #bbb;
-    padding: 0 20px;
+    padding: inherit;
 }
 .job-form-header h3 {
     font-size: 14px;
@@ -81,18 +80,17 @@ button#cv-download {
     color: #666;
 }
 .cv-section-container {
-    display: flex;
     width: 100%;
     padding-top: 18px;
 }
 .cv-section-one {
     width: 100%;
+    display: grid;
+    grid-template-columns: 50fr 50fr;
+    gap: 20px;
 }
 .cv-section-two {
-    width: 50%;
-    display: flex;
-    flex-direction: column;
-    align-items: flex-end;
+    width: 100%;
 }
 .field-input {
     padding: 14px 20px;
@@ -182,7 +180,6 @@ button#cv-download {
     width: 100%;
     display: flex;
     justify-content: flex-end;
-    padding: 19px 20px 11px;
     gap: 10px;
 }
 .btn-application-cancel {
@@ -203,7 +200,7 @@ button#cv-download {
     border-width: 1px 0 0;
     color: #fff;
     align-items: flex-end;
-    background: #000000;
+    background: #084589;
     width: 100%;
 }
 

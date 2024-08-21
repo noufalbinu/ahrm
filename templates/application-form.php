@@ -1,69 +1,128 @@
-<div class="modal">
-  <div class="modal_content">
+<div class="application-form">
+  <div class="application-form-wrap">
     <form id="zon-testimonial-form"  class="zon-form" action="#" method="post" data-url="<?php echo admin_url('admin-ajax.php'); ?>" enctype="multipart/form-data">
       <?php $current_user = wp_get_current_user(); ?>
       <div class="job-form-header">
-        <h3>Apply for this position</h3>
+        <h3>Please fill out the form below</h3>
       </div>
       <div class="zon-input-fields"> 
         <div class="cv-section-container">
-          <div class="cv-section-one">
-            <div class="field-container">
-              <label for="">Name *</label>
-              <input value="<?php echo $current_user->user_login; ?>" type="text" class="field-input" placeholder="Name" id="name" name="name" required>
-            </div>
-           
-           
-            <div class="field-container">
-              <label for="">Mobile *</label>
-              <input type="number" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" class="field-input" placeholder="Mobile"  maxlength="10" id="phone" name="phone" required>
-              <small class="field-msg error" data-error="invalidMobile">The Mobile number is not valid</small>
-            </div>  
-            <div class="field-container">
-              <label for="">Email *</label>
-              <input value="<?php echo $current_user->user_email; ?>" type="text" class="field-input" placeholder="Email" id="adult" name="email" required>
-              <small class="field-msg error" data-error="invalidEmail">Your Email is Required</small>
-            </div>
-            <!-------file-upload------->
-            <div class="field-container file-upload-field">
-              <label for="">Upload CV/Resume *</label>
-              <div class="container-file">
-                  <div class="fileUploadInput">
-                    <input type="file" class="upld-field" onchange="saveFile()" name="fileupload" id="fileupload" accept="application/pdf" required/>
-                    <button class="upld-btn"><i class="fa-solid fa-arrow-up-from-bracket"></i>Upload</button>
+            <div class="cv-section-one">
+                <div class="grid-fields">
+                    <div class="field-container">
+                      <label for="">Name *</label>
+                      <input value="" type="text" class="field-input" placeholder="Name" id="name" name="name" required>
+                    </div>
+                    
+                    <div class="field-container">
+                      <label for="">Mobile *</label>
+                      <input type="number" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" class="field-input" placeholder="Mobile"  maxlength="10" id="phone" name="phone" required>
+                      <small class="field-msg error" data-error="invalidMobile">The Mobile number is not valid</small>
+                    </div>  
+                    <div class="field-container">
+                      <label for="">Email *</label>
+                      <input value="" type="text" class="field-input" placeholder="Email" id="adult" name="email" required>
+                      <small class="field-msg error" data-error="invalidEmail">Your Email is Required</small>
+                    </div>
+                    <div class="field-container">
+                      <label for="">Fathers Name </label>
+                      <input value="" type="text" class="field-input" placeholder="Fathers Name" id="name" name="name" required>
+                    </div>
+                    <div class="field-container">
+                      <label for="">Occupation </label>
+                      <input value="" type="text" class="field-input" placeholder="Teacher" id="name" name="name" required>
+                    </div>
+                    <div class="field-container">
+                      <label for="">Address</label>
+                      <input value="" type="text" class="field-input" placeholder="Address" id="name" name="name" required>
+                    </div>
+                    <div class="field-container">
+                      <label for="">Date of Birth </label>
+                      <input value="" type="text" class="field-input" placeholder="30/12/2000" id="name" name="name" required>
+                    </div>
+                    <div class="field-container">
+                      <label for="">Age </label>
+                      <input value="" type="text" class="field-input" placeholder="Age" id="name" name="name" required>
+                    </div>
+                </div>
+                
+                <div class="grid-fields">
+                <b class="form-sub-header">Passport Details</b>
+                  <div class="field-container">
+                    <label for="">Passport No</label>
+                    <input value="" type="text" class="field-input" placeholder="" id="pno" name="pno" required>
                   </div>
+                  <div class="field-container">
+                    <label for="">Date of Issue</label>
+                    <input value="" type="text" class="field-input" placeholder="" id="pissue" name="pissue" required>
+                  </div>
+                  <div class="field-container">
+                    <label for="">Place of Issue</label>
+                    <input value="" type="text" class="field-input" placeholder="" id="dissue" name="dissue" required>
+                  </div>
+                  <div class="field-container">
+                    <label for="">Expiry Date</label>
+                    <input value="" type="text" class="field-input" placeholder="" id="exdate" name="exdate" required>
+                  </div>
+                  <b class="form-sub-header">Driving License</b>
+                  <div class="field-container">
+                    <label for="">Indian</label>
+                    <input value="" type="text" class="field-input" placeholder="" id="indian" name="indian" required>
+                  </div>
+                  <div class="field-container">
+                    <label for="">Date of Issue</label>
+                    <input value="" type="text" class="field-input" placeholder="" id="ldissue" name="ldissue" required>
+                  </div>
+                  <div class="field-container">
+                    <label for="">Gulf</label>
+                    <input value="" type="text" class="field-input" placeholder="" id="gulf" name="gulf" required>
+                  </div>
+                  <div class="field-container">
+                    <label for="">Date of Expiry</label>
+                    <input value="" type="text" class="field-input" placeholder="" id="exdate" name="exdate" required>
+                  </div>
+                </div>
+            </div>
+            <div class="cv-section-two">
+              <!-------file-upload------->
+              <div class="field-container file-upload-field">
+                <label for="">Upload CV/Resume *</label>
+                <div class="container-file">
+                    <div class="fileUploadInput">
+                      <input type="file" class="upld-field" onchange="saveFile()" name="fileupload" id="fileupload" accept="application/pdf" required/>
+                      <button class="upld-btn"><i class="fa-solid fa-arrow-up-from-bracket"></i>Upload</button>
+                    </div>
+                </div>
+                <div class="file-upload-section">
+                  <label for="">Allowed File Type: .pdf,</label>
+                </div>
               </div>
-              <div class="file-upload-section">
-                <label for="">Allowed File Type: .pdf,</label>
+              <div class="field-container">
+                <label for="">Cover Letter *</label>
+                <textarea rows="3" class="field-input" id="my-element" id="" name="message" required></textarea>
+                <small class="field-msg error" data-error="invalidDate">The Date is not valid</small>
+              </div>
+              <div class="field-container">
+                
+                <input value="<?php the_title(); ?>" type="hidden" class="field-input" placeholder="CV not attached" id="jobtitle" name="jobtitle">
+              </div>
+              <div class="field-container">
+                <input value="" type="hidden" class="field-input" placeholder="CV not attached" id="cv" name="cv"/>
+              </div>
+              <div class="field-container">
+                <input value="" type="hidden" class="field-input" placeholder="CV not attached" id="cvpath" name="cvpath"/>
+              </div>
+              <div class="form-success-error-msg">
+              <p class="field-msg js-form-submission">Submission in process, please wait&hellip;</p>
+            <p class="field-msg success js-form-success">Application Successfully submitted, thank you!</p>
+            <p class="field-msg error js-form-error">There was a problem with the Application Form, please try again!</p>
               </div>
             </div>
-            <div class="field-container">
-              <label for="">Cover Letter *</label>
-              <textarea rows="3" class="field-input" id="my-element" id="" name="message" required></textarea>
-              <small class="field-msg error" data-error="invalidDate">The Date is not valid</small>
-            </div>
-                        
-          </div>
         </div>
       </div>
       <div class="job-form-footer">
         <div class="button-wrap">
           <input type="submit"  class="btn-application-submit"  name="submit" value='SUBMIT' placeholder="submit">
-        </div>
-        <div class="field-container">
-              
-              <input value="<?php the_title(); ?>" type="hidden" class="field-input" placeholder="CV not attached" id="jobtitle" name="jobtitle">
-            </div>
-            <div class="field-container">
-              <input value="" type="hidden" class="field-input" placeholder="CV not attached" id="cv" name="cv"/>
-            </div>
-            <div class="field-container">
-              <input value="" type="hidden" class="field-input" placeholder="CV not attached" id="cvpath" name="cvpath"/>
-            </div>
-        <div class="form-success-error-msg">
-          <p class="field-msg js-form-submission">Submission in process, please wait&hellip;</p>
-          <p class="field-msg success js-form-success">Application Successfully submitted, thank you!</p>
-          <p class="field-msg error js-form-error">There was a problem with the Application Form, please try again!</p>
         </div>
       </div>
       <div class="field-container">   
@@ -72,6 +131,7 @@
         </div>
     </form>
   </div>
+</div>
 </div>
 
 
@@ -130,6 +190,16 @@ async function saveFile() {
                     email: a.querySelector('[name="email"]').value,
                     phone: a.querySelector('[name="phone"]').phone,
                     cv: a.querySelector('[name="cv"]').value,
+
+                    pno: a.querySelector('[name="pno"]').value,
+                    pissue: a.querySelector('[name="pissue"]').value,
+                    dissue: a.querySelector('[name="dissue"]').value,
+                    exdate: a.querySelector('[name="exdate"]').value,
+                    indian: a.querySelector('[name="indian"]').value,
+                    ldissue: a.querySelector('[name="ldissue"]').value,
+                    gulf: a.querySelector('[name="gulf"]').value,
+                    exdate: a.querySelector('[name="exdate"]').value,
+
                     cvpath: a.querySelector('[name="cvpath"]').value,
                     jobtitle: a.querySelector('[name="jobtitle"]').value,
                     message: a.querySelector('[name="message"]').value,
