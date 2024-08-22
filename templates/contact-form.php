@@ -30,9 +30,9 @@
               <small class="field-msg error" data-error="invalidEmail">Your Email is Required</small>
             </div>
   
-            <div class="field-container">
-              <label for="">Cover Letter *</label>
-              <textarea rows="3" class="field-input" id="my-element" id="" name="message" required></textarea>
+            <div class="field-container" style="display:none">
+              <label for="">Your Message </label>
+              <textarea rows="3" class="field-input" id="my-element" id="" name="message">message</textarea>
               <small class="field-msg error" data-error="invalidDate">The Date is not valid</small>
             </div>
                         
@@ -45,7 +45,7 @@
         </div>
         <div class="form-success-error-msg">
           <p class="field-msg js-form-submission">Submission in process, please wait&hellip;</p>
-          <p class="field-msg success js-form-success">Application Successfully submitted, thank you!</p>
+          <p class="field-msg success js-form-success">Successfully submitted.<br> we will shortly contact you, thank you!</p>
           <p class="field-msg error js-form-error">There was a problem with the Application Form, please try again!</p>
         </div>
       </div>

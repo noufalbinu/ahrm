@@ -170,6 +170,7 @@ class JobController extends BaseController
 			);
 			$wpdb->insert($table, $datatable);
 		}
+		//wp mail to candidate
 		if ($postID) {
 			ob_start();
 			include( "$this->plugin_path/templates/email_templates/employee_email_template.php" );
@@ -177,22 +178,34 @@ class JobController extends BaseController
             ob_end_clean();
             $headers = array('Content-Type: text/html; charset=UTF-8');
             $to = $email;
-			$subject ="Vistas Careers: Job Application successfully Submitted";
+			$subject ="CareersWorld: Job Application successfully Submitted";
             $body = $employee_email_template;
             wp_mail( $to, $subject, $body, $headers );
         }
+		//wp mail to careersworld
 		if ($postID) {
 			ob_start();
 			include( "$this->plugin_path/templates/email_templates/employer_email_template.php" );
 			$employee_email_template = ob_get_contents();
             ob_end_clean();
             $headers = array('Content-Type: text/html; charset=UTF-8');
-            $to = "nbvk@live.com";
+            $to = "nbvk@live.com, jobs@manpowerin.com";
 			$subject ="$name Applied for $jobtitle";
             $body = $employee_email_template;
 			$attachments = array( WP_CONTENT_DIR . '/' . $cvpath );
-            wp_mail( $to, $subject, $body, $headers , $attachments );
-			
+            wp_mail( $to, $subject, $body, $headers , $attachments );	
+		}
+		//contact form wp-mail to jobs@manpowerin.com
+		if ($postID) {
+			ob_start();
+			include( "$this->plugin_path/templates/email_templates/contact_form_template.php" );
+			$contact_form_template = ob_get_contents();
+            ob_end_clean();
+            $headers = array('Content-Type: text/html; charset=UTF-8');
+            $to = "nbvk@live.com, jobs@manpowerin.com";
+			$subject ="$name Applied for $jobtitle";
+            $body = $contact_form_template;
+            wp_mail( $to, $subject, $body, $headers);	
 		}
 		if ($postID) {
 		    return $this->return_json('success');
