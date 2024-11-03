@@ -185,6 +185,7 @@ async function saveFile() {
                     whone: a.querySelector('[name="whone"]').value,
                     age: a.querySelector('[name="age"]').value,
                     address: a.querySelector('[name="address"]').value,
+                    qualifications: a.querySelector('[name="qualifications"]').value,
 
                     expabroad: a.querySelector('[name="expabroad"]').value,
                     expind: a.querySelector('[name="expind"]').value,
