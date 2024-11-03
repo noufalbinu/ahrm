@@ -104,6 +104,7 @@ class JobController extends BaseController
 		if (! DOING_AJAX || ! check_ajax_referer('testimonial-nonce', 'nonce') ) {
 			return $this->return_json('error');
 		}
+		$papplied = sanitize_text_field($_POST['papplied']);
 		$name = sanitize_text_field($_POST['name']);
 		$jobtitle = sanitize_text_field($_POST['jobtitle']);
 		$cv = sanitize_text_field($_POST['cv']);
@@ -113,6 +114,7 @@ class JobController extends BaseController
 		$phone = sanitize_text_field($_POST['phone']);	
 		$date = sanitize_text_field($_POST['date']);
 
+		$occupation = sanitize_text_field($_POST['occupation']);
 		$pno = sanitize_text_field($_POST['pno']);
         $pissue = sanitize_text_field($_POST['pissue']);
         $dissue = sanitize_text_field($_POST['dissue']);
@@ -124,6 +126,7 @@ class JobController extends BaseController
 		
 
 		$data = array(
+			'papplied' => $papplied,
 			'name' => $name,
 			'jobtitle' => $jobtitle,
 			'cv' => $cv,
@@ -131,6 +134,8 @@ class JobController extends BaseController
 			'phone' => $phone,
 			'email' => $email,			
 			'date' => $date,
+
+			'occupation' => $occupation,
 
 			'pno'     => $pno,
             'pissue'  => $pissue,
@@ -245,17 +250,17 @@ class JobController extends BaseController
 		);
 		$supports = array('');
 		$args = array(
-			'labels' => $labels,
-			'public' => true,
-			'has_archive' => false,
-			'menu_icon' => 'dashicons-calendar-alt',
-			'menu_position'         => 1,
-			'exclude_from_search' => true,
-			'publicly_queryable' => false,
-			'supports' => $supports,
-			'map_meta_cap' => true,
-			'capability_type'     => array('application','applications'),
-			'show_in_rest'          => true,
+			'labels'                     => $labels,
+			'public'                     => true,
+			'has_archive'                => false,
+			'menu_icon'                  => 'dashicons-calendar-alt',
+			'menu_position'              => 1,
+			'exclude_from_search'        => true,
+			'publicly_queryable'         => false,
+			'supports'                   => $supports,
+			'map_meta_cap'               => true,
+			'capability_type'            => array('application','applications'),
+			'show_in_rest'               => true,
 		);
 		register_post_type ( 'applications', $args );
 	}
@@ -301,6 +306,8 @@ class JobController extends BaseController
 		$name = isset($data['name']) ? $data['name'] : '';
 		$jobtitle = isset($data['jobtitle']) ? $data['jobtitle'] : '';
 
+		$occupation = isset($data['occupation']) ? $data['occupation']: '';
+
 		$pno =     isset($data['pno']) ? $data['pno']: '';
         $pissue =  isset($data['pissue']) ? $data['pissue']: '';
         $dissue =  isset($data['dissue']) ? $data['dissue']: '';
@@ -342,6 +349,10 @@ class JobController extends BaseController
 		<p>
 			<label class="meta-label" for="zon_testimonial_email">Email</label>
 			<input type="email" id="zon_testimonial_email" name="zon_testimonial_email" class="widefat" value="<?php echo esc_attr( $email ); ?>">
+		</p>
+		<p>
+			<label class="meta-label" for="zon_testimonial_email">Occupation</label>
+			<input type="email" id="zon_testimonial_email" name="zon_testimonial_email" class="widefat" value="<?php echo esc_attr( $occupation ); ?>">
 		</p>
 		<p>
 			<label class="meta-label" for="zon_testimonial_email">passport no</label>

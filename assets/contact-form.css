@@ -50,9 +50,9 @@ button#cv-download {
   
   .modal_content {
     background-color: white;
-    box-shadow: 1px 1px 10px 1px #bbbbbb94;
+    box-shadow: 1px 1px 10px 1px #e9e9e994;
     padding: 21px;
-    border-radius: 10px;
+    border: 1px solid #cfcfcf;
   }
   
   .close {
@@ -66,7 +66,7 @@ button#cv-download {
   }
 .zon-input-fields {
     text-align: center;
-    padding: 0px 20px;
+    padding: 0px px;
 }
 .job-form-header {
     display: flex;
@@ -97,7 +97,7 @@ button#cv-download {
     align-items: flex-end;
 }
 .field-input {
-    padding: 17px 33px;
+    padding: 16px 23px;
     width: 100%;
     border: 1px solid #c8c8c8;
     border-radius: 9px;
@@ -240,6 +240,6 @@ button#cv-download {
 }
 @media screen and (max-width: 767px) {
 .modal {
-    width: 95%;
+    width: 100%;
 }
 }

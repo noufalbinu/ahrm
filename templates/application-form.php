@@ -10,76 +10,74 @@
             <div class="cv-section-one">
                 <div class="grid-fields">
                     <div class="field-container">
+                      <label for="">Position applied for *</label>
+                      <input value="" type="text" class="field-input" placeholder="Name" id="name" name="name" required>
+                    </div>
+                    <div class="field-container">
                       <label for="">Name *</label>
                       <input value="" type="text" class="field-input" placeholder="Name" id="name" name="name" required>
                     </div>
-                    
-                    <div class="field-container">
-                      <label for="">Mobile *</label>
-                      <input type="number" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" class="field-input" placeholder="Mobile"  maxlength="10" id="phone" name="phone" required>
-                      <small class="field-msg error" data-error="invalidMobile">The Mobile number is not valid</small>
-                    </div>  
-                    <div class="field-container">
-                      <label for="">Email *</label>
-                      <input value="" type="text" class="field-input" placeholder="Email" id="adult" name="email" required>
-                      <small class="field-msg error" data-error="invalidEmail">Your Email is Required</small>
-                    </div>
-                    <div class="field-container">
-                      <label for="">Fathers Name </label>
-                      <input value="" type="text" class="field-input" placeholder="Fathers Name" id="name" name="name" required>
-                    </div>
-                    <div class="field-container">
-                      <label for="">Occupation </label>
-                      <input value="" type="text" class="field-input" placeholder="Teacher" id="name" name="name" required>
-                    </div>
-                    <div class="field-container">
-                      <label for="">Address</label>
-                      <input value="" type="text" class="field-input" placeholder="Address" id="name" name="name" required>
-                    </div>
-                    <div class="field-container">
-                      <label for="">Date of Birth </label>
-                      <input value="" type="text" class="field-input" placeholder="30/12/2000" id="name" name="name" required>
-                    </div>
                     <div class="field-container">
                       <label for="">Age </label>
-                      <input value="" type="text" class="field-input" placeholder="Age" id="name" name="name" required>
+                      <input value="" type="text" class="field-input" placeholder="Age" id="age" name="age" required>
                     </div>
+                    <div class="field-container">
+                      <label for="">Qualifications*</label>
+                      <textarea class="field-textarea"  name="" id=""></textarea>
+                      <small class="field-msg error" data-error="invalidMobile">The Mobile number is not valid</small>
+                    </div> 
+                    
+                    <div class="field-container">
+                      <label for="">Experience in India (in years)*</label>
+                      <input type="number" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" class="field-input" placeholder=""  maxlength="2" id="phone" name="expind" required>
+                      <small class="field-msg error" data-error="invalidMobile">The Mobile number is not valid</small>
+                    </div> 
+                    <div class="field-container">
+                      <label for="">Experience at Abroad (in years)*</label>
+                      <input type="number" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" class="field-input" placeholder=""  maxlength="2" id="phone" name="expabroad" required>
+                      <small class="field-msg error" data-error="invalidMobile">The Mobile number is not valid</small>
+                    </div> 
+                    <div class="field-container">
+                      <label for="">Address*</label>
+                      <textarea class="field-textarea" name="" id=""></textarea>
+                    </div>
+                  
+                    
+                   
                 </div>
                 
                 <div class="grid-fields">
-                <b class="form-sub-header">Passport Details</b>
+                  <div class="field-container">
+                    <label for="">Phone Number*</label>
+                    <input type="number" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" class="field-input" placeholder="Mobile"  maxlength="10" id="phone" name="phone" required>
+                    <small class="field-msg error" data-error="invalidMobile">The Mobile number is not valid</small>
+                  </div> 
+                  <div class="field-container">
+                    <label for="">Whatsapp Number*</label>
+                    <input type="number" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" class="field-input" placeholder="Mobile"  maxlength="10" id="phone" name="phone" required>
+                    <small class="field-msg error" data-error="invalidMobile">The Mobile number is not valid</small>
+                  </div>   
+                  <div class="field-container">
+                    <label for="">Email ID*</label>
+                    <input value="" type="text" class="field-input" placeholder="Email" id="adult" name="email" required>
+                    <small class="field-msg error" data-error="invalidEmail">Your Email is Required</small>
+                  </div>
+                  <b class="form-sub-header">Passport Details</b>
                   <div class="field-container">
                     <label for="">Passport No</label>
-                    <input value="" type="text" class="field-input" placeholder="" id="pno" name="pno" required>
-                  </div>
-                  <div class="field-container">
-                    <label for="">Date of Issue</label>
-                    <input value="" type="text" class="field-input" placeholder="" id="pissue" name="pissue" required>
+                    <input value="" type="text" class="field-input" placeholder="" id="pno" name="pno" >
                   </div>
                   <div class="field-container">
                     <label for="">Place of Issue</label>
-                    <input value="" type="text" class="field-input" placeholder="" id="dissue" name="dissue" required>
-                  </div>
-                  <div class="field-container">
-                    <label for="">Expiry Date</label>
-                    <input value="" type="text" class="field-input" placeholder="" id="exdate" name="exdate" required>
-                  </div>
-                  <b class="form-sub-header">Driving License</b>
-                  <div class="field-container">
-                    <label for="">Indian</label>
-                    <input value="" type="text" class="field-input" placeholder="" id="indian" name="indian" required>
+                    <input value="" type="text" class="field-input" placeholder="" id="dissue" name="dissue" >
                   </div>
                   <div class="field-container">
                     <label for="">Date of Issue</label>
-                    <input value="" type="text" class="field-input" placeholder="" id="ldissue" name="ldissue" required>
+                    <input value="" type="text" class="field-input" placeholder="" id="pissue" name="pissue" >
                   </div>
                   <div class="field-container">
-                    <label for="">Gulf</label>
-                    <input value="" type="text" class="field-input" placeholder="" id="gulf" name="gulf" required>
-                  </div>
-                  <div class="field-container">
-                    <label for="">Date of Expiry</label>
-                    <input value="" type="text" class="field-input" placeholder="" id="exdate" name="exdate" required>
+                    <label for="">Expiry Date</label>
+                    <input value="" type="text" class="field-input" placeholder="" id="exdate" name="exdate" >
                   </div>
                 </div>
             </div>
@@ -98,12 +96,6 @@
                 </div>
               </div>
               <div class="field-container">
-                <label for="">Cover Letter *</label>
-                <textarea rows="3" class="field-input" id="my-element" id="" name="message" required></textarea>
-                <small class="field-msg error" data-error="invalidDate">The Date is not valid</small>
-              </div>
-              <div class="field-container">
-                
                 <input value="<?php the_title(); ?>" type="hidden" class="field-input" placeholder="CV not attached" id="jobtitle" name="jobtitle">
               </div>
               <div class="field-container">
@@ -185,20 +177,27 @@ async function saveFile() {
             var a = document.getElementById("zon-testimonial-form");
             a.addEventListener("submit", function(e) {
                 e.preventDefault(), o();
-                var r = {  
+                var r = { 
+                    papplied = a.querySelector('[name="papplied"]').value,
                     name: a.querySelector('[name="name"]').value,
                     email: a.querySelector('[name="email"]').value,
-                    phone: a.querySelector('[name="phone"]').phone,
+                    phone: a.querySelector('[name="phone"]').value,
+                    whone: a.querySelector('[name="whone"]').value,
+                    age: a.querySelector('[name="age"]').value,
+                    address: a.querySelector('[name="address"]').value,
+
+                    expabroad: a.querySelector('[name="expabroad"]').value,
+                    expind: a.querySelector('[name="expind"]').value,
+
                     cv: a.querySelector('[name="cv"]').value,
+                    
+                    occupation: a.querySelector('[name="occupation"]').value,
 
                     pno: a.querySelector('[name="pno"]').value,
                     pissue: a.querySelector('[name="pissue"]').value,
                     dissue: a.querySelector('[name="dissue"]').value,
                     exdate: a.querySelector('[name="exdate"]').value,
-                    indian: a.querySelector('[name="indian"]').value,
-                    ldissue: a.querySelector('[name="ldissue"]').value,
-                    gulf: a.querySelector('[name="gulf"]').value,
-                    exdate: a.querySelector('[name="exdate"]').value,
+                    
 
                     cvpath: a.querySelector('[name="cvpath"]').value,
                     jobtitle: a.querySelector('[name="jobtitle"]').value,

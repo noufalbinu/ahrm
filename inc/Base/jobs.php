@@ -16,10 +16,7 @@ class Jobs extends BaseController {
 		if ( ! $this->activated( 'Jobs' ) ) return;
 		add_action( 'init', array( $this, 'custom_post_job' ) );
 		add_action( 'admin_enqueue_scripts', array( $this, 'zon_styles' ) );
-		add_filter( 'single_template', array( $this, 'load_pack_template' ) );
-		add_action( 'add_meta_boxes', array( $this, 'zon_fixed_boxess' ) );
-		add_action( 'save_post', array( $this,'zon_save_meta_boxx' ) );
-        
+    
 		// filter option for job application from candidates
 		add_filter('parse_query', array( $this, 'tsm_convert_id_to_term_in_query_cv') );
 		add_action( 'init', array( $this,  'job_taxonomy_cv') );
@@ -71,6 +68,7 @@ class Jobs extends BaseController {
 			'items_list_navigation' => __( 'Items list navigation', 'text_domain' ),
 			'filter_items_list'     => __( 'Filter items list', 'text_domain' ),
 		);
+		
 		$args = array(
 			'label'                 => __( 'Post Type', 'text_domain' ),
 			'description'           => __( 'Post Type Description', 'text_domain' ),
@@ -89,8 +87,8 @@ class Jobs extends BaseController {
 			'has_archive'           => 'jobs',
 			'exclude_from_search'   => false,
 			'publicly_queryable'    => true,
-			'capability_type'     => array('job','jobs', 'page'),
-			'map_meta_cap'        => true,
+			'capability_type'       => array('job','jobs', 'page'),
+			'map_meta_cap'          => true,
 			'show_in_rest'          => true,
 		);
 		register_post_type( 'jobs', $args );
@@ -198,62 +196,8 @@ class Jobs extends BaseController {
 		
 		
 	}
-	// filter option for job application from candidates
-public function zon_fixed_boxess() {
-	global $post;
-    if ( 'page' == $post->post_type && 0 != count( get_page_templates( $post ) ) && get_option( 'page_for_posts' ) != $post->ID ) {
-         if( $my_conditions )
-             $post->page_template = "page-mytemplate.php";
-    }
-	add_meta_box(
-		'fixed_box',                       // Unique ID
-		'Job Details',                             // Box title
-		 array( $this, 'zon_featuress_boxx' ),      // Content callback, must be of type callable
-		'jobs',                              // 
-		'normal',
-		'high'
-	);
-
+    
 }
 
-
-
-
-
-
-public function zon_save_meta_boxx( $post_id ) {
-
-	
-	if (! isset($_POST['zonpackk_testimonial_nonce'])) {
-			return $post_id;
-		}
-
-		$nonce = $_POST['zonpackk_testimonial_nonce'];
-		if (! wp_verify_nonce( $nonce, 'zonpackk_testimonial' )) {
-			return $post_id;
-		}
-
-		if ( defined( 'DOING_AUTOSAVE' ) && DOING_AUTOSAVE ) {
-			return $post_id;
-		}
-
-		if (! current_user_can( 'edit_post', $post_id ) ) {
-			return $post_id;
-		}
-
-		if (isset($_POST['dataoption'])) {
-			$zonoption = $_POST['dataoption'];
-			$_SESSION['dataoption'] = $zonoption ;
-		} else {
-			$zonoption  = $_SESSION['dataoption'];
-		}
-
-		$data = array(
-			'p1' => $_POST['pack1']
-		);
-		update_post_meta( $post_id, '_zonpackk_testimonial_key', $data );
-		}
-
-}
 
 

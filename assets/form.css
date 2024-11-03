@@ -1,11 +1,12 @@
 button.btn-apply {
   padding: 14px 54px;
-  background: #d00;
+  background: #084988;
   border-radius: 5px;
   border: none;
   color: #fff;
   font-size: 14px;
   font-weight: 600;
+  width: 100%;
 }
  button:hover {
     background-color: #bfbfbf;
@@ -63,7 +64,6 @@ button#cv-download {
     cursor: pointer;
   }
 .zon-input-fields {
-    text-align: center;
 }
 .job-form-header {
     display: flex;
