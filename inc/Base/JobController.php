@@ -114,6 +114,13 @@ class JobController extends BaseController
 		$phone = sanitize_text_field($_POST['phone']);	
 		$date = sanitize_text_field($_POST['date']);
 
+		$wphone = sanitize_text_field($_POST['whone']);
+        $age = sanitize_text_field($_POST['age']);
+        $address = sanitize_text_field($_POST['address']);
+        $qualifications = sanitize_text_field($_POST['qualifications']);
+        $expabroad = sanitize_text_field($_POST['expabroad']);
+        $expind = sanitize_text_field($_POST['expind']);
+
 		$occupation = sanitize_text_field($_POST['occupation']);
 		$pno = sanitize_text_field($_POST['pno']);
         $pissue = sanitize_text_field($_POST['pissue']);
@@ -126,14 +133,20 @@ class JobController extends BaseController
 		
 
 		$data = array(
-			'papplied' => $papplied,
-			'name' => $name,
-			'jobtitle' => $jobtitle,
-			'cv' => $cv,
-			'cvpath' => $cvpath,
-			'phone' => $phone,
-			'email' => $email,			
-			'date' => $date,
+			'papplied'    =>    $papplied,
+			'name' =>           $name,
+			'jobtitle' =>       $jobtitle,
+			'cv' =>             $cv,
+			'cvpath' =>         $cvpath,
+			'phone' =>          $phone,
+			'email' =>          $email,			
+			'date' =>           $date,
+			'wphone' =>         $wphone,
+            'age' =>            $age,
+            'address' =>        $address,
+            'qualifications' => $qualifica,
+            'expabroad'  =>     $expabroad,
+            'expind' =>         $expind,
 
 			'occupation' => $occupation,
 
@@ -324,72 +337,72 @@ class JobController extends BaseController
 		$approved = isset($data['approved']) ? $data['approved'] : false;
 		$featured = isset($data['featured']) ? $data['featured'] : false;
 		?>
-		<?php echo esc_attr( $cvpath ); ?>
 		<p>
-			
 			<label class="meta-label" for="zon_name">Attached File(CV)</label>
-			<div class="input-group">
-			   <input type="text" id="zon_cv" name="zon_cv" class="widefat" value="<?php echo esc_attr( $cv ); ?>" disabled>
+			<div class="ahcm-input-group">
+			   <input type="text" id="zon_cv" name="zon_cv" class="widefat attachment-link-input" value="<?php echo esc_attr( $cv ); ?>" disabled>
 			   <button id="cv-download"><a href="<?php echo esc_attr( $cv ); ?>" download>Download CV</a></button>
 			   <button id="cv-view"><a href="<?php echo esc_attr( $cv ); ?>" target="blank" rel="noopener noreferrer">View CV</a></button>
 			</div>
 		</p>
-		<p>
-			<label class="meta-label" for="zon_name">name</label>
-			<input type="text" id="zon_name" name="zon_name" class="widefat" value="<?php echo esc_attr( $name ); ?>">
-		</p>
-		<p>
-			<label class="meta-label" for="zon_package">Applyed for</label>
-			<input type="text" id="zon_package" name="zon_package" class="widefat" value="<?php echo esc_attr( $jobtitle ); ?>">
-		</p>
-		<p>
-			<label class="meta-label" for="zon_phone">phone</label>
-			<input type="text" id="zon_phone" name="zon_phone" class="widefat" value="<?php echo esc_attr( $phone ); ?>">
-		</p>
-		<p>
-			<label class="meta-label" for="zon_testimonial_email">Email</label>
-			<input type="email" id="zon_testimonial_email" name="zon_testimonial_email" class="widefat" value="<?php echo esc_attr( $email ); ?>">
-		</p>
-		<p>
-			<label class="meta-label" for="zon_testimonial_email">Occupation</label>
-			<input type="email" id="zon_testimonial_email" name="zon_testimonial_email" class="widefat" value="<?php echo esc_attr( $occupation ); ?>">
-		</p>
-		<p>
-			<label class="meta-label" for="zon_testimonial_email">passport no</label>
-			<input type="email" id="zon_testimonial_email" name="zon_testimonial_email" class="widefat" value="<?php echo esc_attr( $pno ); ?>">
-		</p>
-		<p>
-			<label class="meta-label" for="zon_testimonial_email">Email</label>
-			<input type="email" id="zon_testimonial_email" name="zon_testimonial_email" class="widefat" value="<?php echo esc_attr( $pissue ); ?>">
-		</p>
-		<p>
-			<label class="meta-label" for="zon_testimonial_email">Email</label>
-			<input type="email" id="zon_testimonial_email" name="zon_testimonial_email" class="widefat" value="<?php echo esc_attr( $dissue ); ?>">
-		</p>
-		<p>
-			<label class="meta-label" for="zon_testimonial_email">Email</label>
-			<input type="email" id="zon_testimonial_email" name="zon_testimonial_email" class="widefat" value="<?php echo esc_attr( $exdate ); ?>">
-		</p>
-		<p>
-			<label class="meta-label" for="zon_testimonial_email">Email</label>
-			<input type="email" id="zon_testimonial_email" name="zon_testimonial_email" class="widefat" value="<?php echo esc_attr( $indian ); ?>">
-		</p>
-		<p>
-			<label class="meta-label" for="zon_testimonial_email">Email</label>
-			<input type="email" id="zon_testimonial_email" name="zon_testimonial_email" class="widefat" value="<?php echo esc_attr( $ldissue ); ?>">
-		</p>
-		<p>
-			<label class="meta-label" for="zon_testimonial_email">Email</label>
-			<input type="email" id="zon_testimonial_email" name="zon_testimonial_email" class="widefat" value="<?php echo esc_attr( $gulf); ?>">
-		</p>
-		<p>
-			<label class="meta-label" for="zon_testimonial_email">Email</label>
-			<input type="email" id="zon_testimonial_email" name="zon_testimonial_email" class="widefat" value="<?php echo esc_attr( $exdate ); ?>">
-		</p>
-		<p>
-			<label class="meta-label" for="zon_testimonial_email">Cover Letter</label>
-			<p id="cover-message" name="message" class="widefat"><?php echo esc_attr( $message ); ?></p>
-		</p>
+		<div class="ahcm-column-wrap">
+		    <div class="ahcm-column">
+		        <p>
+		        	<label class="meta-label" for="zon_name">name</label>
+		        	<input type="text" id="zon_name" name="zon_name" class="widefat" value="<?php echo esc_attr( $name ); ?>">
+		        </p>
+		        <p>
+		        	<label class="meta-label" for="zon_package">Applyed for</label>
+		        	<input type="text" id="zon_package" name="zon_package" class="widefat" value="<?php echo esc_attr( $jobtitle ); ?>">
+		        </p>
+		        <p>
+		        	<label class="meta-label" for="zon_phone">phone</label>
+		        	<input type="text" id="zon_phone" name="zon_phone" class="widefat" value="<?php echo esc_attr( $phone ); ?>">
+		        </p>
+		        <p>
+		        	<label class="meta-label" for="zon_testimonial_email">Email</label>
+		        	<input type="email" id="zon_testimonial_email" name="zon_testimonial_email" class="widefat" value="<?php echo esc_attr( $email ); ?>">
+		        </p>
+		        <p>
+		        	<label class="meta-label" for="zon_testimonial_email">Occupation</label>
+		        	<input type="email" id="zon_testimonial_email" name="zon_testimonial_email" class="widefat" value="<?php echo esc_attr( $occupation ); ?>">
+		        </p>
+		        <p>
+		        	<label class="meta-label" for="zon_testimonial_email">passport no</label>
+		        	<input type="email" id="zon_testimonial_email" name="zon_testimonial_email" class="widefat" value="<?php echo esc_attr( $pno ); ?>">
+		        </p>
+		        <p>
+		        	<label class="meta-label" for="zon_testimonial_email">Email</label>
+		        	<input type="email" id="zon_testimonial_email" name="zon_testimonial_email" class="widefat" value="<?php echo esc_attr( $pissue ); ?>">
+		        </p>
+	        </div>
+		    <div class="ahcm-column">
+		        <p>
+		        	<label class="meta-label" for="zon_testimonial_email">Email</label>
+		        	<input type="email" id="zon_testimonial_email" name="zon_testimonial_email" class="widefat" value="<?php echo esc_attr( $dissue ); ?>">
+		        </p>
+		        <p>
+		        	<label class="meta-label" for="zon_testimonial_email">Email</label>
+		        	<input type="email" id="zon_testimonial_email" name="zon_testimonial_email" class="widefat" value="<?php echo esc_attr( $exdate ); ?>">
+		        </p>
+		        <p>
+		        	<label class="meta-label" for="zon_testimonial_email">Email</label>
+		        	<input type="email" id="zon_testimonial_email" name="zon_testimonial_email" class="widefat" value="<?php echo esc_attr( $indian ); ?>">
+		        </p>
+		        <p>
+		        	<label class="meta-label" for="zon_testimonial_email">Email</label>
+		        	<input type="email" id="zon_testimonial_email" name="zon_testimonial_email" class="widefat" value="<?php echo esc_attr( $ldissue ); ?>">
+		        </p>
+		        <p>
+		        	<label class="meta-label" for="zon_testimonial_email">Email</label>
+		        	<input type="email" id="zon_testimonial_email" name="zon_testimonial_email" class="widefat" value="<?php echo esc_attr( $gulf); ?>">
+		        </p>
+		        <p>
+		        	<label class="meta-label" for="zon_testimonial_email">Email</label>
+		        	<input type="email" id="zon_testimonial_email" name="zon_testimonial_email" class="widefat" value="<?php echo esc_attr( $exdate ); ?>">
+		        </p>
+		    </div>
+		</div>
 		<div class="meta-container">
 			<label class="meta-label w-50 text-left" for="zon_testimonial_approved">Candidate Shortlisted</label>
 			<div class="text-right w-50 inline">

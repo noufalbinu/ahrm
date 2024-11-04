@@ -41,7 +41,7 @@ class Dashboard extends BaseController
 		$this->pages = array(
 			array(
 				'page_title' => 'Zon Packages Settings', 
-				'menu_title' => 'vBook Settings', 
+				'menu_title' => 'AHCM Settings', 
 				'capability' => 'manage_options', 
 				'menu_slug' => 'zon_packages', 
 				'callback' => array( $this->callbacks, 'adminDashboard' ), 

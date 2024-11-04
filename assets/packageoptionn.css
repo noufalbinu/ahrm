@@ -18,7 +18,32 @@ textarea.pack-discription {
     border-radius: 5px;
     text-align: unset;
 }
-
+.ahcm-input-group {
+    display: flex;
+}
+button#cv-download, #cv-view {
+    background: #163b3e;
+    border: 1px solid #bbb;
+    width: 150px;
+}
+button#cv-download a, #cv-view a {
+    width: 150px;
+    color:#fff;
+    text-decoration: none;
+}
+.ahcm-column-wrap {
+    display: grid;
+    grid-template-columns: 50fr 50fr;
+    gap: 30px;
+}
+.ahcm-column label {
+    text-transform: capitalize;
+}
+.ahcm-column input, .attachment-link-input {
+    border: 1px solid #b7bfc0 !important;
+    border-radius: 0px  !important;
+    padding: 4px 16px  !important;
+}
 .packageoption {
     overflow: auto;
     border: 1px solid #fff;

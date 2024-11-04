@@ -1,5 +1,5 @@
 <div class="wrap">
-	<h1>vBook Settings</h1>
+	<h1>AHCM Settings</h1>
 	<?php settings_errors(); ?>
 
 	<ul class="nav nav-tabs">

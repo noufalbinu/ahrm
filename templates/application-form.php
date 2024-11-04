@@ -11,7 +11,7 @@
                 <div class="grid-fields">
                     <div class="field-container">
                       <label for="">Position applied for *</label>
-                      <input value="" type="text" class="field-input" placeholder="Name" id="name" name="name" required>
+                      <input value="" type="text" class="field-input" placeholder="" id="papplied" name="papplied" required>
                     </div>
                     <div class="field-container">
                       <label for="">Name *</label>
@@ -23,7 +23,7 @@
                     </div>
                     <div class="field-container">
                       <label for="">Qualifications*</label>
-                      <textarea class="field-textarea"  name="" id=""></textarea>
+                      <textarea class="field-textarea"  name="qualifications" id="qualifications"></textarea>
                       <small class="field-msg error" data-error="invalidMobile">The Mobile number is not valid</small>
                     </div> 
                     
@@ -39,13 +39,13 @@
                     </div> 
                     <div class="field-container">
                       <label for="">Address*</label>
-                      <textarea class="field-textarea" name="" id=""></textarea>
+                      <textarea class="field-textarea" name="address" id="address"></textarea>
                     </div>
-                  
-                    
-                   
+                    <div class="field-container">
+                      <label for="">Which countries driving license do you have</label>
+                      <input value="" type="text" class="field-input" placeholder="" id="wcd" name="wcd" >
+                    </div>
                 </div>
-                
                 <div class="grid-fields">
                   <div class="field-container">
                     <label for="">Phone Number*</label>
@@ -54,7 +54,7 @@
                   </div> 
                   <div class="field-container">
                     <label for="">Whatsapp Number*</label>
-                    <input type="number" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" class="field-input" placeholder="Mobile"  maxlength="10" id="phone" name="phone" required>
+                    <input type="number" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" class="field-input" placeholder="Mobile"  maxlength="10" id="wphone" name="wphone" required>
                     <small class="field-msg error" data-error="invalidMobile">The Mobile number is not valid</small>
                   </div>   
                   <div class="field-container">
@@ -79,6 +79,7 @@
                     <label for="">Expiry Date</label>
                     <input value="" type="text" class="field-input" placeholder="" id="exdate" name="exdate" >
                   </div>
+                  
                 </div>
             </div>
             <div class="cv-section-two">
@@ -127,109 +128,141 @@
 </div>
 
 
+
+
 <script>
+/**
+ * Save File Function
+ * Handles file upload securely by sending it to the server via POST.
+ */
+async function saveFile() {
+    try {
+        const fileInput = document.getElementById('fileupload');
+        if (!fileInput || !fileInput.files.length) return;
 
+        const formData = new FormData();
+        formData.append("file", fileInput.files[0]);
 
-//save file
-async function saveFile() { 
-    let formData = new FormData();
-    formData.append("file", fileupload.files[0]);
-    const fileUploadPath = await fetch('<?php echo plugin_dir_url( __FILE__ ); ?>/upload.php', {
-      method: "POST", 
-      body: formData,
-    });
-    let cvSource = await fileUploadPath.json(); 
-    document.getElementById('cv').value = cvSource.image_source;
-    document.getElementById('cvpath').value = cvSource.image_path;
+        const response = await fetch('<?php echo plugin_dir_url(__FILE__); ?>/upload.php', {
+            method: "POST",
+            body: formData,
+        });
+
+        if (!response.ok) {
+            throw new Error('File upload failed');
+        }
+
+        const result = await response.json();
+        document.getElementById('cv').value = result.image_source;
+        document.getElementById('cvpath').value = result.image_path;
+    } catch (error) {
+        console.error("Error during file upload:", error);
+        alert("Failed to upload file. Please try again.");
+    }
 }
 
-! function o(n, i, u) {
-    function c(r, e) {
-        if (!i[r]) {
-            if (!n[r]) {
-                var t = "function" == typeof require && require;
-                if (!e && t) return t(r, !0);
-                if (l) return l(r, !0);
-                var s = new Error("Cannot find module '" + r + "'");
-                throw s.code = "MODULE_NOT_FOUND", s
-            }
-            var a = i[r] = {
-                exports: {}
-            };
-            n[r][0].call(a.exports, function(e) {
-                return c(n[r][1][e] || e)
-            }, a, a.exports, o, n, i, u)
-        }
-        return i[r].exports
+/**
+ * Clear All Field Messages
+ * Hides all error or success messages for fields.
+ */
+function clearFieldMessages() {
+    document.querySelectorAll(".field-msg").forEach((msg) => msg.classList.remove("show"));
+}
+
+/**
+ * Validate Email Address
+ * Returns true if the email format is valid.
+ */
+function validateEmail(email) {
+    const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return emailPattern.test(String(email).toLowerCase());
+}
+
+/**
+ * Submit Form Function
+ * Validates form input, shows appropriate messages, and sends the form data to the server.
+ */
+async function submitForm(event) {
+    event.preventDefault();
+    clearFieldMessages();
+
+    const form = document.getElementById("zon-testimonial-form");
+    if (!form) return;
+
+    // Collect form data
+    const formData = {
+        name: form.querySelector('[name="name"]').value.trim(),
+        email: form.querySelector('[name="email"]').value.trim(),
+        phone: form.querySelector('[name="phone"]').value.trim(),
+
+        wphone: form.querySelector('[name="wphone"]').value.trim(),
+        age: form.querySelector('[name="age"]').value.trim(),
+        address: form.querySelector('[name="address"]').value.trim(),
+        qualifications: form.querySelector('[name="qualifications"]').value.trim(),
+        expabroad: form.querySelector('[name="expabroad"]').value.trim(),
+        expind: form.querySelector('[name="expind"]').value.trim(),
+        address: form.querySelector('[name="address"]').value.trim(),
+        wcd: form.querySelector('[name="wcd"]').value.trim(),
+
+        cv: form.querySelector('[name="cv"]').value.trim(),
+        pno: form.querySelector('[name="pno"]').value.trim(),
+        pissue: form.querySelector('[name="pissue"]').value.trim(),
+        dissue: form.querySelector('[name="dissue"]').value.trim(),
+        exdate: form.querySelector('[name="exdate"]').value.trim(),
+
+        cvpath: form.querySelector('[name="cvpath"]').value.trim(),
+        jobtitle: form.querySelector('[name="jobtitle"]').value.trim(),
+        nonce: form.querySelector('[name="nonce"]').value,
+    };
+
+    // Input Validation
+    if (!formData.name) {
+        form.querySelector('[data-error="invalidName"]').classList.add("show");
+        return;
     }
-    for (var l = "function" == typeof require && require, e = 0; e < u.length; e++) c(u[e]);
-    return c
-}({
-    1: [function(e, r, t) {
-        "use strict";
+    if (!validateEmail(formData.email)) {
+        form.querySelector('[data-error="invalidEmail"]').classList.add("show");
+        return;
+    }
 
-        function o() {
-            document.querySelectorAll(".field-msg").forEach(function(e) {
-                return e.classList.remove("show")
-            })
+    // Save File First
+    await saveFile();
+
+    // Prepare and send form data
+    const submissionURL = form.dataset.url;
+    const requestData = new URLSearchParams(new FormData(form));
+
+    try {
+        form.querySelector(".js-form-submission").classList.add("show");
+
+        const response = await fetch(submissionURL, {
+            method: "POST",
+            body: requestData,
+        });
+
+        const result = await response.json();
+
+        clearFieldMessages();
+        if (response.ok && result.status !== "error") {
+            form.querySelector(".js-form-success").classList.add("show");
+            form.reset();
+        } else {
+            throw new Error("Form submission error");
         }
-        document.addEventListener("DOMContentLoaded", function(e) {
-            var a = document.getElementById("zon-testimonial-form");
-            a.addEventListener("submit", function(e) {
-                e.preventDefault(), o();
-                var r = { 
-                    papplied = a.querySelector('[name="papplied"]').value,
-                    name: a.querySelector('[name="name"]').value,
-                    email: a.querySelector('[name="email"]').value,
-                    phone: a.querySelector('[name="phone"]').value,
-                    whone: a.querySelector('[name="whone"]').value,
-                    age: a.querySelector('[name="age"]').value,
-                    address: a.querySelector('[name="address"]').value,
-                    qualifications: a.querySelector('[name="qualifications"]').value,
+    } catch (error) {
+        clearFieldMessages();
+        form.querySelector(".js-form-error").classList.add("show");
+        console.error("Form submission error:", error);
+    }
+}
 
-                    expabroad: a.querySelector('[name="expabroad"]').value,
-                    expind: a.querySelector('[name="expind"]').value,
-
-                    cv: a.querySelector('[name="cv"]').value,
-                    
-                    occupation: a.querySelector('[name="occupation"]').value,
-
-                    pno: a.querySelector('[name="pno"]').value,
-                    pissue: a.querySelector('[name="pissue"]').value,
-                    dissue: a.querySelector('[name="dissue"]').value,
-                    exdate: a.querySelector('[name="exdate"]').value,
-                    
-
-                    cvpath: a.querySelector('[name="cvpath"]').value,
-                    jobtitle: a.querySelector('[name="jobtitle"]').value,
-                    message: a.querySelector('[name="message"]').value,
-                    nonce: a.querySelector('[name="nonce"]').value
-                };
-                if (r.name)
-                    if (/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(String(r.email).toLowerCase()))
-                        if (r.message) {
-                            var t = a.dataset.url,
-                            s = new URLSearchParams(new FormData(a));
-                        
-                            
-                            saveFile()
-                            a.querySelector(".js-form-submission").classList.add("show"), fetch(t, {
-                                method: "POST",
-                                body: s   
-                            }).then(function(e) {
-                                return e.json()
-                            }).catch(function(e) {
-                                o(), a.querySelector(".js-form-error").classList.add("show")
-                            }).then(function(e) {
-                                o(), 0 !== e && "error" !== e.status ? (a.querySelector(".js-form-success").classList.add("show"), a.reset()) : a.querySelector(".js-form-error").classList.add("show")
-                            })
-                        } 
-                else a.querySelector('[data-error="invalidMessage"]').classList.add("show");
-                else a.querySelector('[data-error="invalidEmail"]').classList.add("show");
-                else a.querySelector('[data-error="invalidName"]').classList.add("show")
-            })
-        })
-    }, {}]
-}, {}, [1]);
-//# sourceMappingURL=form.js.map
+/**
+ * Initialize Form Submission Event
+ */
+document.addEventListener("DOMContentLoaded", () => {
+    const form = document.getElementById("zon-testimonial-form");
+    if (form) {
+        form.addEventListener("submit", submitForm);
+    }
+});
 </script>
